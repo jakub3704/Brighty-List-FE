@@ -1,0 +1,9 @@
+{
+    "LogIn": "Log in",
+    "EnterEmail": "Enter email",
+    "EnterPassword": "Enter password",
+    "WrongEmail": "Please enter a valid email address",
+
+    "SignIn": "Sign in",
+    "PageNotFound": "Page Not Found"
+}

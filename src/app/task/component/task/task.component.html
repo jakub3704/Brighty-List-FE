@@ -1,0 +1,115 @@
+<div class="body-container">
+    <mat-card *ngIf="tasks.length == 0">
+        <p>You don't have any active tasks</p>
+    </mat-card>
+
+    <table *ngIf="tasks.length !== 0" class="card-content-conteiner">
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <mat-card class="card-content-margin">
+                    <table class="width100 height-title">
+                        <tr>
+                            <td class="width50px">
+                                <button mat-icon-button [matMenuTriggerFor]="menu">
+                                    <mat-icon>{{prioritiesIcon[task.priority]}}</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="task.setPriority(1)">H</button>
+                                    <button mat-menu-item (click)="task.setPriority(2)">M</button>
+                                    <button mat-menu-item (click)="task.setPriority(3)">L</button>
+                                </mat-menu>
+                            </td>
+                            <td>
+                                <div>{{task.title}}</div>
+                            </td>
+                            <td class="width100px">
+                                <button mat-icon-button>
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="notes-container">
+                                    {{task.notes}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <mat-accordion>
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Reminders
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div class="reminders-container">
+                                            <table *ngIf="task.reminders.length !== 0" class="width100">
+                                                <tr *ngFor="let reminder of task.reminders">
+                                                    <td>
+                                                        {{reminder.nextExecutionTime}}
+                                                    </td>
+                                                    <td>
+                                                        {{reminder.message}}
+                                                    </td>
+                                                    <td class="width100px">
+                                                        <button mat-icon-button>
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button>
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <button mat-raised-button color="primary" class="width100">Create new
+                                                reminder</button>
+                                        </div>
+
+                                    </mat-expansion-panel>
+
+                                </mat-accordion>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <table class="width100">
+                                    <tr>
+                                        <td class="width200px">
+                                            {{task.startTime}}
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td class="width200px">
+                                            {{task.endTime}}
+                                        </td>
+                                        <td class="width100px">
+
+                                            <button mat-raised-button color="primary">
+                                                Complete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+                </mat-card>
+            </tr>
+        </tbody>
+    </table>
+</div>

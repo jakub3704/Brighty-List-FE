@@ -1,0 +1,53 @@
+<div class="body-container">
+    <mat-card>
+
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form class="form-width">
+                <table cellspacing="0">
+
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Enter Username</mat-label>
+                                <input matInput [formControl]="validatorUserNameControl" [errorStateMatcher]="matcher"
+                                    [(ngModel)]="username" placeholder="Username" name="username" required>
+                                <mat-error *ngIf="validatorUserNameControl.hasError('required')">
+                                    Username is required
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Enter Password</mat-label>
+                                <input matInput [formControl]="validatorPasswordControl" [errorStateMatcher]="matcher"
+                                    [(ngModel)]="password" placeholder="Password" name="password" required>
+                                <mat-error *ngIf="validatorPasswordControl.hasError('required')">
+                                    Password is required
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button (click)="logIn()" mat-raised-button color="primary"
+                [disabled]="!(validatorPasswordControl.valid && validatorUserNameControl.valid)">
+                Login
+            </button>
+            <br>
+            <a mat-button class="clean-link" routerLink="/forgotten">Forgotten your password?</a>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

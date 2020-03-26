@@ -1,0 +1,34 @@
+ .fill-remaining-space {
+   /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+   flex: 1 1 auto;
+ }
+
+ .toolbar-margin {
+   width: 100px;
+ }
+
+ .clean-link {
+   color: inherit;
+   text-decoration: none;
+ }
+
+ .clean-link:hover {
+   color: #CCCCCC;
+ }
+
+ .language-select {
+   width: 50px;
+ }
+
+.shadow {
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+
+.active-lang {
+  color:blue;
+}
+
+.inactive-lang {
+  color:black;
+}

@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="shadow">
+  <mat-toolbar-row>
+    <span class="toolbar-margin"></span>
+    <span>Brighty List</span>
+    <span class="fill-remaining-space"></span>
+
+    <a mat-button class="clean-link" routerLink="/login">{{'LogIn' | translate}}</a>
+    <a mat-button class="clean-link" routerLink="/signup">{{'SignIn' | translate}}</a>
+
+    <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+      <mat-icon>language</mat-icon>
+    </button>
+    <mat-menu #languageMenu="matMenu">
+        <button [disabled]="selectedLang == 'pl'" mat-menu-item (click)="switchLang('pl')">PL</button>
+        <button [disabled]="selectedLang == 'en'" mat-menu-item (click)="switchLang('en')">EN</button>
+    </mat-menu>
+
+    <span class="toolbar-margin"></span>
+  </mat-toolbar-row>
+</mat-toolbar>

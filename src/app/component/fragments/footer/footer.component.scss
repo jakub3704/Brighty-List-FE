@@ -1,0 +1,29 @@
+footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background-color: #CCCCCC;
+  color: #666666;
+  font-weight: 600;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+.bright-list-footer {
+  text-align: center;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
