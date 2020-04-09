@@ -1,53 +1,71 @@
 <div class="body-container">
-    <mat-card>
 
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
+    <mat-card class="card-size">
+        <div class="row-container">
 
-        <mat-card-content>
-            <form class="form-width">
-                <table cellspacing="0">
+            <div class="row">
+                <mat-card-header>
+                    <mat-card-title>{{'login_title' | translate}}</mat-card-title>
+                </mat-card-header>
+            </div>
 
-                    <tr>
-                        <td>
-                            <mat-form-field>
-                                <mat-label>Enter Username</mat-label>
-                                <input matInput [formControl]="validatorUserNameControl" [errorStateMatcher]="matcher"
+            <span class="space-25px"></span>
+
+            <div class="row">
+                <mat-card-content class="width-100per">
+                    <form class="row-container">
+                        <div class="row">
+                            <mat-error *ngIf="authenticationService.isInvalid">
+                                {{'form_error_user_or_pass' | translate}}
+                            </mat-error>
+                        </div>
+
+                        <span class="space-12px"></span>
+
+                        <div class="row">
+                            <mat-form-field class="width-100per">
+                            <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
+                                <input matInput [formControl]="userNameControl" [errorStateMatcher]="matcher"
                                     [(ngModel)]="username" placeholder="Username" name="username" required>
-                                <mat-error *ngIf="validatorUserNameControl.hasError('required')">
-                                    Username is required
+                                <mat-error *ngIf="uameControl.hasError('required')">
+                                    {{'form_blank_username' | translate}}
                                 </mat-error>
                             </mat-form-field>
-                        </td>
-                    </tr>
+                        </div>
 
-                    <tr>
-                        <td>
-                            <mat-form-field>
-                                <mat-label>Enter Password</mat-label>
-                                <input matInput [formControl]="validatorPasswordControl" [errorStateMatcher]="matcher"
+                        <span class="space-12px"></span>
+
+                        <div class="row">
+                            <mat-form-field class="width-100per">
+                                <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
+                                <input matInput [formControl]="passwordControl" [errorStateMatcher]="matcher"
                                     [(ngModel)]="password" placeholder="Password" name="password" required>
-                                <mat-error *ngIf="validatorPasswordControl.hasError('required')">
-                                    Password is required
+                                <mat-error *ngIf="passwordControl.hasError('required')">
+                                    {{'form_blank_password' | translate}}
                                 </mat-error>
                             </mat-form-field>
-                        </td>
-                    </tr>
+                        </div>
 
-                </table>
-            </form>
+                    </form>
 
-        </mat-card-content>
+                </mat-card-content>
+            </div>
 
-        <mat-card-actions>
-            <button (click)="logIn()" mat-raised-button color="primary"
-                [disabled]="!(validatorPasswordControl.valid && validatorUserNameControl.valid)">
-                Login
-            </button>
-            <br>
-            <a mat-button class="clean-link" routerLink="/forgotten">Forgotten your password?</a>
-        </mat-card-actions>
+            <div class="row">
 
+                <mat-card-actions class="row-container">
+                    <div class="row">
+                        <button class="width-100per" (click)="logIn()" mat-raised-button color="primary"
+                            [disabled]="!(validatorPasswordControl.valid && validatorUserNameControl.valid)">
+                            {{'login_button' | translate}}
+                        </button>
+                    </div>
+                    <span class="space-12px"></span>
+                    <div class="row">
+                            <a mat-button routerLink="/forgotten">{{'forgottenPassword_title' | translate}}</a>
+                    </div>
+                </mat-card-actions>
+            </div>
+        </div>
     </mat-card>
 </div>

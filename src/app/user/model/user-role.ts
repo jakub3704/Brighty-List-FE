@@ -1,4 +1,4 @@
-enum Role {
+export enum UserRole {
 ROLE_ADMIN = 'ROLE_ADMIN',
 ROLE_USER = 'ROLE_USER',
 ROLE_PREMIUM_USER = 'ROLE_PREMIUM_USER'

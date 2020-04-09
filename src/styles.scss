@@ -18,12 +18,15 @@ body {
   display: block;
   position: relative;
   padding-bottom: 120px;
-  padding-top: 60px;
+  padding-top: 62px;
 }
 
 .body-container {
   min-height: 100%;
   padding: 30px 100px 30px 100px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .main-footer {
@@ -37,4 +40,12 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
+}
+
+.timepicker-overlay {
+    z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+    z-index: 10000000 !important;
 }

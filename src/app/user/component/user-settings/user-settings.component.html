@@ -1,0 +1,96 @@
+<div class="body-container">
+
+    <table class="profile-container">
+
+        <td class="profile-options">
+            <h1>User Settings</h1>
+            <button mat-button [disabled]="isGeneral" (click)="isGeneral=true">General</button>
+            <button mat-button [disabled]="!isGeneral" (click)="isGeneral=false">Security</button>
+        </td>
+        <td class="profile-details">
+
+            <table *ngIf="isGeneral">
+                <tr>
+                    <td colspan="3">
+                        General
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Name:
+                    </td>
+                    <td>
+                        {{userDto.name}}
+                    </td>
+                    <td>
+                        <button mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Mail:
+                    </td>
+                    <td>
+                        {{userDto.mail}}
+                    </td>
+                    <td>
+                        <button mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        Update your name and email address.
+                    </td>
+                </tr>
+
+            </table>
+
+            <table *ngIf="!isGeneral">
+                <tr>
+                    <td colspan="3">
+                        Security
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button mat-button (click)="openDialogChangePassword()">Password change</button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button mat-button>Delete account</button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        Change your password or delete your account.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </table>
+
+</div>

@@ -2,60 +2,60 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-import { appRouting } from './routing.module';
-import { brightyTranslateModule } from './brighty-translate.module';
+import { BrightyRoutingModule } from './config/brighty-routing.module';
+import { BrightyTranslateModule } from './config/brighty-translate.module';
+import { AngularMaterialImportModule } from './config/angular-material-import.module';
+
+import { HeaderComponent } from './component/fragments/header/header.component';
+import { FooterComponent } from './component/fragments/footer/footer.component';
 
 import { HomeComponent } from './component/home/home.component';
-import { IndexComponent } from './component/index/index.component';
 import { PageNotFoundComponent } from './component/pagenotfound/pagenotfound.component';
-import { TaskComponent } from './task/component/task/task.component';
 
 import { LogInComponent } from './security/component/login/login.component';
 import { SignUpComponent } from './security/component/signup/signup.component';
 import { ForgottenPasswordComponent } from './security/component/forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './security/component/reset-password/reset-password.component';
 
-import { HeaderComponent } from './component/fragments/header/header.component';
-import { FooterComponent } from './component/fragments/footer/footer.component';
+import { UserSettingsComponent } from './user/component/user-settings/user-settings.component';
+import { DialogChangePasswordComponent } from './user/component/dialog-change-password/dialog-change-password.component';
+import { DialogChangeNameComponent } from './user/component/dialog-change-name/dialog-change-name.component';
+import { DialogChangeEmailComponent } from './user/component/dialog-change-email/dialog-change-email.component';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSelectModule } from '@angular/material/select';
-import { MatListModule } from '@angular/material/list';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatRadioModule } from '@angular/material/radio';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { TasksComponent } from './task/component/tasks/tasks.component';
+import { DialogUpdateTaskComponent } from './task/component/dialog-update-task/dialog-update-task.component';
+import { DialogUpdateReminderComponent } from './task/component/dialog-update-reminder/dialog-update-reminder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+
     HomeComponent,
-    IndexComponent,
+    PageNotFoundComponent,
+
     LogInComponent,
     SignUpComponent,
     ResetPasswordComponent,
     ForgottenPasswordComponent,
-    TaskComponent,
-    PageNotFoundComponent
+
+    UserSettingsComponent,
+    DialogChangePasswordComponent,
+    DialogChangeNameComponent,
+    DialogChangeEmailComponent,
+
+    TasksComponent,
+    DialogUpdateTaskComponent,
+    DialogUpdateReminderComponent
   ],
   imports: [
     BrowserModule,
@@ -66,26 +66,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     RecaptchaModule,
     RecaptchaFormsModule,
 
-    appRouting,
-    brightyTranslateModule,
+    BrightyRoutingModule,
+    BrightyTranslateModule,
+    AngularMaterialImportModule,
 
-    MatToolbarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatDialogModule,
-    MatTableModule,
-    MatMenuModule,
-    MatIconModule,
-    MatStepperModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatSelectModule,
-    MatListModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

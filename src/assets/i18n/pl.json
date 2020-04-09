@@ -3,7 +3,22 @@
     "EnterEmail": "Podaj adres e-mail",
     "EnterPassword": "Wprowadz Haslo",
     "WrongEmail": "Prosze podac poprawny adres e-mail",
-
     "SignIn": "Zarejestruj Si\u0119",
-    "PageNotFound": "Nie odnaleziono strony"
+    "PageNotFound": "Nie odnaleziono strony",
+
+    "forgottenPassword_title": "Zapomia\u0142e\u015b has\u0142a?",
+    "forgottenPassword_message": "Prze\u015blemy \u0142\u0105cze odzyskiwania na tw\u00f3j adres e-mail:",
+    "forgottenPassword_placeholder": "Wpisz adres e-mail",
+    "forgottenPassword_button": "Wy\u015blij",
+
+    "login_title":"Zaloguj Sie",
+    "login_button":"Zaloguj Sie",
+
+    "form_placeholder_username":"Podaj nazwe uzytkownika",
+    "form_placeholder_password":"Podaj haslo",
+    "form_not_email": "Niepoprawny adres e-mail",
+    "form_blank": "Pole nie mo\u017ce by\u0107 puste",
+    "form_blank_username": "Nazwa u¿ytkownika jest wymagana",
+    "form_blank_password": "Has³o jest wymagane",
+    "form_error_user_or_pass": "Nazwa u¿ytkownika lub has³o s¹ niepoprawne"
 }

@@ -1,44 +1,31 @@
-.login-card {
-  min-width: 250px;
-  max-width: 350px;
-  width: 50%;
-  min-height: 250px;
-  max-height: 350px;
-  height: 50%;
-  margin: 50px;
+.card-size {
+  width: 350px;
+  padding: 35px 25px 15px 25px;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.row {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.form-width {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 220px;
-  max-width: 320px;
-  width: 95%;
-  display: block;
+.space-12px {
+  flex: 0 0 12px;
 }
 
-.center-items {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 220px;
-  max-width: 320px;
-  width: 95%;
-  display: flex;
-  align-items: center;
-  display: block;
+.space-25px {
+  flex: 0 0 25px;
 }
 
-.text-center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
+.width-100per {
+  width: 100%;
 }

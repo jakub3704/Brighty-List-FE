@@ -1,9 +1,23 @@
+import { UserRole } from './user-role';
+
 export class UserDto {
-    private id: number;
-    private name: string;
-    private eMail: string;
-    private password: string;
-    private role: Role;
+    id: number;
+    name: string;
+    mail: string;
+    password: string;
+    role: UserRole;
+
+    constructor(id: number,
+                name: string,
+                eMail: string,
+                password: string,
+                role: UserRole) {
+        this.id = id;
+        this.name = name;
+        this.mail = eMail;
+        this.password = password;
+        this.role = role;
+    }
 
     public getId() {
         return this.id;
@@ -22,11 +36,11 @@ export class UserDto {
     }
 
     public getMail() {
-        return this.eMail;
+        return this.mail;
     }
 
-    public setMail(eMail: string) {
-        this.eMail = eMail;
+    public setMail(mail: string) {
+        this.mail = mail;
     }
 
     public getPassword() {
@@ -41,7 +55,7 @@ export class UserDto {
         return this.role;
     }
 
-    public setRole(role: Role) {
+    public setRole(role: UserRole) {
         this.role = role;
     }
 }

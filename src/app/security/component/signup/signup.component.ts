@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { ErrorStateMatcher } from '@angular/material/core';
+import { UserDto } from 'src/app/user/model/user-dto';
 
 @Component({
   selector: 'app-signup',
@@ -10,6 +11,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 
 export class SignUpComponent implements OnInit {
+  userDto: UserDto;
   isEditable = false;
   emailFormGroup: FormGroup;
   dataFormGroup: FormGroup;
@@ -23,12 +25,12 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.emailFormGroup = this.signupFormBuilder.group({
-      emailControl: ['', Validators.required]
+      email: ['', Validators.required, Validators.email]
     });
     this.dataFormGroup = this.signupFormBuilder.group({
-      usernameControl: ['', Validators.required],
-      passwordControl: ['', Validators.required],
-      passwordTwoControl: ['', Validators.required]
+      userName: ['', Validators.required, Validators.maxLength(10)],
+      password: ['', Validators.required, Validators.maxLength(30)],
+      passwordReapeted: ['', Validators.required, Validators.maxLength(30)]
     });
     this.termsFormGroup = this.signupFormBuilder.group({
       termsControl: ['', Validators.required]

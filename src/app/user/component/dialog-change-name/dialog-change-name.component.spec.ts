@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexComponent } from './index.component';
+import { DialogChangeNameComponent } from './dialog-change-name.component';
 
-describe('IndexComponent', () => {
-  let component: IndexComponent;
-  let fixture: ComponentFixture<IndexComponent>;
+describe('DialogChangeNameComponent', () => {
+  let component: DialogChangeNameComponent;
+  let fixture: ComponentFixture<DialogChangeNameComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndexComponent ]
+      declarations: [ DialogChangeNameComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndexComponent);
+    fixture = TestBed.createComponent(DialogChangeNameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

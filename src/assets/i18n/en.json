@@ -3,7 +3,30 @@
     "EnterEmail": "Enter email",
     "EnterPassword": "Enter password",
     "WrongEmail": "Please enter a valid email address",
-
     "SignIn": "Sign in",
-    "PageNotFound": "Page Not Found"
+    "PageNotFound": "Page Not Found",
+
+    "forgottenPassword_title": "Forgot your password?",
+    "forgottenPassword_message": "We will send a recovery link to your e-mail adress:",
+    "forgottenPassword_placeholder": "Enter e-mail",
+    "forgottenPassword_button": "Send",
+
+    "login_title": "Login",
+    "login_button": "Login",
+
+    "form_placeholder_username": "Enter Username",
+    "form_placeholder_password": "Enter Password",
+    "form_not_email": "Not a valid email",
+    "form_blank": "You must enter a value",
+    "form_blank_username": "Username is required",
+    "form_blank_password": "Password is required",
+    "form_error_user_or_pass": "Username or password incorect",
+
+    "signin_title": "Sign up for your account",
+    "signin_title_email": "User Mail",
+    "signin_title_data": "User Data",
+    "signin_title_done": "Done",
+    "terms_message": "By signing up, you confirm that you've read and accepted our Terms of Service and Privacy Policy.",
+    "terms_agree": "I agree to the terms of use",
+    "terms_agree_error": "You must agree to the terms of use"
 }

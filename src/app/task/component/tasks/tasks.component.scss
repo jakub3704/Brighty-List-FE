@@ -1,0 +1,305 @@
+.page-container {
+  padding: 50px;
+}
+
+.title-container {
+  height: 45px;
+  max-height: 45px;
+  min-height: 45px;
+}
+
+.notes-container {
+  height: 50px;
+  max-height: 150px;
+  min-height: 50px;
+}
+
+.reminders-container {
+  max-height: 600px;
+  min-height: 60px;
+}
+
+.card-width {
+  flex: 1 1 auto;
+}
+
+.card-margin {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+.card-content-conteiner {
+  width: 100%;
+  height: 100px;
+}
+
+.card-content-margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.height-title {
+  height: 50px;
+  max-height: 50px;
+  min-height: 50px;
+}
+
+.width50px {
+  width: 50px;
+  max-width: 50px;
+  min-width: 50px;
+}
+
+.width100px {
+  width: 100px;
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.width200px {
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
+}
+
+/*
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+*/
+.align-items-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.form-dimensions {
+  max-width: 95%;
+  min-width: 90%;
+}
+
+.textarea-dimensions {
+  max-width: 90%;
+  min-width: 85%;
+  max-height: 70px;
+  min-height: 70px;
+}
+
+mat-select-content mat-option[value="true"] {
+  color: blue !important;
+}
+
+mat-select-content mat-option[value="false"] {
+  color: grey !important;
+}
+
+.color-blue {
+  background-color: blue;
+}
+
+.color-grey {
+  background-color: grey;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+
+// Proper content
+
+.body-container {
+  min-height: 100%;
+  padding: 90px 100px 30px 100px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.tasks-app-container {
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+}
+
+.page-row-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page-row {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page-row-column {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-toolbar {
+  position: fixed;
+  top: 62;
+  height: 60px;
+  width: 100%;
+  z-index: 1;
+  background-color: #9575CD;
+  color: white;
+}
+
+.toolbar-margin {
+  width: 100px;
+}
+
+.toolbar-base-span {
+  width: 30px;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.space-50 {
+  flex: 0 0 50px;
+}
+
+.space-20p {
+  flex: 0 0 20%;
+}
+
+.shadow {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+}
+
+.card-task {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-row-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-row {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-column-priority {
+  flex: none;
+  width: 50px;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-column-title {
+  flex: 10;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-column {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+}
+
+.height-max-flex {
+  flex: 10;
+}
+
+.height-60 {
+  height: 60px;
+  min-height: 60px;
+}
+
+.height-50 {
+  height: 50px;
+  min-height: 50px;
+}
+
+.height-40 {
+  height: 40px;
+  min-height: 40px;
+}
+.height-25 {
+  height: 25px;
+  min-height: 25px;
+}
+.height-10 {
+  height: 10px;
+  min-height: 10px;
+}
+.width-50 {
+  width: 50px;
+  min-width: 50px;
+  flex: none;
+}
+
+.width-100 {
+  width: 100px;
+  min-width: 100px;
+  flex: none;
+}
+
+width-max-flex {
+  flex: 1;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.center-vertically {
+  justify-content: center;
+  display: flex;
+}
+
+.horizontal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-left {
+  padding-left:15px;
+}
+
+.button-size {
+  width:150px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+

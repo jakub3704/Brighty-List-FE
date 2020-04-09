@@ -1,0 +1,180 @@
+<div class="tasks-app-container">
+    <mat-toolbar class="page-toolbar shadow">
+        <mat-toolbar-row>
+            <span class="toolbar-margin"></span>
+            Task List
+            <span class="toolbar-base-span"></span>
+
+            <button mat-icon-button (click)="openDialogUpdateTask()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <span class="fill-remaining-space"></span>
+
+            <button mat-button [matMenuTriggerFor]="filterMenu">
+                Filter
+            </button>
+            <mat-menu #filterMenu="matMenu">
+                <button mat-menu-item>By Priority</button>
+                <button mat-menu-item>By Date</button>
+                <button mat-menu-item>By Name</button>
+                <button mat-menu-item>By Status</button>
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="viewMenu">
+                View
+            </button>
+            <mat-menu #viewMenu="matMenu" [(ngModel)]="isFullView">
+                <button mat-menu-item (click)="isFullView=true" [disabled]="isFullView">Full</button>
+                <button mat-menu-item (click)="isFullView=false" [disabled]="!isFullView">Small</button>
+            </mat-menu>
+
+            <span class="toolbar-margin"></span>
+
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="body-container">
+        <div class="page-row-container" *ngIf="tasks.length == 0">
+            <div class="page-row">
+                <mat-card>
+                    <p>You don't have any active tasks</p>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <div class="page-row-container" *ngIf="tasks.length !== 0">
+
+
+            <div class="page-row" *ngFor="let task of tasks">
+
+                <mat-card class="card-task">
+                    <div class="card-row-container">
+
+                        <div class="card-row height-50">
+
+                            <div class="card-column-priority center">
+                                <button mat-icon-button [matMenuTriggerFor]="menu">
+                                    <mat-icon>{{prioritiesIcon[task.priority]}}</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="task.setPriority(1)">H</button>
+                                    <button mat-menu-item (click)="task.setPriority(2)">M</button>
+                                    <button mat-menu-item (click)="task.setPriority(3)">L</button>
+                                </mat-menu>
+                            </div>
+
+                            <div class="card-column-title">
+
+                                <div class="card-row height-40">
+                                    <div class="card-column-title">
+                                        <div>{{task.title}}</div>
+                                    </div>
+                                    <div class="card-column width-100">
+                                        <div class="card-row">
+                                            <div class="card-column">
+                                                <button mat-icon-button>
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </div>
+                                            <div class="card-column">
+                                                <button mat-icon-button>
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-row height-15">
+                                    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-row height-10">
+                        </div>
+                        <!-- Hidden -->
+                        <div class="card-row" *ngIf="isFullView">
+                            <div class="card-column">
+                                <div class="card-row-container">
+
+                                    <div class="card-row">
+                                        <div class="notes-container">
+                                            {{task.notes}}
+                                        </div>
+                                    </div>
+
+                                    <div class="card-row border-bottom">
+                                        <div class="card-column">
+                                            <div class="horizontal-container height-40">
+                                                <div>Reminders:</div>
+                                                <button mat-icon-button (click)="openDialogAddReminder()">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+                                                <span class="fill-remaining-space"></span>
+                                                <button mat-icon-button (click)="toggleReminderVisible()">
+                                                    <mat-icon>{{reminderExpandIcon}}</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-row" *ngIf="isRemindersVisible">
+                                        <div class="card-row-container" *ngIf="task.reminders.length === 0">
+                                            You have no reminders
+                                        </div>
+                                        <div class="card-row-container" *ngIf="task.reminders.length !== 0">
+                                            <div class="card-row border-bottom" *ngFor="let reminder of task.reminders">
+                                                <div class="card-column">
+                                                    <div class="horizontal-container height-40">
+                                                        <div class="padding-left">{{reminder.nextExecutionTime}}</div>
+                                                        <span class="space-50"></span>
+                                                        <div>{{reminder.message}}</div>
+                                                        <span class="fill-remaining-space"></span>
+                                                        <div>
+                                                            <button mat-icon-button>
+                                                                <mat-icon>delete</mat-icon>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-row height-25">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hidden -->
+                    <div class="card-row">
+                        <div>
+                            <div class="card-row">Start time:</div>
+                            <div class="card-row">{{task.startTime}}</div>
+                        </div>
+                        <span class="space-20p"></span>
+                        <div>
+                            <div class="card-row">End time:</div>
+                            <div class="card-row">{{task.endTime}}</div>
+                        </div>
+                        <span class="fill-remaining-space"></span>
+                        <div>
+                            <button mat-raised-button color="primary" class="button-size">
+                                Complete
+                            </button>
+                        </div>
+                    </div>
+
+                </mat-card>
+
+            </div>
+
+        </div>
+    </div>
+</div>

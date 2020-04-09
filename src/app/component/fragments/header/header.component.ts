@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '../../../security/service/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
   selectedLang = 'en';
 
   constructor(
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    public authenticationService: AuthenticationService) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
   }
@@ -22,5 +24,9 @@ export class HeaderComponent implements OnInit {
   switchLang(lang: string) {
     this.selectedLang = lang;
     this.translate.use(lang);
+  }
+
+  logOut() {
+    this.authenticationService.closeSesion();
   }
 }
