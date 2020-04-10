@@ -15,11 +15,11 @@ export class LogInComponent implements OnInit {
 
   constructor(public authenticationService: AuthenticationService) { }
 
-  validatorUserNameControl = new FormControl('', [
+  userNameControl = new FormControl('', [
     Validators.required,
   ]);
 
-  validatorPasswordControl = new FormControl('', [
+  passwordControl = new FormControl('', [
     Validators.required,
   ]);
 

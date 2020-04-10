@@ -7,25 +7,29 @@
             <div class="row">
                 <mat-horizontal-stepper linear #stepper>
 
-
-                    <mat-step [stepControl]="emailFormGroup" [editable]="isEditable">
+                    <mat-step [editable]=false>
                         <ng-template matStepLabel>User Email</ng-template>
 
                         <div class="row-container">
                             <span class="space-25px"></span>
                             <div class="row">
-                                <form class="width-100per" [formGroup]="emailFormGroup">
+                                <form class="width-100per">
                                     <mat-form-field class="width-100per">
-                                        <mat-label>Enter mail</mat-label>
-                                        <input matInput required [formControl]="email"
-                                        [(ngModel)]="userDto.eMail" name="eMail">
-
+                                        <mat-label>{{'form_placeholder_email' | translate}}</mat-label>
+                                        <input matInput [(ngModel)]="user.email" name="email"
+                                            [formControl]="emailControl" [errorStateMatcher]="matcher" required>
+                                        <mat-error *ngIf="emailControl.hasError('required')">
+                                            {{'form_blank' | translate}}
+                                        </mat-error>
+                                        <mat-error *ngIf="emailControl.hasError('email')">
+                                            {{'form_not_email' | translate}}
+                                        </mat-error>
                                     </mat-form-field>
                                 </form>
                             </div>
                             <span class="space-25px"></span>
                             <div class="row">
-                                <button class="width-100per" [disabled]="!(emailFormGroup.valid)" mat-raised-button
+                                <button class="width-100per" [disabled]="!emailControl.valid" mat-raised-button
                                     matStepperNext color="primary" type="button">Continue
                                 </button>
                             </div>
@@ -33,42 +37,56 @@
 
                     </mat-step>
 
-                    <mat-step [stepControl]="dataFormGroup" [editable]="isEditable">
+                    <mat-step [editable]=false>
                         <ng-template matStepLabel>User Data</ng-template>
 
-                        <form [formGroup]="dataFormGroup" class="row-container">
+                        <form class="row-container">
                             <span class="space-25px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
                                     <mat-label>Enter Username</mat-label>
-                                    <input matInput formControlName="usernameControl" required >                                   
+                                    <input matInput [(ngModel)]="user.name" name="name" [formControl]="nameControl"
+                                        [errorStateMatcher]="matcher" required>
+                                    <mat-error *ngIf="nameControl.hasError('required')">
+                                        {{'form_blank_username' | translate}}
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <span class="space-12px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
                                     <mat-label>Enter Password</mat-label>
-                                    <input matInput required formControlName="passwordControl">
+                                    <input matInput [(ngModel)]="user.password" name="password"
+                                        [formControl]="passwordControl" [errorStateMatcher]="matcher" required>
+                                    <mat-error *ngIf="passwordControl.hasError('required')">
+                                        {{'form_blank_password' | translate}}
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <span class="space-12px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
-                                    <mat-label>Reapet Pasword</mat-label>
-                                    <input matInput required formControlName="passwordTwoControl">
+                                    <mat-label>Enter Password</mat-label>
+                                    <input matInput [(ngModel)]="user.password" name="password"
+                                        [formControl]="passwordReapetControl" [errorStateMatcher]="matcher" required>
+                                    <mat-error *ngIf="passwordReapetControl.hasError('required')">
+                                        {{'form_blank_password' | translate}}
+                                    </mat-error>
                                 </mat-form-field>
                             </div>
                             <span class="space-25px"></span>
                             <div class="row">
-                                <button class="width-100per" [disabled]="!(dataFormGroup.valid)" mat-raised-button
-                                    matStepperNext color="primary" type="button">Continue
+                                <button class="width-100per" mat-raised-button matStepperNext color="primary"
+                                    type="button"
+                                    [disabled]="!(nameControl.valid && passwordControl.valid && passwordReapetControl.valid)">
+                                    Continue
                                 </button>
                             </div>
                         </form>
 
                     </mat-step>
 
-                    <mat-step [stepControl]="termsFormGroup" [editable]="isEditable">
+                    <mat-step [editable]="false">
                         <ng-template matStepLabel>Done</ng-template>
 
                         <div class="row-container">
@@ -78,11 +96,12 @@
                             <span class="space-12px"></span>
                             <div class="row">
                                 <div class="width-100per">
-                                    <form [formGroup]="termsFormGroup" #captchaProtectedForm="ngForm">
-                                        <mat-checkbox required formControlName="termsControl">
+                                    <form>
+                                        <mat-checkbox [formControl]="termsControl"
+                                            required>
                                             {{'terms_agree' | translate}}
                                         </mat-checkbox>
-                                        <mat-error *ngIf="!termsFormGroup.valid">
+                                        <mat-error *ngIf="!termsControl.valid">
                                             {{'terms_agree_error' | translate}}
                                         </mat-error>
                                     </form>
@@ -91,28 +110,18 @@
                             <span class="space-12px"></span>
                             <div class="row">
                                 <div class="width-100per">
-                                    <re-captcha [(ngModel)]="formModel.captcha" name="captcha" required
-                                        siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" #captchaControl="ngModel">
-                                    </re-captcha>
+                                    someday capcha
                                 </div>
                             </div>
                             <span class="space-25px"></span>
                             <div class="row">
                                 <button class="width-100per" mat-raised-button color="primary" type="button"
-                                    [disabled]="!(termsFormGroup.valid && captchaControl.valid)" (click)="onClickMe()">
+                                    [disabled]="!termsControl.valid" (click)="submit()">
                                     Sign up
                                 </button>
                             </div>
-                            <div class="row">
-                                {{clickMessage}}
-                            </div>
-
                         </div>
-
                     </mat-step>
-
-
-
                 </mat-horizontal-stepper>
             </div>
         </div>

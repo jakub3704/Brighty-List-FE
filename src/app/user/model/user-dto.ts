@@ -7,18 +7,6 @@ export class UserDto {
     password: string;
     role: UserRole;
 
-    constructor(id: number,
-                name: string,
-                eMail: string,
-                password: string,
-                role: UserRole) {
-        this.id = id;
-        this.name = name;
-        this.mail = eMail;
-        this.password = password;
-        this.role = role;
-    }
-
     public getId() {
         return this.id;
     }

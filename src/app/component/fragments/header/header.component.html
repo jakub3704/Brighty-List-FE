@@ -4,8 +4,8 @@
     <span>Brighty List</span>
     <span class="fill-remaining-space"></span>
 
-    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/logIn">{{'LogIn' | translate}}</a>
-    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/signUp">{{'SignIn' | translate}}</a>
+    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/login" routerLinkActive="active">{{'LogIn' | translate}}</a>
+    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/signup" routerLinkActive="active">{{'SignUp' | translate}}</a>
 
     <div *ngIf="authenticationService.isLoggedIn">
       <button mat-icon-button [matMenuTriggerFor]="userMenu">

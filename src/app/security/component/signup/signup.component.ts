@@ -1,48 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { ErrorStateMatcher } from '@angular/material/core';
-import { UserDto } from 'src/app/user/model/user-dto';
+import { UserService } from 'src/app/user/service/user.service';
+import { SignUpUserDto } from 'src/app/user/model/sign-up-user-dto';
+import { AuthenticationService } from '../../service/authentication.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
+export class SignupComponent implements OnInit {
+  user = new SignUpUserDto();
 
-export class SignUpComponent implements OnInit {
-  userDto: UserDto;
-  isEditable = false;
-  emailFormGroup: FormGroup;
-  dataFormGroup: FormGroup;
-  termsFormGroup: FormGroup;
-  clickMessage = '';
+//TODO validation min max signs
+  emailControl = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
 
-  public formModel: FormModel = {};
+  nameControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  passwordControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  passwordReapetControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  termsControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   public matcher = new MyErrorStateMatcher();
 
-  constructor(private signupFormBuilder: FormBuilder) { }
+  constructor(
+    private userServive: UserService,
+    public authenticationService: AuthenticationService
+    ) { }
 
-  ngOnInit() {
-    this.emailFormGroup = this.signupFormBuilder.group({
-      email: ['', Validators.required, Validators.email]
-    });
-    this.dataFormGroup = this.signupFormBuilder.group({
-      userName: ['', Validators.required, Validators.maxLength(10)],
-      password: ['', Validators.required, Validators.maxLength(30)],
-      passwordReapeted: ['', Validators.required, Validators.maxLength(30)]
-    });
-    this.termsFormGroup = this.signupFormBuilder.group({
-      termsControl: ['', Validators.required]
-    });
-  }
+    @ViewChild('stepper') stepper: MatStepper;
 
- onClickMe() {
-    this.clickMessage = 'You are my hero!';
-  }
+    nextClicked(event) {
+      this.stepper.selected.completed = true;
+      this.stepper.next();
+    }
 
-  public resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    ngOnInit(): void {
+    }
+
+  public submit(): void {
+    this.userServive.signUpUser(this.user)
+                    .subscribe(data=>{data=this.user;});   
+    this.authenticationService.retriveToken(this.user.name, this.user.password);
   }
 }
 
@@ -53,6 +68,3 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-export interface FormModel {
-  captcha?: string;
-}

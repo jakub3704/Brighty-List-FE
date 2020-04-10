@@ -21,7 +21,7 @@ import { HomeComponent } from './component/home/home.component';
 import { PageNotFoundComponent } from './component/pagenotfound/pagenotfound.component';
 
 import { LogInComponent } from './security/component/login/login.component';
-import { SignUpComponent } from './security/component/signup/signup.component';
+import { SignupComponent } from './security/component/signup/signup.component';
 import { ForgottenPasswordComponent } from './security/component/forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './security/component/reset-password/reset-password.component';
 
@@ -44,7 +44,7 @@ import { DialogUpdateReminderComponent } from './task/component/dialog-update-re
     PageNotFoundComponent,
 
     LogInComponent,
-    SignUpComponent,
+    SignupComponent,
     ResetPasswordComponent,
     ForgottenPasswordComponent,
 

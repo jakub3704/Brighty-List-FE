@@ -27,7 +27,7 @@
                             <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
                                 <input matInput [formControl]="userNameControl" [errorStateMatcher]="matcher"
                                     [(ngModel)]="username" placeholder="Username" name="username" required>
-                                <mat-error *ngIf="uameControl.hasError('required')">
+                                <mat-error *ngIf="userNameControl.hasError('required')">
                                     {{'form_blank_username' | translate}}
                                 </mat-error>
                             </mat-form-field>
@@ -56,7 +56,7 @@
                 <mat-card-actions class="row-container">
                     <div class="row">
                         <button class="width-100per" (click)="logIn()" mat-raised-button color="primary"
-                            [disabled]="!(validatorPasswordControl.valid && validatorUserNameControl.valid)">
+                            [disabled]="!(passwordControl.valid && userNameControl.valid)">
                             {{'login_button' | translate}}
                         </button>
                     </div>
