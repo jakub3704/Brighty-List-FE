@@ -1,3 +1,103 @@
-<div class="body-container">
-    <p>Home Component</p>
+<div class="home-body-container">
+    <div class="page-row-container">
+        <div class="page-row-100hv color-basic">
+            <div class="page-row-column">
+                <div class="row-container">
+
+                    <div class="page-row center">
+                        <div class="preview-main-title">{{'home_title' | translate}}</div>
+                    </div>
+
+                    <span class="space-15"></span>
+
+                    <div class="page-row">
+
+                        <div class="page-row-column">
+
+                            <div class="row-container">
+                                <span class="fill-remaining-space"></span>
+                                <div class="page-row center height-min-10 padding-lf-60px">
+                                    <div class="page-row-column preview-title">
+                                        {{'home_dec_title' | translate}}
+                                    </div>
+                                </div>
+                                <span class="space-30"></span>
+                                <div class="page-row center height-min-10 padding-lf-60px">
+                                    <div class="page-row-column preview-description">
+                                        {{'home_description' | translate}}
+                                    </div>
+                                </div>
+                                <span class="fill-remaining-space"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="page-row-column center">
+                            <div class="row">
+                                <img class="img-preview" src="assets/images/prev-000.png">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <span class="fill-remaining-space"></span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="page-row-100hv">
+
+            <span class="space-10p"></span>
+
+            <div class="page-row-column center width-40">
+                <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+            </div>
+
+            <div class="row-column center">
+
+                <div class="row-container">
+                    <span class="fill-remaining-space"></span>
+
+                    <div class="page-row center height-min-10">
+                        <div class="img-container">
+                            <div style="display: none" name="mySlides">
+                                <div class="numbertext">1 / 3</div>
+                                <img src="assets/images/prev-001.png" style="width:100%">
+                            </div>
+
+                            <div style="display: none" name="mySlides">
+                                <div class="numbertext">2 / 3</div>
+                                <img src="assets/images/prev-002.png" style="width:100%">
+                            </div>
+
+                            <div style="display: none" name="mySlides">
+                                <div class="numbertext">3 / 3</div>
+                                <img src="assets/images/prev-003.png" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <span class="space-5"></span>
+
+                    <div class="page-row center height-min-10">
+                        <div style="text-align:center">
+                            <span class="dot" (click)="currentSlide(1)"></span>
+                            <span class="dot" (click)="currentSlide(2)"></span>
+                            <span class="dot" (click)="currentSlide(3)"></span>
+                        </div>
+                    </div>
+
+                    <span class="fill-remaining-space"></span>
+                </div>
+
+
+            </div>
+
+            <div class="page-row-column center width-40">
+                <a class="next" (click)="plusSlides(1)">&#10095;</a>
+            </div>
+
+            <span class="space-10p"></span>
+        </div>
+    </div>
 </div>

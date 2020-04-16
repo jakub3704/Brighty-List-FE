@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 import { ErrorStateMatcher } from '@angular/material/core';
 import { UserService } from 'src/app/user/service/user.service';
 import { SignUpUserDto } from 'src/app/user/model/sign-up-user-dto';
 import { AuthenticationService } from '../../service/authentication.service';
 import { MatStepper } from '@angular/material/stepper';
+import { equalValidator } from 'src/app/validators/equal-validator';
 
 @Component({
   selector: 'app-signup',
@@ -14,8 +15,9 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class SignupComponent implements OnInit {
   user = new SignUpUserDto();
+  hide = true;
+  hideReapet = true;
 
-//TODO validation min max signs
   emailControl = new FormControl('', [
     Validators.required,
     Validators.email
@@ -23,20 +25,29 @@ export class SignupComponent implements OnInit {
 
   nameControl = new FormControl('', [
     Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(20)
+
   ]);
 
   passwordControl = new FormControl('', [
     Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(30)
   ]);
 
   passwordReapetControl = new FormControl('', [
     Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(30),
+    equalValidator(this.passwordControl)
   ]);
 
   termsControl = new FormControl('', [
-    Validators.required,
+    Validators.required
   ]);
 
+  public formModel: FormModel = {};
   public matcher = new MyErrorStateMatcher();
 
   constructor(
@@ -59,6 +70,10 @@ export class SignupComponent implements OnInit {
                     .subscribe(data=>{data=this.user;});   
     this.authenticationService.retriveToken(this.user.name, this.user.password);
   }
+
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -68,3 +83,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+export interface FormModel {
+  captcha?: string;
+}

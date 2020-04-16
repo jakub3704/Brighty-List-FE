@@ -32,7 +32,7 @@ export class TaskService {
   }
 
   public updateTask(task: TaskDto) {
-    return this.httpClient.put(this.backEndUrl + 'tasks/' + task.getTaskId(), task, { headers: this.httpHeaders });
+    return this.httpClient.put(this.backEndUrl + 'tasks/' + task.taskId, task, { headers: this.httpHeaders });
   }
 
   public deleteTask(taskId: string) {

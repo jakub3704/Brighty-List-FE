@@ -6,6 +6,7 @@ import { TaskStatus } from '../../model/task-status';
 import { ReminderDto } from '../../model/reminder-dto';
 import { DialogUpdateTaskComponent } from '../dialog-update-task/dialog-update-task.component';
 import { DialogUpdateReminderComponent } from '../dialog-update-reminder/dialog-update-reminder.component';
+import { DialogNewTaskComponent } from '../dialog-new-task/dialog-new-task.component';
 
 @Component({
   selector: 'app-tasks',
@@ -22,6 +23,7 @@ export class TasksComponent implements OnInit {
     2: 'looks_two',
     3: 'looks_3'
   };
+
   tasks: TaskDto[] = [];
 
   constructor(private taskService: TaskService,
@@ -30,7 +32,11 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getAllTasks().subscribe(data => { this.tasks = data; });
   }
-
+  openDialogNewTask(): void {
+    const dialogRef = this.dialog.open(DialogNewTaskComponent, {
+      width: '800px',
+    });
+  }
   openDialogUpdateTask(): void {
     const dialogRef = this.dialog.open(DialogUpdateTaskComponent, {
       width: '800px',

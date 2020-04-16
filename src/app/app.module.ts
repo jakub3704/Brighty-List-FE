@@ -33,6 +33,8 @@ import { DialogChangeEmailComponent } from './user/component/dialog-change-email
 import { TasksComponent } from './task/component/tasks/tasks.component';
 import { DialogUpdateTaskComponent } from './task/component/dialog-update-task/dialog-update-task.component';
 import { DialogUpdateReminderComponent } from './task/component/dialog-update-reminder/dialog-update-reminder.component';
+import { ErrorComponent } from './component/error/error.component';
+import { DialogNewTaskComponent } from './task/component/dialog-new-task/dialog-new-task.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { DialogUpdateReminderComponent } from './task/component/dialog-update-re
 
     TasksComponent,
     DialogUpdateTaskComponent,
-    DialogUpdateReminderComponent
+    DialogUpdateReminderComponent,
+    ErrorComponent,
+    DialogNewTaskComponent
   ],
   imports: [
     BrowserModule,

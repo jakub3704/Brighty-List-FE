@@ -10,6 +10,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./login.component.scss']
 })
 export class LogInComponent implements OnInit {
+  hide = true;
   username: string;
   password: string;
 

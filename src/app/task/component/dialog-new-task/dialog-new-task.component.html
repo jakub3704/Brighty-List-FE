@@ -16,13 +16,15 @@
                 <div class="padding-left">Task Title:</div>
                 <mat-form-field class="forms-margin">
                     <mat-label>Task Title</mat-label>
-                    <input matInput required>
+                    <input matInput [(ngModel)]="task.title" name="taskTitle" [formControl]="titleControl"
+                        [errorStateMatcher]="matcher" required maxlength="20" minlength="3">
                 </mat-form-field>
             </div>
             <div class="row-column">
                 <div class="padding-left">Select priority:</div>
                 <mat-form-field class="forms-margin">
-                    <mat-select placeholder="select priority" required>
+                    <mat-label>Chose</mat-label>
+                    <mat-select [(value)]="priority">
                         <mat-option value="1">High</mat-option>
                         <mat-option value="2">Medium</mat-option>
                         <mat-option value="3">Low</mat-option>
@@ -37,7 +39,8 @@
         <div class="dialog-row">
             <mat-form-field class="task-notes-form forms-margin">
                 <mat-label>Leave a note</mat-label>
-                <textarea class="task-notes-form-textarea" matInput placeholder="Ex. Get up do some stuff"></textarea>
+                <textarea [(ngModel)]="task.notes" name="taskNotes" class="task-notes-form-textarea" matInput
+                    placeholder="Ex. Get up do some stuff"></textarea>
             </mat-form-field>
         </div>
         <!-- Start time -->
@@ -48,7 +51,8 @@
             <div class="row-column">
                 <mat-form-field class="forms-margin">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="startDatePicker" placeholder="Chose date" required>
+                    <input matInput [(ngModel)]="startDateTime" name="startDateTime" (ngModelChange)="onChangeStartTime()"
+                    [matDatepicker]="startDatePicker" placeholder="Chose date" required>
                     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #startDatePicker></mat-datepicker>
                 </mat-form-field>
@@ -56,7 +60,8 @@
             <div class="row-column">
                 <mat-form-field class="forms-margin">
                     <mat-label>Choose time</mat-label>
-                    <input matInput [ngxTimepicker]="startTimePicker" [format]="24"  placeholder="Chose time" required>
+                    <input matInput [(ngModel)]="startTime" name="startTime" (ngModelChange)="onChangeStartTime()"
+                        [ngxTimepicker]="startTimePicker" [format]="24" placeholder="Chose time" required>
                     <ngx-material-timepicker-toggle matSuffix [for]="startTimePicker">
                     </ngx-material-timepicker-toggle>
                     <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
@@ -69,7 +74,7 @@
                 <div class="padding-left">End time:</div>
             </div>
             <div class="row-column">
-                <mat-checkbox>
+                <mat-checkbox [(ngModel)]="sameAsStart">
                     {{'dialog_task_sameAsStart' | translate}}
                 </mat-checkbox>
             </div>
@@ -78,7 +83,9 @@
             <div class="row-column">
                 <mat-form-field class="forms-margin">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="endDatePicker" placeholder="Chose date" required>
+                    <input matInput [(ngModel)]="endDateTime" name="endDateTime" (ngModelChange)="onChangeEndTime()"
+                     [matDatepicker]="endDatePicker" placeholder="Chose date"
+                        required [disabled]="sameAsStart">
                     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </mat-form-field>
@@ -86,7 +93,9 @@
             <div class="row-column">
                 <mat-form-field class="forms-margin">
                     <mat-label>Choose time</mat-label>
-                    <input matInput [ngxTimepicker]="endTimePicker" [format]="24"  placeholder="Chose time" required>
+                    <input matInput [(ngModel)]="endTime" name="endTime" (ngModelChange)="onChangeEndTime()"
+                    [ngxTimepicker]="endTimePicker" [format]="24"
+                        placeholder="Chose time" required [disabled]="sameAsStart">
                     <ngx-material-timepicker-toggle matSuffix [for]="endTimePicker">
                     </ngx-material-timepicker-toggle>
                     <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
@@ -101,9 +110,9 @@
             <div class="row-column">
                 <mat-form-field class="forms-margin">
                     <mat-label>Chose</mat-label>
-                    <mat-select>
-                        <mat-option value="1">Autocomplete</mat-option>
-                        <mat-option value="2">Manual</mat-option>
+                    <mat-select [(value)]="isAutocomplete">
+                        <mat-option value="true">Autocomplete</mat-option>
+                        <mat-option value="false">Manual</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -115,7 +124,10 @@
                 <button mat-raised-button color="primary" class="forms-margin" (click)="closeDialog()">Cancel</button>
             </div>
             <div class="row-column height-50">
-                <button mat-raised-button color="primary" class="forms-margin" (click)="submitChange()">Save</button>
+                <button mat-raised-button color="primary" class="forms-margin" (click)="submitChange()"
+                    [disabled]="!titleControl.valid">
+                    Save
+                </button>
             </div>
         </div>
     </div>

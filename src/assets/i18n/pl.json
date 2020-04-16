@@ -21,5 +21,15 @@
     "form_blank": "Pole nie mo\u017ce by\u0107 puste",
     "form_blank_username": "Nazwa u�ytkownika jest wymagana",
     "form_blank_password": "Has�o jest wymagane",
-    "form_error_user_or_pass": "Nazwa u�ytkownika lub has�o s� niepoprawne"
+    "form_error_user_or_pass": "Nazwa u�ytkownika lub has�o s� niepoprawne",
+    "form_min_char": "Podaj minimalnie 3 litery",
+    "form_pass_not_equal": "Hasła muszą być takie same",
+
+    "signin_title": "Sign up for your account",
+    "signin_title_email": "User Mail",
+    "signin_title_data": "User Data",
+    "signin_title_done": "Done",
+    "terms_message": "By signing up, you confirm that you've read and accepted our Terms of Service and Privacy Policy.",
+    "terms_agree": "I agree to the terms of use",
+    "terms_agree_error": "You must agree to the terms of use"
 }

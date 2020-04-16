@@ -22,6 +22,8 @@
     "form_blank_username": "Username is required",
     "form_blank_password": "Password is required",
     "form_error_user_or_pass": "Username or password incorect",
+    "form_min_char": "Minimum 3 characters required",
+    "form_pass_not_equal": "Password is not maching",
 
     "signin_title": "Sign up for your account",
     "signin_title_email": "User Mail",
@@ -29,5 +31,13 @@
     "signin_title_done": "Done",
     "terms_message": "By signing up, you confirm that you've read and accepted our Terms of Service and Privacy Policy.",
     "terms_agree": "I agree to the terms of use",
-    "terms_agree_error": "You must agree to the terms of use"
+    "terms_agree_error": "You must agree to the terms of use",
+
+    "home_title": "This is my portfolio project",
+    "home_dec_title": "Manage your schedule!",
+    "home_description": "Brighty list will help you with managing your tasks with eMail reminders",
+
+    "error_title": "Something gone wrong?",
+
+    "dialog_task_sameAsStart": "Same as start time"
 }

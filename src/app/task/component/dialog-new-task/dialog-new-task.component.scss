@@ -1,0 +1,174 @@
+.width-max {
+    width: 100%;
+  }
+  
+  .dialog {
+    position: relative;
+    width: 750px;
+    min-height: 400px;
+  }
+  
+  .dialog-row-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dialog-row {
+    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .row-column {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .center {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  .center-vertically {
+    justify-content: center;
+    display: flex;
+  }
+  
+  .right {
+    position: absolute;
+    right: 15px;
+  }
+  
+  .height-50 {
+    height: 50px;
+  }
+  
+  .task-notes-form {
+    width: 720px;
+    height: 100px;
+  }
+  
+  .task-notes-form-textarea {
+    resize: none;
+  }
+  
+  .column-width {
+    width: 250px;
+  }
+  
+  .column-height-radio-buttons {
+    height: 50px;
+  }
+  
+  .column-height-forms {
+    height: 50px;
+  }
+  
+  .div-radio-button-column-one {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  
+  .div-radio-button-column-two {
+    position: absolute;
+    left: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  
+  .div-radio-button-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+  }
+  
+  .div-radio-button-days-container {
+    height: 120px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+  .div-radio-button-days-container>* {
+    flex: 1 1 30px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+  }
+  
+  .div-radio-button-reapet-container {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .div-radio-button-reapet-container-div {
+    flex: 1 1 40px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  
+  .div-reapet-form-container {
+    position: absolute;
+    left: 200px;
+    width: 180px;
+  }
+  
+  .div-forms-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .general-conteiner-for-position-absolute {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .general-conteiner {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 1px solid cyan;
+  }
+  
+  .form-column-one {
+    padding: 10px;
+    width: 180px;
+  }
+  
+  .form-properties {
+    padding: 10px;
+    width: 180px;
+  }
+  
+  .padding-left {
+    padding-left: 15px;
+  }
+  
+  .position-left {
+    position: relative;
+    left: 15px;
+  }
+  
+  .forms-margin {
+   margin: 0px 15px 0px 15px;
+  }
+  

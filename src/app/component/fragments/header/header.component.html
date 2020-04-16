@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="shadow">
   <mat-toolbar-row>
     <span class="toolbar-margin"></span>
-    <span>Brighty List</span>
+    <span>
+      <a mat-button class="clean-link" routerLink="/home"><h1>Brighty List</h1></a>
+    </span>
     <span class="fill-remaining-space"></span>
 
     <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/login" routerLinkActive="active">{{'LogIn' | translate}}</a>
