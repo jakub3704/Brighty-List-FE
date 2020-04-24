@@ -8,12 +8,19 @@
             </button>
         </div>
     </div>
-    <div class="dialog-row">
+    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
+        <mat-form-field class="message-form forms-margin">
+            <mat-label>Message</mat-label>
+            <textarea [(ngModel)]="reminder.message" name="message" class="message-form-textarea" matInput
+                placeholder="Ex. Get up do some stuff"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
         <div class="padding-left">Select reminder type:</div>
     </div>
-    <div class="dialog-row">
+    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
         <div class="div-radio-button-container">
-            <mat-radio-group [(ngModel)]="reminderTypeSelection">
+            <mat-radio-group [(ngModel)]="reminderTypeSelection" required >
                 <mat-radio-button class="div-radio-button-column-one" value="BEFORE_START">
                     Before start
                 </mat-radio-button>
@@ -25,7 +32,7 @@
     </div>
     <!-- Reminders - No selection -->
     <div class="dialog-row height-50" *ngIf="reminderTypeSelection==='NO_SELECTION'">
-        <div class="padding-left">Make your selection</div>
+        <div class="padding-left">Something gone wrong</div>
     </div>
     <!-- Reminders - Before Start -->
     <div class="dialog-row" *ngIf="reminderTypeSelection==='BEFORE_START'">
@@ -35,11 +42,8 @@
             </div>
             <div class="dialog-row">
                 <mat-form-field class="forms-margin">
-                    <mat-select placeholder="selec time before" required>
-                        <mat-option value="1">15 minuts</mat-option>
-                        <mat-option value="2">30 minuts</mat-option>
-                        <mat-option value="3">45 minuts</mat-option>
-                        <mat-option value="4">60 minuts</mat-option>
+                    <mat-select [(ngModel)]="timeBeforeValue" placeholder="Select time before" required>
+                        <mat-option *ngFor="let beforeValue of timeBeforeArray" [value]="beforeValue">{{beforeValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -71,7 +75,8 @@
                         <div class="row-column">
                             <mat-form-field class="forms-margin">
                                 <mat-label>Chose a date</mat-label>
-                                <input matInput [matDatepicker]="datePicker" placeholder="Chose date" required>
+                                <input matInput [matDatepicker]="datePicker" placeholder="Chose date" 
+                                [(ngModel)]="reminderByDate" required>
                                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                                 <mat-datepicker #datePicker></mat-datepicker>
                             </mat-form-field>
@@ -80,7 +85,7 @@
                             <mat-form-field class="forms-margin">
                                 <mat-label>Chose time</mat-label>
                                 <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Chose time"
-                                    required>
+                                    [(ngModel)]="reminderTime" required>
                                 <ngx-material-timepicker-toggle matSuffix [for]="timePicker">
                                 </ngx-material-timepicker-toggle>
                                 <ngx-material-timepicker #timePicker></ngx-material-timepicker>
@@ -109,7 +114,7 @@
                         <mat-form-field class="forms-margin">
                             <mat-label>Chose time</mat-label>
                             <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Chose time"
-                                required>
+                            [(ngModel)]="reminderTime" required>
                             <ngx-material-timepicker-toggle matSuffix [for]="timePicker">
                             </ngx-material-timepicker-toggle>
                             <ngx-material-timepicker #timePicker></ngx-material-timepicker>

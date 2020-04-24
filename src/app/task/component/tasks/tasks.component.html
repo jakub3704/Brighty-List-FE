@@ -11,15 +11,70 @@
 
             <span class="fill-remaining-space"></span>
 
+            <div class="search-container">
+                <div class="search-column center">
+                    <input [(ngModel)]="searchInput" type="text" placeholder="Search by title" name="searchByTitle">
+                </div>
+                <div class="search-column center">
+                    <button mat-icon-button (click)="search(searchInput)">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <span class="space-20"></span>
+
             <button mat-button [matMenuTriggerFor]="filterMenu">
                 Filter
             </button>
             <mat-menu #filterMenu="matMenu">
-                <button mat-menu-item>By Priority</button>
-                <button mat-menu-item>By Date</button>
-                <button mat-menu-item>By Name</button>
-                <button mat-menu-item>By Status</button>
+                <button mat-menu-item [disabled]="filterOption === 'DEFAULT'"
+                    (click)="filterBtn('DEFAULT')">Defaut</button>
+                <button mat-menu-item [matMenuTriggerFor]="priorityMenu">By Priority</button>
+                <button mat-menu-item [matMenuTriggerFor]="statusMenu">By Status</button>
             </mat-menu>
+            <mat-menu #priorityMenu="matMenu">
+                <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_HIGH'"
+                    (click)="filterBtn('BY_PRIORITY_HIGH')">H</button>
+                <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_MEDIUM'"
+                    (click)="filterBtn('BY_PRIORITY_MEDIUM')">M</button>
+                <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_LOW'"
+                    (click)="filterBtn('BY_PRIORITY_LOW')">L</button>
+            </mat-menu>
+            <mat-menu #statusMenu="matMenu">
+                <button mat-menu-item [disabled]="filterOption === 'STATUS_PENDING'"
+                    (click)="filterBtn('STATUS_PENDING')">Pending</button>
+                <button mat-menu-item [disabled]="filterOption === 'STATUS_ACTIVE'"
+                    (click)="filterBtn('STATUS_ACTIVE')">Active</button>
+                <button mat-menu-item [disabled]="filterOption === 'STATUS_COMPLETED'"
+                    (click)="filterBtn('STATUS_COMPLETED')">Completed</button>
+                <button mat-menu-item [disabled]="filterOption === 'STATUS_OVERDUE'"
+                    (click)="filterBtn('STATUS_OVERDUE')">Overdue</button>
+            </mat-menu>
+            <span class="space-20"></span>
+
+            <button mat-button [matMenuTriggerFor]="sortMenu">
+                Sort
+            </button>
+            <mat-menu #sortMenu="matMenu">
+                <button mat-menu-item [disabled]="sortOption === 'DEFAULT'" (click)="sort('DEFAULT')">Defaut</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_PRIORITY'" (click)="sort('BY_PRIORITY')">By
+                    Priority</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_START_DATE'" (click)="sort('BY_START_DATE')">By
+                    Start Date</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_END_DATE'" (click)="sort('BY_END_DATE')">By End
+                    Date</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_TITLE'" (click)="sort('BY_TITLE')">By
+                    Title</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_STATUS'" (click)="sort('BY_STATUS')">By
+                    Status</button>
+            </mat-menu>
+
+            <button mat-button (click)="sortReverse()">
+                <mat-icon>{{sortIcon[sortIsReverse.toString()]}}</mat-icon>
+            </button>
+
+            <span class="space-20"></span>
 
             <button mat-button [matMenuTriggerFor]="viewMenu">
                 View
@@ -48,38 +103,31 @@
 
 
             <div class="page-row" *ngFor="let task of tasks">
-
+                <!-- Single Task -->
                 <mat-card class="card-task">
                     <div class="card-row-container">
 
                         <div class="card-row height-50">
 
                             <div class="card-column-priority center">
-                                <button mat-icon-button [matMenuTriggerFor]="menu">
-                                    <mat-icon>{{prioritiesIcon[task.priority]}}</mat-icon>
-                                </button>
-                                <mat-menu #menu="matMenu">
-                                    <button mat-menu-item (click)="task.setPriority(1)">H</button>
-                                    <button mat-menu-item (click)="task.setPriority(2)">M</button>
-                                    <button mat-menu-item (click)="task.setPriority(3)">L</button>
-                                </mat-menu>
+                                <mat-icon>{{prioritiesIcon[task.priority]}}</mat-icon>
                             </div>
 
                             <div class="card-column-title">
 
                                 <div class="card-row height-40">
                                     <div class="card-column-title">
-                                        <div>{{task.title}}</div>
+                                        <div>{{task.title}}{{task.statusPriority}}</div>
                                     </div>
                                     <div class="card-column width-100">
                                         <div class="card-row">
                                             <div class="card-column">
-                                                <button mat-icon-button>
+                                                <button mat-icon-button (click)="openDialogUpdateTask(task)">
                                                     <mat-icon>edit</mat-icon>
                                                 </button>
                                             </div>
                                             <div class="card-column">
-                                                <button mat-icon-button>
+                                                <button mat-icon-button (click)="btnDeleteTask(task)">
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
                                             </div>
@@ -88,7 +136,7 @@
                                 </div>
 
                                 <div class="card-row height-15">
-                                    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                                    <mat-progress-bar value="task.progress"></mat-progress-bar>
                                 </div>
 
                             </div>
@@ -97,12 +145,12 @@
 
                         <div class="card-row height-10">
                         </div>
-                        <!-- Hidden -->
+                        <!-- Full View -->
                         <div class="card-row" *ngIf="isFullView">
                             <div class="card-column">
                                 <div class="card-row-container">
 
-                                    <div class="card-row">
+                                    <div class="card-row" *ngIf="task.notes!=undefined || task.notes!=null ">
                                         <div class="notes-container">
                                             {{task.notes}}
                                         </div>
@@ -112,18 +160,18 @@
                                         <div class="card-column">
                                             <div class="horizontal-container height-40">
                                                 <div>Reminders:</div>
-                                                <button mat-icon-button (click)="openDialogAddReminder()">
+                                                <button mat-icon-button (click)="openDialogAddReminder(task)">
                                                     <mat-icon>add</mat-icon>
                                                 </button>
                                                 <span class="fill-remaining-space"></span>
-                                                <button mat-icon-button (click)="toggleReminderVisible()">
-                                                    <mat-icon>{{reminderExpandIcon}}</mat-icon>
+                                                <button mat-icon-button (click)="task.isExpanded=!task.isExpanded">
+                                                    <mat-icon>{{expandIcon[task.isExpanded]}}</mat-icon>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card-row" *ngIf="isRemindersVisible">
+                                    <div class="card-row" *ngIf="task.isExpanded">
                                         <div class="card-row-container" *ngIf="task.reminders.length === 0">
                                             You have no reminders
                                         </div>
@@ -131,12 +179,14 @@
                                             <div class="card-row border-bottom" *ngFor="let reminder of task.reminders">
                                                 <div class="card-column">
                                                     <div class="horizontal-container height-40">
-                                                        <div class="padding-left">{{reminder.nextExecutionTime}}</div>
+                                                        <div class="padding-left">
+                                                            {{reminder.nextExecutionTime.toGMTString()}}</div>
                                                         <span class="space-50"></span>
                                                         <div>{{reminder.message}}</div>
                                                         <span class="fill-remaining-space"></span>
                                                         <div>
-                                                            <button mat-icon-button>
+                                                            <button mat-icon-button
+                                                                (click)="btnDeleteReminder(reminder)">
                                                                 <mat-icon>delete</mat-icon>
                                                             </button>
                                                         </div>
@@ -152,20 +202,20 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Hidden -->
+                    <!-- Full View part End -->
                     <div class="card-row">
                         <div>
                             <div class="card-row">Start time:</div>
-                            <div class="card-row">{{task.startTime}}</div>
+                            <div class="card-row">{{task.startTime.toGMTString()}}</div>
                         </div>
                         <span class="space-20p"></span>
                         <div>
                             <div class="card-row">End time:</div>
-                            <div class="card-row">{{task.endTime}}</div>
+                            <div class="card-row">{{task.endTime.toGMTString()}}</div>
                         </div>
                         <span class="fill-remaining-space"></span>
                         <div>
-                            <button mat-raised-button color="primary" class="button-size">
+                            <button mat-raised-button color="primary" class="button-size" (click)="completeTask(task)">
                                 Complete
                             </button>
                         </div>

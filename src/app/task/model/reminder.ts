@@ -1,10 +1,8 @@
-export class ReminderDto {
+export class Reminder {
     taskId: number;
     reminderId: number;
     message: string;
     cron: string;
-    nextExecutionTime: Date;
+    nextExecutionTime: string;
     active: boolean;
-
-    
 }

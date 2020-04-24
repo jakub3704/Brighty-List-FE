@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogUpdateTaskComponent } from './dialog-update-task.component';
+import { DialogNewReminderComponent } from './dialog-new-reminder.component';
 
-describe('DialogUpdateTaskComponent', () => {
-  let component: DialogUpdateTaskComponent;
-  let fixture: ComponentFixture<DialogUpdateTaskComponent>;
+describe('DialogNewReminderComponent', () => {
+  let component: DialogNewReminderComponent;
+  let fixture: ComponentFixture<DialogNewReminderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogUpdateTaskComponent ]
+      declarations: [ DialogNewReminderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogUpdateTaskComponent);
+    fixture = TestBed.createComponent(DialogNewReminderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
