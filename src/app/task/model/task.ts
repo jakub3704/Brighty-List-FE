@@ -11,6 +11,10 @@ export class Task {
     endTime: string;
     completedTime: string;
     status: TaskStatus;
+    progress: number;
+    statusPriority: number;
+    autocomplete: boolean;
+    completed: boolean;
     reminders: Reminder[] = [];
 }
 

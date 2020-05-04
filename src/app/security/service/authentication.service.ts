@@ -10,13 +10,15 @@ const CLIENT_SECRET = 'brighty-secret';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    public isLoggedIn = false;
+    public isLoggedIn: boolean;
     public isInvalid = false;
     token: TokenDto;
 
     constructor(private httpClient: HttpClient,
                 private coockieService: CookieService,
-                private router: Router) { }
+                private router: Router) { 
+                this.isLoggedIn = this.checkCredentials();
+                }
 
     public retriveToken(username: string, password: string) {
         const httpHeaders = new HttpHeaders(
@@ -42,7 +44,6 @@ export class AuthenticationService {
                     this.router.navigate(['/tasks']);
                 },
                 error => {
-                    // TODO - dla odpowiedniego b³edu odpowiednia reakcja
                     this.isLoggedIn = false;
                     this.isInvalid = true;
             }
@@ -50,7 +51,8 @@ export class AuthenticationService {
     }
 
     saveToken(token: TokenDto) {
-        this.coockieService.set('access_token', JSON.stringify(token), token.expires_in);
+        var expire = new Date(new Date().getTime() + token.expires_in*1000)
+        this.coockieService.set('access_token', JSON.stringify(token), expire);
     }
 
     getToken(): TokenDto {
@@ -59,14 +61,14 @@ export class AuthenticationService {
     }
 
     checkCredentials(): boolean {
-        return this.coockieService.check('access_token');
+        this.isLoggedIn = this.coockieService.check('access_token');
+        return this.isLoggedIn;
     }
 
     closeSesion() {
         this.coockieService.delete('access_token');
         this.isLoggedIn = false;
         this.router.navigate(['/home']);
-        // window.location.reload();
     }
 
 }

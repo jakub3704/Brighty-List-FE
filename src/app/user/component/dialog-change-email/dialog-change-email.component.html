@@ -1,1 +1,35 @@
-<p>dialog-change-mail works!</p>
+<div mat-dialog-content>
+    <div class="basic-row-container">
+        <div class="basic-row center">
+            <h1>{{'user_settings_dialog_change_email' | translate}}</h1>
+        </div>
+        <span class="span-10"></span>
+        <div class="basic-row center">
+            <mat-form-field class="width-max">
+                <mat-label>{{'form_placeholder_email' | translate}}</mat-label>
+                <input matInput name="email"
+                    [formControl]="emailControl" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="emailControl.hasError('required')">
+                    {{'form_blank' | translate}}
+                </mat-error>
+                <mat-error *ngIf="emailControl.hasError('email')">
+                    {{'form_not_email' | translate}}
+                </mat-error>
+            </mat-form-field> 
+        </div>
+        <span class="span-20"></span>
+        <div class="basic-row center">
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max"
+                    (click)="closeDialog()">{{'btn_cancel' | translate}}</button>
+            </div>
+            <span class="span-20"></span>
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max" (click)="submitChange()"
+                    [disabled]="!emailControl.valid">
+                    {{'btn_save' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,5 @@ export class ReminderDto {
     message: string;
     cron: string;
     nextExecutionTime: Date;
-    active: boolean;
-
-    
+    active: boolean; 
 }

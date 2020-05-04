@@ -1,49 +1,61 @@
 <div mat-dialog-content class="dialog">
     <!-- Reminders -->
+    <div class="dialog-row">{{reminderDate}}</div>
+        
     <div class="dialog-row">
-        <div class="row-column height-50 padding-left center-vertically">New Reminder</div>
+        <div class="row-column height-50 padding-left center-vertically">
+            <h1>{{'reminder_create_title' | translate}}</h1>
+        </div>
         <div class="row-column height-50 center">
             <button mat-icon-button class="right" (click)="closeDialog()">
                 <mat-icon>close</mat-icon>
             </button>
         </div>
     </div>
-    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
+    <div class="dialog-row center" *ngIf="errorSame">
+        <mat-error>{{'error_same_reminder' | translate}}</mat-error>
+    </div>
+    <div class="dialog-row" *ngIf="!(reminderTypeSelection==='NO_SELECTION' || reminderTypeSelection==='IMPOSIBLE')">
         <mat-form-field class="message-form forms-margin">
-            <mat-label>Message</mat-label>
+            <mat-label>{{'reminder_create_message' | translate}}</mat-label>
             <textarea [(ngModel)]="reminder.message" name="message" class="message-form-textarea" matInput
                 placeholder="Ex. Get up do some stuff"></textarea>
         </mat-form-field>
     </div>
-    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
-        <div class="padding-left">Select reminder type:</div>
+    <div class="dialog-row" *ngIf="!(reminderTypeSelection==='NO_SELECTION' || reminderTypeSelection==='IMPOSIBLE')">
+        <div class="padding-left">{{'reminder_create_select_reminder_type' | translate}}</div>
     </div>
-    <div class="dialog-row" *ngIf="reminderTypeSelection!=='NO_SELECTION'">
+    <div class="dialog-row" *ngIf="!(reminderTypeSelection==='NO_SELECTION' || reminderTypeSelection==='IMPOSIBLE')">
         <div class="div-radio-button-container">
-            <mat-radio-group [(ngModel)]="reminderTypeSelection" required >
-                <mat-radio-button class="div-radio-button-column-one" value="BEFORE_START">
-                    Before start
+            <mat-radio-group [(ngModel)]="reminderTypeSelection" required (change)="onReminderTypeSelectionChange()">
+                <mat-radio-button class="div-radio-button-column-one" value="BEFORE_START" [disabled]="!canBeforeStart">
+                    {{'reminder_create_reminder_type_before_start' | translate}}
                 </mat-radio-button>
-                <mat-radio-button class="div-radio-button-column-two" value="BETWEEN">
-                    Between
+                <mat-radio-button class="div-radio-button-column-two" value="BETWEEN" [disabled]="!canBetween">
+                    {{'reminder_create_reminder_type_between' | translate}}
                 </mat-radio-button>
             </mat-radio-group>
         </div>
     </div>
     <!-- Reminders - No selection -->
     <div class="dialog-row height-50" *ngIf="reminderTypeSelection==='NO_SELECTION'">
-        <div class="padding-left">Something gone wrong</div>
+        <div class="padding-left">{{'reminder_create_reminder_type_error' | translate}}</div>
+    </div>
+    <div class="dialog-row height-50" *ngIf="reminderTypeSelection==='IMPOSIBLE'">
+        <div class="padding-left">{{'reminder_create_reminder_type_imposible' | translate}}</div>
     </div>
     <!-- Reminders - Before Start -->
     <div class="dialog-row" *ngIf="reminderTypeSelection==='BEFORE_START'">
         <div class="dialog-row-container width-max">
             <div class="dialog-row">
-                <div class="padding-left">Select time before start:</div>
+                <div class="padding-left">{{'reminder_create_select_time_before_start' | translate}}</div>
             </div>
             <div class="dialog-row">
                 <mat-form-field class="forms-margin">
-                    <mat-select [(ngModel)]="timeBeforeValue" placeholder="Select time before" required>
-                        <mat-option *ngFor="let beforeValue of timeBeforeArray" [value]="beforeValue">{{beforeValue}}</mat-option>
+                    <mat-label>{{'form_placeholder_select' | translate}}</mat-label>
+                    <mat-select [(ngModel)]="timeBeforeValue" required>
+                        <mat-option *ngFor="let beforeValue of timeBeforeArray" [value]="beforeValue">{{beforeValue}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -53,39 +65,27 @@
     <div class="dialog-row" *ngIf="reminderTypeSelection==='BETWEEN'">
         <div class="dialog-row-container width-max">
             <div class="dialog-row">
-                <div class="padding-left">Select date input type:</div>
-            </div>
-            <div class="dialog-row">
-                <div class="div-radio-button-container">
-                    <mat-radio-group [(ngModel)]="betweenTypeSelection" checked>
-                        <mat-radio-button class="div-radio-button-column-one" value="BY_DATE">By Date
-                        </mat-radio-button>
-                        <mat-radio-button class="div-radio-button-column-two" value="BY_DAY">By Day
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-            </div>
-            <!-- Between - By Date -->
-            <div class="dialog-row" *ngIf="betweenTypeSelection==='BY_DATE'">
                 <div class="dialog-row-container width-max">
                     <div class="dialog-row">
-                        <div class="padding-left">Select date and time:</div>
+                        <div class="padding-left">{{'reminder_create_select_date_time' | translate}}</div>
                     </div>
                     <div class="dialog-row">
                         <div class="row-column">
                             <mat-form-field class="forms-margin">
-                                <mat-label>Chose a date</mat-label>
-                                <input matInput [matDatepicker]="datePicker" placeholder="Chose date" 
-                                [(ngModel)]="reminderByDate" required>
+                                <mat-label>{{'form_placeholder_chose_date' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="datePicker" placeholder="Chose date"
+                                    [(ngModel)]="reminderDate" [min]="minDate" [max]="maxDate" required
+                                    (dateInput)="onDateChange()" (dateChange)="onDateChange()">
                                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                                 <mat-datepicker #datePicker></mat-datepicker>
                             </mat-form-field>
                         </div>
                         <div class="row-column">
                             <mat-form-field class="forms-margin">
-                                <mat-label>Chose time</mat-label>
+                                <mat-label>{{'form_placeholder_chose_time' | translate}} </mat-label>
                                 <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Chose time"
-                                    [(ngModel)]="reminderTime" required>
+                                    [(ngModel)]="reminderTime" (ngModelChange)="onTimeChange()" [min]="minTime"
+                                    [max]="maxTime" required>
                                 <ngx-material-timepicker-toggle matSuffix [for]="timePicker">
                                 </ngx-material-timepicker-toggle>
                                 <ngx-material-timepicker #timePicker></ngx-material-timepicker>
@@ -94,50 +94,25 @@
                     </div>
                 </div>
             </div>
-            <!-- Between - By Day -->
-            <div class="dialog-row" *ngIf="betweenTypeSelection==='BY_DAY'">
-                <div class="dialog-row-container width-max">
-                    <div class="dialog-row">
-                        <div class="padding-left">Select day of the week:</div>
-                    </div>
-                    <div class="dialog-row">
-                        <mat-radio-group [(ngModel)]="selectedDay" class="div-radio-button-days-container">
-                            <mat-radio-button *ngFor="let day of days" [value]="day">
-                                {{day}}
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <div class="dialog-row">
-                        <div class="padding-left">Select time:</div>
-                    </div>
-                    <div class="dialog-row">
-                        <mat-form-field class="forms-margin">
-                            <mat-label>Chose time</mat-label>
-                            <input matInput [ngxTimepicker]="timePicker" [format]="24" placeholder="Chose time"
-                            [(ngModel)]="reminderTime" required>
-                            <ngx-material-timepicker-toggle matSuffix [for]="timePicker">
-                            </ngx-material-timepicker-toggle>
-                            <ngx-material-timepicker #timePicker></ngx-material-timepicker>
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
             <!-- Reminders - Between - Reapet-->
             <div class="dialog-row">
-                <div class="padding-left">Select reapet ratio:</div>
+                <div class="padding-left">{{'reminder_create_select_reapet_ratio' | translate}}</div>
             </div>
             <div class="dialog-row">
                 <mat-radio-group class="div-radio-button-reapet-container" [(ngModel)]="reapetTypeSelection">
                     <div class="div-radio-button-reapet-container-div">
-                        <mat-radio-button value="NEVER">Never</mat-radio-button>
+                        <mat-radio-button value="NEVER">{{'reminder_create_reapet_ratio_never' | translate}}
+                        </mat-radio-button>
                     </div>
                     <div class="div-radio-button-reapet-container-div">
-                        <mat-radio-button value="EVERY_DAY">Every day</mat-radio-button>
+                        <mat-radio-button value="EVERY_DAY">{{'reminder_create_reapet_ratio_every_day' | translate}}
+                        </mat-radio-button>
                     </div>
                     <div class="div-radio-button-reapet-container-div">
                         <div class="dialog-row">
                             <div class="row-column">
-                                <mat-radio-button value="CUSTOM">Custom</mat-radio-button>
+                                <mat-radio-button value="CUSTOM">{{'reminder_create_reapet_ratio_custom' | translate}}
+                                </mat-radio-button>
                             </div>
                             <div class="row-column height-60">
                                 <mat-form-field class="forms-margin">

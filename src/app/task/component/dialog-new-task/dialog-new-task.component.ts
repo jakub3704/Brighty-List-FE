@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskDto } from '../../model/task-dto';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, Validators} from '@angular/forms';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
-import { TaskStatus } from '../../model/task-status';
-import { TaskService, dateTimeEquals } from '../../service/task.service';
+import { TaskService, dateTimeEquals, dateEquals } from '../../service/task.service';
 
 @Component({
   selector: 'app-dialog-new-task',
@@ -17,12 +16,14 @@ export class DialogNewTaskComponent implements OnInit {
   startDateTime: Date = new Date();
   startTime: string;
 
-  sameAsStart: boolean;
+  sameAsStart: boolean = true;
   endDateTime: Date = new Date();
   endTime: string;
+  endTimeMin: string =  null;
+  startTimeMin: string;
 
-  isAutocomplete = 'true';
-  priority = '2';
+  isAutocomplete: string = 'true';
+  priority: string = '2';
 
   titleControl = new FormControl('', [
     Validators.required,
@@ -32,12 +33,16 @@ export class DialogNewTaskComponent implements OnInit {
 
   public matcher = new MyFormErrorStateMatcher();
 
-
   constructor(
     public dialogRef: MatDialogRef<DialogNewTaskComponent>,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: TaskDto) {
     dialogRef.disableClose = true;
+  }
+
+  ngOnInit(): void {
+    this.setInitialDateTimeNow();
+    this.setBasicData();
   }
 
   closeDialog(): void {
@@ -47,49 +52,81 @@ export class DialogNewTaskComponent implements OnInit {
   submitChange(): void {
     this.prepareDataForSubmit();
     if (this.data === null) {
-      this.taskService.createTask(this.task);
+      this.taskService.createTask(this.task).then(
+        () => {
+          this.dialogRef.close();
+        });;
     } else {
-      this.taskService.updateTask(this.task);
+      this.taskService.updateTask(this.task).then(
+        () => {
+          this.dialogRef.close();
+        });;
     }
-    //this.dialogRef.close();
   }
 
   private prepareDataForSubmit() {
     this.task.priority = parseInt(this.priority);
     this.task.startTime = this.startDateTime;
     this.task.endTime = this.endDateTime;
-    this.setStatus(this.isAutocomplete);
+
+    if (this.isAutocomplete === 'true') {
+      this.task.autocomplete = true;
+    } else {
+      this.task.autocomplete = false;
+    }
+    this.task.completed = false;
+  }
+
+  onChangeStartDate(): void {
+    this.ifSameAsStart();
+    this.setStartTimeMin();
+    this.setEndTimeMin();
+  }
+
+  onChangeEndDate(): void {
+    this.ifSameAsStart();
+    this.setStartTimeMin();
+    this.setEndTimeMin();
   }
 
   onChangeStartTime(): void {
-    var startTimeTmp: string[] = this.startTime.split(':');
-    this.startDateTime.setHours(parseInt(startTimeTmp[0]));
-    this.startDateTime.setMinutes(parseInt(startTimeTmp[1]));
-    this.startDateTime.setMilliseconds(0);
+    this.updateTimeOfDate(this.startTime, this.startDateTime)
     this.task.startTime = this.startDateTime;
 
     this.ifSameAsStart();
+    this.setStartTimeMin();
+    this.setEndTimeMin();
   }
 
   onChangeEndTime(): void {
-    var endTimeTmp: string[] = this.endTime.split(':');
-    this.endDateTime.setHours(parseInt(endTimeTmp[0]));
-    this.endDateTime.setMinutes(parseInt(endTimeTmp[1]));
-    this.endDateTime.setMilliseconds(0);
+    this.updateTimeOfDate(this.endTime, this.endDateTime)
     this.task.endTime = this.endDateTime;
 
     this.ifSameAsStart();
+    this.setStartTimeMin();
+    this.setEndTimeMin();
   }
-
-  ngOnInit(): void {
-    this.setInitialDateTimeNow();
-    this.setBasicData();
+  
+  ifSameAsStart(): void {
+    if (this.sameAsStart) {
+      this.endDateTime = new Date(this.startDateTime);
+      this.endTime = this.startTime;
+    }
   }
 
   private setInitialDateTimeNow() {
     this.now = new Date();
-    this.now.setHours(this.now.getHours() + 4);
-    this.now.setMinutes(0);
+    var compare = Math.round((this.now.getMinutes() / 30));
+    if (compare === 0) {
+      this.now.setHours(this.now.getHours() + 1);
+      this.now.setMinutes(0);
+    } else if (compare === 1) {
+      this.now.setHours(this.now.getHours() + 1);
+      this.now.setMinutes(30);
+    }  else if (compare === 2) {
+      this.now.setHours(this.now.getHours() + 2);
+      this.now.setMinutes(0);
+    } 
     this.now.setSeconds(0);
     this.now.setMilliseconds(0);
   }
@@ -97,50 +134,72 @@ export class DialogNewTaskComponent implements OnInit {
   private setBasicData() {
     if (this.data != null) {
       this.task = this.data;
-      this.startDateTime = new Date(this.task.startTime + 'Z');
-      this.startTime = this.startDateTime.getHours() + ':' + this.startDateTime.getMinutes();
+      this.startDateTime = new Date(this.task.startTime);
+      this.startTime = this.timeToStringFromDate(this.startDateTime);
 
-      this.endDateTime = new Date(this.task.endTime + 'Z');
-      this.endTime = this.endDateTime.getHours() + ':' + this.endDateTime.getMinutes();
+      this.endDateTime = new Date(this.task.endTime);
+      this.endTime = this.timeToStringFromDate(this.endDateTime);
 
       this.sameAsStart = dateTimeEquals(this.startDateTime, this.endDateTime);
+
+      this.setEndTimeMin();
+      this.updateIsAutocomplete(this.task.autocomplete);
     } else {
       this.startDateTime = new Date(this.now);
-      this.startTime = this.startDateTime.getHours() + ':' + this.startDateTime.getMinutes();
+      this.startTime = this.timeToStringFromDate(this.startDateTime);
 
       this.endDateTime = new Date(this.now);
-      this.endTime = this.endDateTime.getHours() + ':' + this.endDateTime.getMinutes();
+      this.endTime = this.timeToStringFromDate(this.endDateTime);
 
       this.sameAsStart = true;
+      this.endTimeMin = this.startTime
+    }
+    this.setStartTimeMin();
+  }
+
+  private setEndTimeMin(): void {
+    if (dateEquals(this.startDateTime, this.endDateTime)) {
+      this.endTimeMin = this.startTime
+    } else {
+      this.endTimeMin =  null;
     }
   }
 
-  setStatus(isAutocomplete: string) {
-    if (isAutocomplete === 'true') {
-      if (dateTimeEquals(this.now, this.startDateTime)) {
-        this.task.status = TaskStatus.STATUS_ACTIVE_AUTOCOMPLETE
+  private setStartTimeMin(): void {
+    if (dateEquals(this.startDateTime, this.now)) {
+      if (this.data != null) {
+        var tmp = new Date();
+        this.startTimeMin = (tmp.getHours() + 1) + ':' + tmp.getMinutes();
+      } else {
+        this.startTimeMin = this.timeToStringFromDate(this.now);
       }
-      if (this.startDateTime > this.now) {
-        this.task.status = TaskStatus.STATUS_PENDING_AUTOCOMPLETE
-      }
-    }
-    if (isAutocomplete === 'false') {
-      if (dateTimeEquals(this.now, this.startDateTime)) {
-        this.task.status = TaskStatus.STATUS_ACTIVE
-      }
-      if (this.startDateTime > this.now) {
-        this.task.status = TaskStatus.STATUS_PENDING
-      }
+    } else if (this.startDateTime.getTime() < this.now.getTime()) {
+      var tmp = new Date();
+      this.startTimeMin = (tmp.getHours() + 1) + ':' + tmp.getMinutes();
+    } else {
+      this.startTimeMin =  null;
     }
   }
 
-  ifSameAsStart(): void {
-    if (this.sameAsStart) {
-      this.endDateTime.setDate(this.startDateTime.getDate());
-      this.endTime = this.startTime;
+  private updateIsAutocomplete(autocomplete: boolean) {
+    if (autocomplete) {
+      this.isAutocomplete = 'true';
+    } else {
+      this.isAutocomplete = 'false';
     }
-  } 
-} 
+  }
+
+  private timeToStringFromDate(date: Date): string {
+    return date.getHours() + ':' + date.getMinutes();
+  }
+
+  private updateTimeOfDate(time: string, date: Date): void {
+    var timeSplited: string[] = time.split(':');
+    date.setHours(parseInt(timeSplited[0]));
+    date.setMinutes(parseInt(timeSplited[1]));
+    date.setMilliseconds(0);
+  }
+}
 
 
 

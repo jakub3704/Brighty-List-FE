@@ -2,20 +2,21 @@
   <mat-toolbar-row>
     <span class="toolbar-margin"></span>
     <span>
-      <a mat-button class="clean-link" routerLink="/home"><h1>Brighty List</h1></a>
+      <a mat-button class="clean-link" routerLink="/home"><h1>{{'app_titile' | translate}}</h1></a>
     </span>
     <span class="fill-remaining-space"></span>
 
-    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/login" routerLinkActive="active">{{'LogIn' | translate}}</a>
-    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/signup" routerLinkActive="active">{{'SignUp' | translate}}</a>
+    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/login" routerLinkActive="active">{{'log_in' | translate}}</a>
+    <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/signup" routerLinkActive="active">{{'sign_up' | translate}}</a>
 
+    <a *ngIf="authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/tasks" routerLinkActive="active">{{'header_my_tasks' | translate}}</a>
     <div *ngIf="authenticationService.isLoggedIn">
       <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/userSettings">Settings</button>
-        <button mat-menu-item (click)="logOut()">Log Out</button>
+        <button mat-menu-item routerLink="/userSettings">{{'header_user_settings' | translate}}</button>
+        <button mat-menu-item (click)="logOut()">{{'header_user_log_out' | translate}}</button>
       </mat-menu>
     </div>
 

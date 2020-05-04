@@ -25,16 +25,20 @@ export class TaskService {
     return await this.httpClient.get<Task[]>(this.backEndUrl + 'tasks', { headers: this.httpHeaders }).toPromise();
   }
 
-  public async searchAllTasks(searchInput: string): Promise<Task[]> {
+  public async search(searchInput: string): Promise<Task[]> {
     return await this.httpClient.get<Task[]>(this.backEndUrl + 'tasks/search=' + searchInput, { headers: this.httpHeaders }).toPromise();
   }
 
-  public async filter(column: string, input: string): Promise<Task[]> {
-    return await this.httpClient.get<Task[]>(this.backEndUrl + 'tasks/filter?column=' + column + '&input=' + input , { headers: this.httpHeaders }).toPromise();
+  public async filter(option: string): Promise<Task[]> {
+    return await this.httpClient.get<Task[]>(this.backEndUrl + 'tasks/filter?option=' + option, { headers: this.httpHeaders }).toPromise();
   }
 
-  public getTaskById(taskId: string) {
-    return this.httpClient.get<Task>(this.backEndUrl + 'tasks/' + taskId, { headers: this.httpHeaders });
+  public async sort(option: String): Promise<Task[]> {
+    return await this.httpClient.get<Task[]>(this.backEndUrl + 'tasks/sort?option=' + option, { headers: this.httpHeaders }).toPromise();
+  }
+
+  public async getTaskById(taskId: string) {
+    return await this.httpClient.get<Task>(this.backEndUrl + 'tasks/' + taskId, { headers: this.httpHeaders }).toPromise();
   }
 
   public async createTask(taskDto: TaskDto) {
@@ -45,33 +49,33 @@ export class TaskService {
     return await this.httpClient.put<Task>(this.backEndUrl + 'tasks/' + taskDto.taskId, this.mapTaskDtoToTask(taskDto), { headers: this.httpHeaders }).toPromise();
   }
 
-  public completeTask(taskId: string) {
+  public async completeTask(taskId: string) {
     const httpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
     });
-    return this.httpClient.get(this.backEndUrl + 'tasks/complete/' + taskId, { headers: httpHeaders });
+    return await this.httpClient.get(this.backEndUrl + 'tasks/complete/' + taskId, { headers: httpHeaders }).toPromise();
   }
 
-  public deleteTask(taskId: string) {
+  public async deleteTask(taskId: string) {
     const httpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
     });
-    return this.httpClient.delete(this.backEndUrl + 'tasks/' + taskId, { headers: httpHeaders });
+    return await this.httpClient.delete(this.backEndUrl + 'tasks/' + taskId, { headers: httpHeaders }).toPromise();
   }
 
-  public getReminderById(taskId: string, reminderId: string) {
-    return this.httpClient.get<Reminder>(this.backEndUrl + 'tasks/' + taskId + '/reminders/' + reminderId, { headers: this.httpHeaders });
+  public async getReminderById(taskId: string, reminderId: string) {
+    return await this.httpClient.get<Reminder>(this.backEndUrl + 'tasks/' + taskId + '/reminders/' + reminderId, { headers: this.httpHeaders }).toPromise();
   }
 
   public async createReminder(reminderDto: ReminderDto) {
     return await this.httpClient.post<Reminder>(this.backEndUrl + 'reminders', this.mapReminderDtoToReminder(reminderDto), { headers: this.httpHeaders }).toPromise();
   }
 
-  public deleteReminder(reminderId: string) {
+  public async deleteReminder(reminderId: string) {
     const httpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
     });
-    return this.httpClient.delete(this.backEndUrl + 'reminders/' + reminderId, { headers: httpHeaders });
+    return await this.httpClient.delete(this.backEndUrl + 'reminders/' + reminderId, { headers: httpHeaders }).toPromise();
   }
 
   private mapTaskDtoToTask(taskDto: TaskDto): Task {
@@ -83,10 +87,22 @@ export class TaskService {
     task.priority = taskDto.priority;
     task.startTime = taskDto.startTime.toISOString();
     task.endTime = taskDto.endTime.toISOString();
-    if (taskDto.completedTime != null || taskDto.completedTime != undefined) { 
-    task.completedTime = taskDto.completedTime.toISOString();
+    if (taskDto.completedTime != null || taskDto.completedTime != undefined) {
+      task.completedTime = taskDto.completedTime.toISOString();
     }
     task.status = taskDto.status;
+    task.progress = taskDto.progress;
+    task.statusPriority = taskDto.statusPriority;
+    task.autocomplete = taskDto.autocomplete;
+    task.completed = taskDto.completed;
+
+    if (taskDto.reminders.length > 0) {
+      for (var reminderDto of taskDto.reminders) {
+        var reminder: Reminder = this.mapReminderDtoToReminder(reminderDto);
+        task.reminders.push(reminder);
+      }
+    }
+
     return task;
   }
 
@@ -109,6 +125,16 @@ export function dateTimeEquals(a: Date, b: Date): boolean {
     a.getHours() === b.getHours() &&
     a.getMinutes() === b.getMinutes()
   ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function dateEquals(a: Date, b: Date): boolean {
+  if (a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()) {
     return true;
   } else {
     return false;

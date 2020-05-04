@@ -1,96 +1,87 @@
 <div class="body-container">
 
-    <table class="profile-container">
+    <div class="page-row-container">
+        <div class="page-row center">
+            <mat-card class="card-dimensions">
+                <mat-card-title>
+                    {{'user_settings_title' | translate}}
+                </mat-card-title>
+                <div class="card-row-container card-min-height">
 
-        <td class="profile-options">
-            <h1>User Settings</h1>
-            <button mat-button [disabled]="isGeneral" (click)="isGeneral=true">General</button>
-            <button mat-button [disabled]="!isGeneral" (click)="isGeneral=false">Security</button>
-        </td>
-        <td class="profile-details">
+                    <span class="span-20"></span>
 
-            <table *ngIf="isGeneral">
-                <tr>
-                    <td colspan="3">
-                        General
-                    </td>
-                </tr>
+                    <div class="card-row">
 
-                <tr>
-                    <td>
-                        Name:
-                    </td>
-                    <td>
-                        {{userDto.name}}
-                    </td>
-                    <td>
-                        <button mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </tr>
+                        <div class="card-row-column width-200 margin-bottom-auto padding-right">
+                            <div class="card-row-container ">
+                                <div class="card-row">
+                                    <button mat-button [disabled]="isGeneral"
+                                        (click)="isGeneral=!isGeneral">{{'user_settings_general' | translate}}</button>
+                                </div>
+                                <div class="card-row">
+                                    <button mat-button [disabled]="!isGeneral"
+                                        (click)="isGeneral=!isGeneral">{{'user_settings_security' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
 
-                <tr>
-                    <td>
-                        Mail:
-                    </td>
-                    <td>
-                        {{userDto.mail}}
-                    </td>
-                    <td>
-                        <button mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </tr>
+                        <div class="card-row-column">
+                            <!-- general-->
+                            <div class="card-row-container padding-left border-left" *ngIf="isGeneral">
+                                <div class="card-row bold">
+                                    {{'user_settings_general' | translate}}
+                                </div>
+                                <span class="span-10"></span>
+                                <div class="card-row">
+                                    <div class="card-row-column width-100">{{'user_settings_user_name' | translate}}
+                                    </div>
+                                    <div class="card-row-column width-200">{{userDto.name}}</div>
+                                    <div class="card-row-column width-100">
+                                        <button mat-icon-button (click)="openDialogChangeName()">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <span class="span-10"></span>
+                                <div class="card-row">
+                                    <div class="card-row-column width-100">{{'user_settings_user_mail' | translate}}
+                                    </div>
+                                    <div class="card-row-column width-200">{{userDto.email}}</div>
+                                    <div class="card-row-column width-100">
+                                        <button mat-icon-button (click)="openDialogChangeEmail()">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>                            
+                                <span class="span-20"></span>
+                                <div class="card-row">
+                                    {{'user_settings_general_description' | translate}}
+                                </div>
+                            </div>
+                            <!-- security-->
+                            <div class="card-row-container padding-left border-left" *ngIf="!isGeneral">
+                                <div class="card-row bold">
+                                    {{'user_settings_security' | translate}}
+                                </div>
+                                <span class="span-10"></span>
+                                <div class="card-row">
+                                    <button mat-button
+                                        (click)="openDialogChangePassword()">{{'user_settings_btn_password_change' | translate}}</button>
+                                </div>
+                                <span class="span-10"></span>
+                                <div class="card-row">
+                                    <button mat-button (click)="openDialogDeleteAccount()">{{'user_settings_btn_delete_account' | translate}}</button>
+                                </div>
+                                <span class="span-20"></span>
+                                <div class="card-row">
+                                    {{'user_settings_security_description' | translate}}
+                                </div>
+                            </div>
+                        </div>
 
-                <tr>
-                    <td colspan="3">
-                        Update your name and email address.
-                    </td>
-                </tr>
-
-            </table>
-
-            <table *ngIf="!isGeneral">
-                <tr>
-                    <td colspan="3">
-                        Security
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>
-
-                    </td>
-                    <td>
-                        <button mat-button (click)="openDialogChangePassword()">Password change</button>
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-
-                    </td>
-                    <td>
-                        <button mat-button>Delete account</button>
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="3">
-                        Change your password or delete your account.
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </table>
-
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
 </div>

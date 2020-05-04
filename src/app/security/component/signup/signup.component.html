@@ -2,13 +2,13 @@
     <mat-card class="card-size">
         <div class="row-container">
             <div class="row">
-                <mat-card-title>{{'signin_title' | translate}}</mat-card-title>
+                <mat-card-title>{{'signup_title' | translate}}</mat-card-title>
             </div>
             <div class="row">
                 <mat-horizontal-stepper linear #stepper>
 
                     <mat-step [editable]=false>
-                        <ng-template matStepLabel>User Email</ng-template>
+                        <ng-template matStepLabel>{{'signup_title_email' | translate}}</ng-template>
 
                         <div class="row-container">
                             <span class="space-25px"></span>
@@ -30,7 +30,8 @@
                             <span class="space-25px"></span>
                             <div class="row">
                                 <button class="width-100per" [disabled]="!emailControl.valid" mat-raised-button
-                                    matStepperNext color="primary" type="button">Continue
+                                    matStepperNext color="primary" type="button">                    
+                                    {{'btn_continue' | translate}}
                                 </button>
                             </div>
                         </div>
@@ -38,17 +39,17 @@
                     </mat-step>
 
                     <mat-step [editable]=false>
-                        <ng-template matStepLabel>User Data</ng-template>
+                        <ng-template matStepLabel>{{'signup_title_data' | translate}}</ng-template>
 
                         <form class="row-container">
                             <span class="space-25px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
-                                    <mat-label>Enter Username</mat-label>
+                                    <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
                                     <input matInput #inputName [(ngModel)]="user.name" name="name"
                                         [formControl]="nameControl" [errorStateMatcher]="matcher" required
                                         maxlength="20" minlength="3">
-                                    <mat-hint>Max 20 characters</mat-hint>
+                                    <mat-hint>{{'form_pass_max_characters' | translate}}</mat-hint>
                                     <mat-error *ngIf="nameControl.hasError('required')">
                                         {{'form_blank_username' | translate}}
                                     </mat-error>
@@ -60,7 +61,7 @@
                             <span class="space-12px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
-                                    <mat-label>Enter Password</mat-label>
+                                    <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
                                     <input matInput [(ngModel)]="user.password" name="password"
                                         [type]="hide ? 'password' : 'text'" [formControl]="passwordControl"
                                         [errorStateMatcher]="matcher" required>
@@ -76,7 +77,7 @@
                             <span class="space-12px"></span>
                             <div class="row">
                                 <mat-form-field class="width-100per">
-                                    <mat-label>Reapet Password</mat-label>
+                                    <mat-label>{{'form_placeholder_password_verify' | translate}}</mat-label>
                                     <input matInput name="password" [type]="hideReapet ? 'password' : 'text'"
                                         [formControl]="passwordReapetControl" [errorStateMatcher]="matcher" required>
                                     <button mat-icon-button matSuffix (click)="hideReapet = !hideReapet"
@@ -96,7 +97,7 @@
                                 <button class="width-100per" mat-raised-button matStepperNext color="primary"
                                     type="button"
                                     [disabled]="!(nameControl.valid && passwordControl.valid && passwordReapetControl.valid)">
-                                    Continue
+                                    {{'btn_continue' | translate}}
                                 </button>
                             </div>
                         </form>
@@ -104,21 +105,21 @@
                     </mat-step>
 
                     <mat-step [editable]="false">
-                        <ng-template matStepLabel>Done</ng-template>
+                        <ng-template matStepLabel>{{'signup_title_done' | translate}}</ng-template>
 
                         <div class="row-container">
                             <div class="row">
-                                {{'terms_message' | translate}}
+                                {{'signup_terms_message' | translate}}
                             </div>
                             <span class="space-12px"></span>
                             <div class="row">
                                 <div class="width-100per">
                                     <form>
                                         <mat-checkbox [formControl]="termsControl" required>
-                                            {{'terms_agree' | translate}}
+                                            {{'signup_terms_agree' | translate}}
                                         </mat-checkbox>
                                         <mat-error *ngIf="!termsControl.valid">
-                                            {{'terms_agree_error' | translate}}
+                                            {{'signup_terms_agree_error' | translate}}
                                         </mat-error>
                                     </form>
                                 </div>
@@ -135,7 +136,7 @@
                             <div class="row">
                                 <button class="width-100per" mat-raised-button color="primary" type="button"
                                     [disabled]="!(termsControl.valid && captchaControl.valid)" (click)="submit()">
-                                    Sign up
+                                    {{'signup_btn' | translate}}
                                 </button>
                             </div>
                         </div>

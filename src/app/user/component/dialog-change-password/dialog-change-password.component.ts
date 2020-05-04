@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../service/user.service';
+import { equalValidator } from 'src/app/validators/equal-validator';
+import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 
 @Component({
   selector: 'app-dialog-change-password',
@@ -10,12 +12,33 @@ import { UserService } from '../../service/user.service';
 })
 export class DialogChangePasswordComponent implements OnInit {
   isSubmited = false;
+  isInvalid = false;
+  hideCurrent = true;
+  hideNew = true;
+  hideReapet = true;
 
-  passwordNew: string;
-  passwordOld: string;
-
-  dataFormGroup: FormGroup;
   formModel: FormModel = {};
+
+  passwordCurrentControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(30)
+  ]);
+
+  passwordNewControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(30)
+  ]);
+
+  passwordReapetControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(30),
+    equalValidator(this.passwordNewControl)
+  ]);
+
+  public matcher = new MyFormErrorStateMatcher();
 
   constructor(
     private userService: UserService,
@@ -29,19 +52,17 @@ export class DialogChangePasswordComponent implements OnInit {
   }
 
   submitChange(): void {
-    if (this.userService.updatePassword(this.passwordOld, this.passwordNew)) {
+    this.userService.updatePassword(this.passwordCurrentControl.value, this.passwordNewControl.value).then(
+      result=>{
       this.dialogRef.close();
-    } else {
-      // TODO sth gone wrong
-    }
+      window.location.reload()
+    },
+    error => {
+      this.isInvalid = true;
+    });
   }
 
   ngOnInit(): void {
-    this.dataFormGroup = this.dialogFormBuilder.group({
-      passwordOldControl: ['', Validators.required],
-      passwordNewControl: ['', Validators.required],
-      passwordNewReapetControl: ['', Validators.required]
-    });
   }
 
   public resolved(captchaResponse: string) {

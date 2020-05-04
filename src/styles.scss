@@ -49,3 +49,54 @@ body {
 .timepicker-backdrop-overlay {
     z-index: 10000000 !important;
 }
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.basic-row-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.basic-row {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  width: 100%;
+}
+
+.basic-row-column {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: 100%;
+}
+
+.width-max{
+  width: 100%;
+}
+.height-max{
+  height: 100%;
+}
+
+.span-20 {
+  flex: 0 0 20px;
+}
+.span-10 {
+  flex: 0 0 10px;
+}
+.padding-tb{
+  padding: 5px 0px 5px 0px;
+}
+
+.mat-snack-bar-container {
+  max-width: 100% !important;
+  }

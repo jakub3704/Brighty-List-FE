@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+
+    <div class="basic-row-container">
+        <div class="basic-row center">
+            <h1>{{'user_settings_dialog_delete_account' | translate}}</h1>
+        </div>
+        <span class="span-10"></span>
+        <div class="basic-row center padding-tb">
+            <mat-error *ngIf="isInvalid">
+                {{'error_delete_account' | translate}}
+            </mat-error>
+        </div>
+        <div class="basic-row center">
+            <mat-form-field class="width-max">
+                <mat-label>{{'form_placeholder_password_current' | translate}}</mat-label>
+                <input matInput name="passwordCurrent"
+                    [type]="hideCurrent ? 'password' : 'text'" [formControl]="passwordCurrentControl"
+                    [errorStateMatcher]="matcher" required>
+                <button mat-icon-button matSuffix (click)="hideCurrent = !hideCurrent"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCurrent">
+                    <mat-icon>{{hideCurrent ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="passwordCurrentControl.hasError('required')">
+                    {{'form_blank_password' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <span class="span-10"></span>
+        <div class="basic-row center">
+            <div class="width-100per">
+                <re-captcha [(ngModel)]="formModel.captcha" name="captcha" required
+                    siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" #captchaControl="ngModel">
+                </re-captcha>
+            </div>
+        </div>
+        <span class="span-20"></span>
+        <div class="basic-row center">
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max"
+                    (click)="closeDialog()">{{'btn_cancel' | translate}}</button>
+            </div>
+            <span class="span-20"></span>
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max" (click)="submitChange()"
+                    [disabled]="!(captchaControl.valid && passwordCurrentControl.valid)">
+                    {{'btn_save' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

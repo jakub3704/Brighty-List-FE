@@ -2,7 +2,7 @@
     <mat-toolbar class="page-toolbar shadow">
         <mat-toolbar-row>
             <span class="toolbar-margin"></span>
-            Task List
+            {{'tasks_toolbar_title' | translate}}
             <span class="toolbar-base-span"></span>
 
             <button mat-icon-button (click)="openDialogNewTask()">
@@ -21,53 +21,58 @@
                     </button>
                 </div>
             </div>
-
+            <button mat-button (click)="refresh()">
+                <mat-icon>refresh_icon</mat-icon>
+            </button>
             <span class="space-20"></span>
 
             <button mat-button [matMenuTriggerFor]="filterMenu">
-                Filter
+                {{'tasks_toolbar_filter' | translate}}
             </button>
             <mat-menu #filterMenu="matMenu">
                 <button mat-menu-item [disabled]="filterOption === 'DEFAULT'"
-                    (click)="filterBtn('DEFAULT')">Defaut</button>
-                <button mat-menu-item [matMenuTriggerFor]="priorityMenu">By Priority</button>
-                <button mat-menu-item [matMenuTriggerFor]="statusMenu">By Status</button>
+                    (click)="filter('DEFAULT')">{{'tasks_toolbar_filter_default' | translate}}</button>
+                <button mat-menu-item
+                    [matMenuTriggerFor]="priorityMenu">{{'tasks_toolbar_filter_priority' | translate}}</button>
+                <button mat-menu-item
+                    [matMenuTriggerFor]="statusMenu">{{'tasks_toolbar_filter_status' | translate}}</button>
             </mat-menu>
             <mat-menu #priorityMenu="matMenu">
                 <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_HIGH'"
-                    (click)="filterBtn('BY_PRIORITY_HIGH')">H</button>
+                    (click)="filter('BY_PRIORITY_HIGH')">{{'tasks_toolbar_filter_priority_high' | translate}}</button>
                 <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_MEDIUM'"
-                    (click)="filterBtn('BY_PRIORITY_MEDIUM')">M</button>
+                    (click)="filter('BY_PRIORITY_MEDIUM')">{{'tasks_toolbar_filter_priority_medium' | translate}}</button>
                 <button mat-menu-item [disabled]="filterOption === 'BY_PRIORITY_LOW'"
-                    (click)="filterBtn('BY_PRIORITY_LOW')">L</button>
+                    (click)="filter('BY_PRIORITY_LOW')">{{'tasks_toolbar_filter_priority_low' | translate}}</button>
             </mat-menu>
             <mat-menu #statusMenu="matMenu">
                 <button mat-menu-item [disabled]="filterOption === 'STATUS_PENDING'"
-                    (click)="filterBtn('STATUS_PENDING')">Pending</button>
+                    (click)="filter('STATUS_PENDING')">{{'tasks_toolbar_filter_status_pending' | translate}}</button>
                 <button mat-menu-item [disabled]="filterOption === 'STATUS_ACTIVE'"
-                    (click)="filterBtn('STATUS_ACTIVE')">Active</button>
+                    (click)="filter('STATUS_ACTIVE')">{{'tasks_toolbar_filter_status_active' | translate}}</button>
                 <button mat-menu-item [disabled]="filterOption === 'STATUS_COMPLETED'"
-                    (click)="filterBtn('STATUS_COMPLETED')">Completed</button>
+                    (click)="filter('STATUS_COMPLETED')">{{'tasks_toolbar_filter_status_completed' | translate}}</button>
                 <button mat-menu-item [disabled]="filterOption === 'STATUS_OVERDUE'"
-                    (click)="filterBtn('STATUS_OVERDUE')">Overdue</button>
+                    (click)="filter('STATUS_OVERDUE')">{{'tasks_toolbar_filter_status_overdue' | translate}}</button>
             </mat-menu>
             <span class="space-20"></span>
 
             <button mat-button [matMenuTriggerFor]="sortMenu">
-                Sort
+                {{'tasks_toolbar_sort' | translate}}
             </button>
             <mat-menu #sortMenu="matMenu">
-                <button mat-menu-item [disabled]="sortOption === 'DEFAULT'" (click)="sort('DEFAULT')">Defaut</button>
-                <button mat-menu-item [disabled]="sortOption === 'BY_PRIORITY'" (click)="sort('BY_PRIORITY')">By
-                    Priority</button>
-                <button mat-menu-item [disabled]="sortOption === 'BY_START_DATE'" (click)="sort('BY_START_DATE')">By
-                    Start Date</button>
-                <button mat-menu-item [disabled]="sortOption === 'BY_END_DATE'" (click)="sort('BY_END_DATE')">By End
-                    Date</button>
-                <button mat-menu-item [disabled]="sortOption === 'BY_TITLE'" (click)="sort('BY_TITLE')">By
-                    Title</button>
-                <button mat-menu-item [disabled]="sortOption === 'BY_STATUS'" (click)="sort('BY_STATUS')">By
-                    Status</button>
+                <button mat-menu-item [disabled]="sortOption === 'DEFAULT'" (click)="sort('DEFAULT')">
+                    {{'tasks_toolbar_sort_default' | translate}}</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_PRIORITY'" (click)="sort('BY_PRIORITY')">
+                    {{'tasks_toolbar_sort_priority' | translate}}</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_START_DATE'" (click)="sort('BY_START_DATE')">
+                    {{'tasks_toolbar_sort_start_time' | translate}}</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_END_DATE'" (click)="sort('BY_END_DATE')">
+                    {{'tasks_toolbar_sort_end_time' | translate}}</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_TITLE'" (click)="sort('BY_TITLE')">
+                    {{'tasks_toolbar_sort_titile' | translate}}</button>
+                <button mat-menu-item [disabled]="sortOption === 'BY_STATUS'" (click)="sort('BY_STATUS')">
+                    {{'tasks_toolbar_sort_status' | translate}}</button>
             </mat-menu>
 
             <button mat-button (click)="sortReverse()">
@@ -77,11 +82,13 @@
             <span class="space-20"></span>
 
             <button mat-button [matMenuTriggerFor]="viewMenu">
-                View
+                {{'tasks_toolbar_view' | translate}}
             </button>
             <mat-menu #viewMenu="matMenu" [(ngModel)]="isFullView">
-                <button mat-menu-item (click)="isFullView=true" [disabled]="isFullView">Full</button>
-                <button mat-menu-item (click)="isFullView=false" [disabled]="!isFullView">Small</button>
+                <button mat-menu-item (click)="isFullView=true" [disabled]="isFullView">
+                    {{'tasks_toolbar_view_full' | translate}}</button>
+                <button mat-menu-item (click)="isFullView=false" [disabled]="!isFullView">
+                    {{'tasks_toolbar_view_small' | translate}}</button>
             </mat-menu>
 
             <span class="toolbar-margin"></span>
@@ -93,14 +100,13 @@
         <div class="page-row-container" *ngIf="tasks.length == 0">
             <div class="page-row">
                 <mat-card class="card-task">
-                    <p>You don't have any active tasks</p>
+                    <p>{{'tasks_page_no_tasks' | translate}}</p>
                 </mat-card>
             </div>
         </div>
 
 
         <div class="page-row-container" *ngIf="tasks.length !== 0">
-
 
             <div class="page-row" *ngFor="let task of tasks">
                 <!-- Single Task -->
@@ -117,12 +123,13 @@
 
                                 <div class="card-row height-40">
                                     <div class="card-column-title">
-                                        <div>{{task.title}}{{task.statusPriority}}</div>
+                                        <div>{{task.title}}</div>
                                     </div>
                                     <div class="card-column width-100">
                                         <div class="card-row">
                                             <div class="card-column">
-                                                <button mat-icon-button (click)="openDialogUpdateTask(task)">
+                                                <button mat-icon-button (click)="openDialogUpdateTask(task)"
+                                                    [disabled]="task.status === 'STATUS_COMPLETED' || task.status === 'STATUS_OVERDUE'">
                                                     <mat-icon>edit</mat-icon>
                                                 </button>
                                             </div>
@@ -136,7 +143,7 @@
                                 </div>
 
                                 <div class="card-row height-15">
-                                    <mat-progress-bar value="task.progress"></mat-progress-bar>
+                                    <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
                                 </div>
 
                             </div>
@@ -150,17 +157,18 @@
                             <div class="card-column">
                                 <div class="card-row-container">
 
-                                    <div class="card-row" *ngIf="task.notes!=undefined || task.notes!=null ">
-                                        <div class="notes-container">
+                                    <div class="card-row" *ngIf="task.notes!=undefined || task.notes!=null">
+                                        <div>
                                             {{task.notes}}
                                         </div>
                                     </div>
 
-                                    <div class="card-row border-bottom">
+                                    <div class="card-row border-bottom"
+                                        *ngIf="!((task.status === 'STATUS_COMPLETED') || (task.status === 'STATUS_OVERDUE'))">
                                         <div class="card-column">
                                             <div class="horizontal-container height-40">
-                                                <div>Reminders:</div>
-                                                <button mat-icon-button (click)="openDialogAddReminder(task)">
+                                                <div>{{'tasks_card_reminders' | translate}}</div>
+                                                <button mat-icon-button (click)="openDialogAddReminder(task)" [disabled]="!task.canAddReminder">
                                                     <mat-icon>add</mat-icon>
                                                 </button>
                                                 <span class="fill-remaining-space"></span>
@@ -173,14 +181,14 @@
 
                                     <div class="card-row" *ngIf="task.isExpanded">
                                         <div class="card-row-container" *ngIf="task.reminders.length === 0">
-                                            You have no reminders
+                                            {{'tasks_card_reminders_empty' | translate}}
                                         </div>
                                         <div class="card-row-container" *ngIf="task.reminders.length !== 0">
                                             <div class="card-row border-bottom" *ngFor="let reminder of task.reminders">
                                                 <div class="card-column">
                                                     <div class="horizontal-container height-40">
                                                         <div class="padding-left">
-                                                            {{reminder.nextExecutionTime.toGMTString()}}</div>
+                                                            {{reminder.nextExecutionTime.toLocaleString()}}</div>
                                                         <span class="space-50"></span>
                                                         <div>{{reminder.message}}</div>
                                                         <span class="fill-remaining-space"></span>
@@ -205,26 +213,57 @@
                     <!-- Full View part End -->
                     <div class="card-row">
                         <div>
-                            <div class="card-row">Start time:</div>
-                            <div class="card-row">{{task.startTime.toGMTString()}}</div>
+                            <div class="card-row">{{'tasks_card_start_time' | translate}}</div>
+                            <div class="card-row">{{task.startTime.toLocaleString()}}</div>
                         </div>
                         <span class="space-20p"></span>
-                        <div>
-                            <div class="card-row">End time:</div>
-                            <div class="card-row">{{task.endTime.toGMTString()}}</div>
+                        <div *ngIf="task.completedTime===undefined || task.completedTime===null">
+                            <div class="card-row">{{'tasks_card_end_time' | translate}}</div>
+                            <div class="card-row">{{task.endTime.toLocaleString()}}</div>
+                        </div>
+                        <div *ngIf="task.completedTime!=undefined || task.completedTime!=null">
+                            <div class="card-row">{{'tasks_card_completed_time' | translate}}</div>
+                            <div class="card-row">{{task.completedTime.toLocaleString()}}</div>
                         </div>
                         <span class="fill-remaining-space"></span>
                         <div>
-                            <button mat-raised-button color="primary" class="button-size" (click)="completeTask(task)">
-                                Complete
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                *ngIf="task.status === 'STATUS_PENDING'" (click)="completeTask(task)">
+                                {{'tasks_btn_pending' | translate}}
+                            </button>
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                *ngIf="task.status === 'STATUS_PENDING_AUTOCOMPLETE'" style="background-color: #9575CD;"
+                                (click)="completeTask(task)">
+                                {{'tasks_btn_pending' | translate}}
+                            </button>
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                *ngIf="task.status === 'STATUS_ACTIVE_AUTOCOMPLETE'" style="background-color: #9575CD;"
+                                (click)="completeTask(task)">
+                                {{'tasks_btn_autocomplete' | translate}}
+                            </button>
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                *ngIf="task.status === 'STATUS_ACTIVE'" (click)="completeTask(task)">
+                                {{'tasks_btn_complete' | translate}}
+                            </button>
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                style="background-color: green;" *ngIf="task.status === 'STATUS_COMPLETED'">
+                                {{'tasks_btn_completed' | translate}}
+                            </button>
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                                style="background-color: red;" *ngIf="task.status === 'STATUS_OVERDUE'"
+                                (click)="completeTask(task)">
+                                {{'tasks_btn_overdue' | translate}}
                             </button>
                         </div>
                     </div>
 
                 </mat-card>
+                <!-- Card End -->
+            </div>
+            <div class="page-row center height-25">
 
             </div>
-
         </div>
     </div>
+
 </div>

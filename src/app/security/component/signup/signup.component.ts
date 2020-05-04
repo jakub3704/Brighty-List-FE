@@ -7,6 +7,7 @@ import { SignUpUserDto } from 'src/app/user/model/sign-up-user-dto';
 import { AuthenticationService } from '../../service/authentication.service';
 import { MatStepper } from '@angular/material/stepper';
 import { equalValidator } from 'src/app/validators/equal-validator';
+import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,6 @@ export class SignupComponent implements OnInit {
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(20)
-
   ]);
 
   passwordControl = new FormControl('', [
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
   ]);
 
   public formModel: FormModel = {};
-  public matcher = new MyErrorStateMatcher();
+  public matcher = new MyFormErrorStateMatcher();
 
   constructor(
     private userServive: UserService,
@@ -63,23 +63,17 @@ export class SignupComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      window.scroll(0, 0);
     }
 
   public submit(): void {
     this.userServive.signUpUser(this.user)
-                    .subscribe(data=>{data=this.user;});   
+                    .then(data=>{data=this.user;});   
     this.authenticationService.retriveToken(this.user.name, this.user.password);
   }
 
   public resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }
-}
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
 

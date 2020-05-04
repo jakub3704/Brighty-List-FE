@@ -1,1 +1,36 @@
-<p>dialog-change-name works!</p>
+<div mat-dialog-content>
+    <div class="basic-row-container">
+        <div class="basic-row center">
+            <h1>{{'user_settings_dialog_change_name' | translate}}</h1>
+        </div>
+        <span class="span-10"></span>
+        <div class="basic-row center">
+            <mat-form-field class="width-max">
+                <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
+                <input matInput #inputName name="name" [formControl]="nameControl"
+                    [errorStateMatcher]="matcher" required maxlength="20" minlength="3">
+                <mat-hint>{{'form_pass_max_characters' | translate}}</mat-hint>
+                <mat-error *ngIf="nameControl.hasError('required')">
+                    {{'form_blank_username' | translate}}
+                </mat-error>
+                <mat-error *ngIf="nameControl.hasError('minlength')">
+                    {{'form_min_char' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <span class="span-20"></span>
+        <div class="basic-row center">
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max"
+                    (click)="closeDialog()">{{'btn_cancel' | translate}}</button>
+            </div>
+            <span class="span-20"></span>
+            <div class="basic-row-column center">
+                <button mat-raised-button color="primary" class="width-max" (click)="submitChange()"
+                    [disabled]="!nameControl.valid">
+                    {{'btn_save' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

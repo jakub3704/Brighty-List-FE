@@ -1,123 +1,3 @@
-.page-container {
-  padding: 50px;
-}
-
-.title-container {
-  height: 45px;
-  max-height: 45px;
-  min-height: 45px;
-}
-
-.notes-container {
-  height: 50px;
-  max-height: 150px;
-  min-height: 50px;
-}
-
-.reminders-container {
-  max-height: 600px;
-  min-height: 60px;
-}
-
-.card-width {
-  flex: 1 1 auto;
-}
-
-.card-margin {
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-.card-content-conteiner {
-  width: 100%;
-  height: 100px;
-}
-
-.card-content-margin {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.width100 {
-  width: 100%;
-}
-
-.height-title {
-  height: 50px;
-  max-height: 50px;
-  min-height: 50px;
-}
-
-.width50px {
-  width: 50px;
-  max-width: 50px;
-  min-width: 50px;
-}
-
-.width100px {
-  width: 100px;
-  max-width: 100px;
-  min-width: 100px;
-}
-
-.width200px {
-  width: 200px;
-  max-width: 200px;
-  min-width: 200px;
-}
-
-/*
-table {
-  border-collapse: collapse;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-}
-*/
-.align-items-center {
-  justify-content: center;
-  align-items: center;
-}
-
-.form-dimensions {
-  max-width: 95%;
-  min-width: 90%;
-}
-
-.textarea-dimensions {
-  max-width: 90%;
-  min-width: 85%;
-  max-height: 70px;
-  min-height: 70px;
-}
-
-mat-select-content mat-option[value="true"] {
-  color: blue !important;
-}
-
-mat-select-content mat-option[value="false"] {
-  color: grey !important;
-}
-
-.color-blue {
-  background-color: blue;
-}
-
-.color-grey {
-  background-color: grey;
-}
-
-.fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
-}
-
-// Proper content
-
 .body-container {
   min-height: 100%;
   padding: 90px 100px 30px 100px;
@@ -173,8 +53,6 @@ mat-select-content mat-option[value="false"] {
 }
 
 .fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
 
@@ -286,11 +164,9 @@ mat-select-content mat-option[value="false"] {
   width: 100%;
 }
 
-
 width-max-flex {
   flex: 1;
 }
-
 
 .center {
   justify-content: center;
@@ -314,14 +190,13 @@ width-max-flex {
 }
 
 .button-size {
-  width: 150px;
+  min-width: 150px;
+  max-width: 250px;
 }
 
 .border-bottom {
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
-
-
 
 .search-container {
   flex: 1 1 auto;

@@ -11,42 +11,55 @@ export class UserService {
   backEndUrl = environment.backEndUrl;
 
   constructor(private httpClient: HttpClient,
-              private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService) {
   }
 
-
-
-  public getUserDetails(): Observable<UserDto> {
-     const httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json;charset=UTF-8',
-      Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
-    });
-    return this.httpClient.get<UserDto>(this.backEndUrl + 'users/details', { headers: httpHeaders });
-  }
-
-  public signUpUser(user: SignUpUserDto) {
+  public async signUpUser(user: SignUpUserDto){
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json;charset=UTF-8'
     });
-    return this.httpClient.post<SignUpUserDto>(this.backEndUrl + 'signup', user, { headers: httpHeaders });
+    return await this.httpClient.post<SignUpUserDto>(this.backEndUrl + 'signup', user, { headers: httpHeaders }).toPromise();
   }
 
-  public updatePassword(passwordOld: string, passwordNew: string) {
+  public async getUserDetails(): Promise<UserDto> {
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json;charset=UTF-8',
       Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
     });
-    return this.httpClient.put(this.backEndUrl + 'users',
-      { passwordOld, passwordNew },
-      { headers: httpHeaders });
-      // TODO poprawic
+    return await this.httpClient.get<UserDto>(this.backEndUrl + 'users/details', { headers: httpHeaders }).toPromise();
   }
 
-  public deleteUser(userId: string) {
+  public async changeName(name: string) {
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json;charset=UTF-8',
       Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
     });
-    return this.httpClient.delete(this.backEndUrl + 'users/' + userId, { headers: httpHeaders });
+    return await this.httpClient.put(this.backEndUrl + 'users/name', name, { headers: httpHeaders }).toPromise();
+  }
+
+  public async changeEmail(email: string) {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
+    });
+    return await this.httpClient.put(this.backEndUrl + 'users/email', email, { headers: httpHeaders }).toPromise();
+  }
+
+  public async updatePassword(passwordOld: string, passwordNew: string) {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
+    });
+    return await this.httpClient.put(this.backEndUrl + 'users/password',
+      { passwordOld: passwordOld, passwordNew: passwordNew },
+      { headers: httpHeaders }).toPromise();
+  }
+
+  public async deleteUser(password: string) {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: 'Bearer ' + this.authenticationService.getToken().access_token
+    });
+    return await this.httpClient.post(this.backEndUrl + 'users/delete', password, { headers: httpHeaders }).toPromise();
   }
 }

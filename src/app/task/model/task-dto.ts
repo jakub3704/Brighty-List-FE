@@ -1,9 +1,8 @@
 import { ReminderDto } from './reminder-dto';
 import { TaskStatus } from './task-status';
 import { Task } from './task';
-import { dateTimeEquals } from '../service/task.service';
 import { Reminder } from './reminder';
-
+import { dateTimeEquals } from '../service/task.service';
 
 export class TaskDto {
   taskId: number;
@@ -15,11 +14,14 @@ export class TaskDto {
   endTime: Date;
   completedTime: Date;
   status: TaskStatus;
+  progress: number;
+  statusPriority: number;
+  autocomplete: boolean;
+  completed: boolean;
   reminders: ReminderDto[] = [];
 
-  progress: number;
   isExpanded: boolean;
-  statusPriority: number;
+  canAddReminder: boolean;
 
   mapFromTask(task: Task) {
     this.taskId = task.taskId;
@@ -33,11 +35,14 @@ export class TaskDto {
       this.completedTime = new Date(task.completedTime + 'Z');
     };
     this.status = task.status;
+    this.progress = task.progress;
+    this.statusPriority = task.statusPriority;
+    this.autocomplete = task.autocomplete;
+    this.completed = task.completed;
     this.mapReminderToReminderDto(task.reminders);
 
-    this.setStatusPriority();
-    this.progress = this.setProgress();
     this.isExpanded = false;
+    this.setCanAddReminder();
   }
 
   mapReminderToReminderDto(reminders: Reminder[]) {
@@ -54,48 +59,27 @@ export class TaskDto {
         reminderDto.active = reminder.active;
 
         this.reminders.push(reminderDto);
-
       };
     }
   }
 
-  setProgress(): number {
+  setCanAddReminder() {
     var now = new Date();
+
     if (dateTimeEquals(this.startTime, this.endTime)) {
-      if (now.getTime() < this.startTime.getTime()) {
-        return 0;
+      if ((now.getTime() + (20 * 60 * 1000)) <= this.startTime.getTime()) {
+        this.canAddReminder = true;
       } else {
-        return 100;
-      }
-    } else {
-      if (this.startTime.getTime() > now.getTime()) {
-        return 0;
-      } else if (now.getTime() < this.endTime.getTime()) {
-        var a = this.endTime.getTime() - this.startTime.getTime();
-        var b = now.getTime() - this.startTime.getTime();
-        return (b / a) * 100;
-      } else if (this.endTime.getTime() < now.getTime()) {
-        return 100;
+        this.canAddReminder = false;
       }
     }
-  }
 
-  setStatusPriority() {
-    if (this.status === TaskStatus.STATUS_PENDING) {
-      this.statusPriority = 0;
-    } else if (this.status === TaskStatus.STATUS_PENDING_AUTOCOMPLETE) {
-        this.statusPriority = 1;
-      } else if (this.status === TaskStatus.STATUS_ACTIVE) {
-          this.statusPriority = 2;
-        } else if (this.status === TaskStatus.STATUS_ACTIVE_AUTOCOMPLETE) {
-            this.statusPriority = 3;
-          } else if (this.status === TaskStatus.STATUS_OVERDUE) {
-              this.statusPriority = 4;
-            } else if (this.status === TaskStatus.STATUS_COMPLETED) {
-                this.statusPriority = 5;
-              } else {
-                this.statusPriority = 6;
-              }
+    if ((now.getTime() + (20 * 60 * 1000)) <= this.endTime.getTime()) {
+      this.canAddReminder = true;
+    } else {
+      this.canAddReminder = false;
+    }
+
   }
 }
 

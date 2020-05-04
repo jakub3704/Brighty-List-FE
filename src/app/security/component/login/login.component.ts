@@ -27,6 +27,7 @@ export class LogInComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
+    window.scroll(0, 0);
   }
 
   logIn() {

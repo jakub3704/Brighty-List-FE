@@ -1,5 +1,40 @@
 <footer #footer>
-  <span class="fill-remaining-space"></span>
-  <p class="bright-list-footer">Brighty List</p>
-  <span class="fill-remaining-space"></span>
+  <div class="container-rows">
+    <span class="span-footer-top"></span>
+    <div class="row">
+      <span class="fill-remaining-space"></span>
+      <a mat-button class="clean-link" routerLink="/home" routerLinkActive="active">{{'app_titile' | translate}}</a>
+      <span class="fill-remaining-space"></span>
+    </div>
+    <span class="span-footer-space"></span>
+    <div class="row">
+      <span class="span-footer-vertical-margin"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" routerLink="/help" routerLinkActive="active">{{'footer_help' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" (click)="openDialogCookies()">{{'footer_cookie' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" routerLink="/privacy" routerLinkActive="active">{{'footer_privacy' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" routerLink="/terms" routerLinkActive="active">{{'footer_terms' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" routerLink="/about" routerLinkActive="active">{{'footer_about' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" routerLink="/contact" routerLinkActive="active">{{'footer_contact' | translate}}</a>
+      </div>
+      <span class="span-footer-vertical-margin"></span>
+    </div>
+    <span class="span-footer-bottom"></span>
+  </div>
+
 </footer>

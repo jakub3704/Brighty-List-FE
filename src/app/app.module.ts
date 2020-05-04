@@ -34,6 +34,14 @@ import { TasksComponent } from './task/component/tasks/tasks.component';
 import { ErrorComponent } from './component/error/error.component';
 import { DialogNewTaskComponent } from './task/component/dialog-new-task/dialog-new-task.component';
 import { DialogNewReminderComponent } from './task/component/dialog-new-reminder/dialog-new-reminder.component';
+import { DialogDeleteAccountComponent } from './user/component/dialog-delete-account/dialog-delete-account.component';
+import { AboutComponent } from './component/about/about.component';
+import { ContactComponent } from './component/contact/contact.component';
+import { PrivacyComponent } from './component/privacy/privacy.component';
+import { CookiesComponent } from './component/fragments/cookies/cookies.component';
+import { HelpComponent } from './component/help/help.component';
+import { CookiesDialogComponent } from './component/fragments/cookies-dialog/cookies-dialog.component';
+import { TermsComponent } from './component/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +65,15 @@ import { DialogNewReminderComponent } from './task/component/dialog-new-reminder
     TasksComponent,
     ErrorComponent,
     DialogNewTaskComponent,
-    DialogNewReminderComponent
+    DialogNewReminderComponent,
+    DialogDeleteAccountComponent,
+    AboutComponent,
+    ContactComponent,
+    PrivacyComponent,
+    CookiesComponent,
+    HelpComponent,
+    CookiesDialogComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
