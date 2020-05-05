@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
-import { ErrorStateMatcher } from '@angular/material/core';
 import { UserService } from 'src/app/user/service/user.service';
 import { SignUpUserDto } from 'src/app/user/model/sign-up-user-dto';
 import { AuthenticationService } from '../../service/authentication.service';
@@ -53,22 +52,22 @@ export class SignupComponent implements OnInit {
   constructor(
     private userServive: UserService,
     public authenticationService: AuthenticationService
-    ) { }
+  ) { }
 
-    @ViewChild('stepper') stepper: MatStepper;
+  @ViewChild('stepper') stepper: MatStepper;
 
-    nextClicked(event) {
-      this.stepper.selected.completed = true;
-      this.stepper.next();
-    }
+  nextClicked(event) {
+    this.stepper.selected.completed = true;
+    this.stepper.next();
+  }
 
-    ngOnInit(): void {
-      window.scroll(0, 0);
-    }
+  ngOnInit(): void {
+    window.scroll(0, 0);
+  }
 
   public submit(): void {
     this.userServive.signUpUser(this.user)
-                    .then(data=>{data=this.user;});   
+      .then(data => { data = this.user; });
     this.authenticationService.retriveToken(this.user.name, this.user.password);
   }
 

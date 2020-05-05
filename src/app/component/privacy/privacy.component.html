@@ -1,7 +1,41 @@
 <div class="body-container">
-    <div class="basic-row-container">
-        <div class="basic-row center">
-            <p>privacy works!</p>
-        </div>
-    </div>
+    <mat-card class="full-page-card">
+        <mat-card-header class="center">
+            <mat-card-title>{{'privacy_titile' | translate}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="basic-row-container center">
+                <span class="span-10"></span>
+                <div class="text-row">
+                    <p class="text-titile text-red">{{'privacy_note' | translate}}</p>
+                    <p class="text-red">{{'privacy_note_message' | translate}}</p>
+                </div>
+                <span class="span-10"></span>
+                <div class="text-row">
+                    <p><strong>{{'privacy_personal_data' | translate}}</strong> - {{'privacy_personal_description' | translate}}</p>
+                </div>
+                <span class="span-10"></span>
+                <div class="text-row">
+                    <p>{{'privacy_personal_when_collected' | translate}}</p>
+                    <p class="text-margin-top">{{'privacy_personal_what_collected' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_what_collected_1' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_what_collected_2' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_what_collected_3' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_what_collected_4' | translate}}</p>
+                </div>
+                <span class="span-10"></span>
+                <div class="text-row">
+                    <p>{{'privacy_personal_why_collected' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_why_collected_1' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_why_collected_2' | translate}}</p>
+                </div>
+                <span class="span-10"></span>
+                <div class="text-row">
+                    <p>{{'privacy_personal_protection' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_protection_1' | translate}}</p>
+                    <p class="text-indent">- {{'privacy_personal_protection_2' | translate}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

@@ -8,7 +8,7 @@ footer {
   left: 0;
   right: 0;
   height: 120px;
-  background-color: #CCCCCC;
+  background-color: #cccccc;
   color: #666666;
   font-weight: 600;
 }
@@ -16,16 +16,6 @@ footer {
 footer a {
   display: flex;
   align-items: center;
-}
-
-.bright-list-footer {
-  text-align: center;
-}
-
-.fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
 }
 
 .container-rows {
@@ -53,9 +43,11 @@ footer a {
 .span-footer-top {
   flex: 0 0 20px;
 }
+
 .span-footer-bottom {
   flex: 0 0 20px;
 }
+
 .span-footer-space {
   flex: 0 0 20px;
 }
@@ -63,6 +55,7 @@ footer a {
 .span-footer-vertical-margin {
   flex: 1 1 100%;
 }
+
 .span-footer-vertical-space {
   flex: 0 0 40px;
 }

@@ -1,4 +1,4 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 html,
 body {
@@ -13,7 +13,6 @@ body {
 
 .main-container {
   min-height: 100vh;
-  /* will cover the 100% of viewport */
   overflow: hidden;
   display: block;
   position: relative;
@@ -43,11 +42,11 @@ body {
 }
 
 .timepicker-overlay {
-    z-index: 10000000 !important;
+  z-index: 10000000 !important;
 }
 
 .timepicker-backdrop-overlay {
-    z-index: 10000000 !important;
+  z-index: 10000000 !important;
 }
 
 .center {
@@ -56,9 +55,62 @@ body {
   display: flex;
 }
 
-.fill-remaining-space {
-  flex: 1 1 auto;
+.padding-tb {
+  padding: 5px 0px 5px 0px;
 }
+
+.mat-snack-bar-container {
+  max-width: 100% !important;
+}
+
+.full-page-card {
+  width: 80%;
+}
+
+.text-row {
+  width: 95%;
+  line-height: normal;
+}
+
+.text-row p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 0px;
+}
+
+.text-margin-top {
+  margin-top: 15px !important;
+  padding: 0px;
+}
+
+.text-indent {
+  text-indent: 20px;
+}
+
+.text-titile {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.text-red {
+  color: red;
+}
+
+.margin-lr-card {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+/* Flex row/column settings */
 
 .basic-row-container {
   display: flex;
@@ -80,23 +132,81 @@ body {
   height: 100%;
 }
 
-.width-max{
-  width: 100%;
+.fill-remaining-space {
+  flex: 1 1 auto;
 }
-.height-max{
-  height: 100%;
+
+.span-50 {
+  flex: 0 0 50px;
+}
+
+.span-30 {
+  flex: 0 0 30px;
+}
+
+.span-25 {
+  flex: 0 0 25px;
 }
 
 .span-20 {
   flex: 0 0 20px;
 }
+
+.span-15 {
+  flex: 0 0 15px;
+}
+
+.span-12 {
+  flex: 0 0 12px;
+}
+
 .span-10 {
   flex: 0 0 10px;
 }
-.padding-tb{
-  padding: 5px 0px 5px 0px;
+
+.span-5 {
+  flex: 0 0 5px;
 }
 
-.mat-snack-bar-container {
-  max-width: 100% !important;
-  }
+.span-20p {
+  flex: 0 0 20%;
+}
+
+.span-10p {
+  flex: 0 0 10%;
+}
+
+/* height settings */
+.height-max {
+  height: 100%;
+}
+
+.height-60 {
+  height: 60px;
+  min-height: 60px;
+}
+
+.height-50 {
+  height: 50px;
+  min-height: 50px;
+}
+
+.height-40 {
+  height: 40px;
+  min-height: 40px;
+}
+
+.height-25 {
+  height: 25px;
+  min-height: 25px;
+}
+
+.height-10 {
+  height: 10px;
+  min-height: 10px;
+}
+
+/* width settings */
+.width-max {
+  width: 100%;
+}

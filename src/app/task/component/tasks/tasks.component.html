@@ -24,7 +24,7 @@
             <button mat-button (click)="refresh()">
                 <mat-icon>refresh_icon</mat-icon>
             </button>
-            <span class="space-20"></span>
+            <span class="span-20"></span>
 
             <button mat-button [matMenuTriggerFor]="filterMenu">
                 {{'tasks_toolbar_filter' | translate}}
@@ -55,7 +55,7 @@
                 <button mat-menu-item [disabled]="filterOption === 'STATUS_OVERDUE'"
                     (click)="filter('STATUS_OVERDUE')">{{'tasks_toolbar_filter_status_overdue' | translate}}</button>
             </mat-menu>
-            <span class="space-20"></span>
+            <span class="span-20"></span>
 
             <button mat-button [matMenuTriggerFor]="sortMenu">
                 {{'tasks_toolbar_sort' | translate}}
@@ -79,7 +79,7 @@
                 <mat-icon>{{sortIcon[sortIsReverse.toString()]}}</mat-icon>
             </button>
 
-            <span class="space-20"></span>
+            <span class="span-20"></span>
 
             <button mat-button [matMenuTriggerFor]="viewMenu">
                 {{'tasks_toolbar_view' | translate}}
@@ -168,7 +168,8 @@
                                         <div class="card-column">
                                             <div class="horizontal-container height-40">
                                                 <div>{{'tasks_card_reminders' | translate}}</div>
-                                                <button mat-icon-button (click)="openDialogAddReminder(task)" [disabled]="!task.canAddReminder">
+                                                <button mat-icon-button (click)="openDialogAddReminder(task)"
+                                                    [disabled]="!task.canAddReminder">
                                                     <mat-icon>add</mat-icon>
                                                 </button>
                                                 <span class="fill-remaining-space"></span>
@@ -189,7 +190,7 @@
                                                     <div class="horizontal-container height-40">
                                                         <div class="padding-left">
                                                             {{reminder.nextExecutionTime.toLocaleString()}}</div>
-                                                        <span class="space-50"></span>
+                                                        <span class="span-50"></span>
                                                         <div>{{reminder.message}}</div>
                                                         <span class="fill-remaining-space"></span>
                                                         <div>
@@ -216,7 +217,7 @@
                             <div class="card-row">{{'tasks_card_start_time' | translate}}</div>
                             <div class="card-row">{{task.startTime.toLocaleString()}}</div>
                         </div>
-                        <span class="space-20p"></span>
+                        <span class="span-20p"></span>
                         <div *ngIf="task.completedTime===undefined || task.completedTime===null">
                             <div class="card-row">{{'tasks_card_end_time' | translate}}</div>
                             <div class="card-row">{{task.endTime.toLocaleString()}}</div>

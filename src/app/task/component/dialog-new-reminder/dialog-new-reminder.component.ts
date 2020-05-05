@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReminderDto } from '../../model/reminder-dto';
 import { TaskDto } from '../../model/task-dto';
-import { TaskStatus } from '../../model/task-status';
 import { TaskService, dateTimeEquals, dateEquals } from '../../service/task.service';
 
 @Component({

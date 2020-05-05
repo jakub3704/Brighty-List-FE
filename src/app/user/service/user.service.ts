@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserDto } from '../model/user-dto';
-import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../security/service/authentication.service';
 import { environment } from '../../../environments/environment';
 import { SignUpUserDto } from '../model/sign-up-user-dto';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DialogChangePasswordComponent } from '../dialog-change-password/dialog-change-password.component';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 import { AuthenticationService } from 'src/app/security/service/authentication.service';
 

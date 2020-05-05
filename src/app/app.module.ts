@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
@@ -31,12 +30,10 @@ import { DialogChangeNameComponent } from './user/component/dialog-change-name/d
 import { DialogChangeEmailComponent } from './user/component/dialog-change-email/dialog-change-email.component';
 
 import { TasksComponent } from './task/component/tasks/tasks.component';
-import { ErrorComponent } from './component/error/error.component';
 import { DialogNewTaskComponent } from './task/component/dialog-new-task/dialog-new-task.component';
 import { DialogNewReminderComponent } from './task/component/dialog-new-reminder/dialog-new-reminder.component';
 import { DialogDeleteAccountComponent } from './user/component/dialog-delete-account/dialog-delete-account.component';
 import { AboutComponent } from './component/about/about.component';
-import { ContactComponent } from './component/contact/contact.component';
 import { PrivacyComponent } from './component/privacy/privacy.component';
 import { CookiesComponent } from './component/fragments/cookies/cookies.component';
 import { HelpComponent } from './component/help/help.component';
@@ -63,12 +60,10 @@ import { TermsComponent } from './component/terms/terms.component';
     DialogChangeEmailComponent,
 
     TasksComponent,
-    ErrorComponent,
     DialogNewTaskComponent,
     DialogNewReminderComponent,
     DialogDeleteAccountComponent,
     AboutComponent,
-    ContactComponent,
     PrivacyComponent,
     CookiesComponent,
     HelpComponent,
@@ -88,7 +83,7 @@ import { TermsComponent } from './component/terms/terms.component';
     BrightyTranslateModule,
     AngularMaterialImportModule,
 
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

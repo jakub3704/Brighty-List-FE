@@ -1,20 +1,20 @@
 <div class="body-container">
     <mat-card class="card-size">
-        <div class="row-container">
-            <div class="row">
+        <div class="basic-row-container">
+            <div class="basic-row center">
                 <mat-card-title>{{'signup_title' | translate}}</mat-card-title>
             </div>
-            <div class="row">
+            <div class="basic-row center">
                 <mat-horizontal-stepper linear #stepper>
 
                     <mat-step [editable]=false>
                         <ng-template matStepLabel>{{'signup_title_email' | translate}}</ng-template>
 
-                        <div class="row-container">
-                            <span class="space-25px"></span>
-                            <div class="row">
-                                <form class="width-100per">
-                                    <mat-form-field class="width-100per">
+                        <div class="basic-row-container">
+                            <span class="span-25"></span>
+                            <div class="basic-row center">
+                                <form class="width-max">
+                                    <mat-form-field class="width-max">
                                         <mat-label>{{'form_placeholder_email' | translate}}</mat-label>
                                         <input matInput [(ngModel)]="user.email" name="email"
                                             [formControl]="emailControl" [errorStateMatcher]="matcher" required>
@@ -27,10 +27,10 @@
                                     </mat-form-field>
                                 </form>
                             </div>
-                            <span class="space-25px"></span>
-                            <div class="row">
-                                <button class="width-100per" [disabled]="!emailControl.valid" mat-raised-button
-                                    matStepperNext color="primary" type="button">                    
+                            <span class="span-25"></span>
+                            <div class="basic-row center">
+                                <button class="width-max" [disabled]="!emailControl.valid" mat-raised-button
+                                    matStepperNext color="primary" type="button">
                                     {{'btn_continue' | translate}}
                                 </button>
                             </div>
@@ -41,10 +41,10 @@
                     <mat-step [editable]=false>
                         <ng-template matStepLabel>{{'signup_title_data' | translate}}</ng-template>
 
-                        <form class="row-container">
-                            <span class="space-25px"></span>
-                            <div class="row">
-                                <mat-form-field class="width-100per">
+                        <form class="basic-row-container">
+                            <span class="span-25"></span>
+                            <div class="basic-row center">
+                                <mat-form-field class="width-max">
                                     <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
                                     <input matInput #inputName [(ngModel)]="user.name" name="name"
                                         [formControl]="nameControl" [errorStateMatcher]="matcher" required
@@ -58,9 +58,9 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <span class="space-12px"></span>
-                            <div class="row">
-                                <mat-form-field class="width-100per">
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <mat-form-field class="width-max">
                                     <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
                                     <input matInput [(ngModel)]="user.password" name="password"
                                         [type]="hide ? 'password' : 'text'" [formControl]="passwordControl"
@@ -74,9 +74,9 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <span class="space-12px"></span>
-                            <div class="row">
-                                <mat-form-field class="width-100per">
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <mat-form-field class="width-max">
                                     <mat-label>{{'form_placeholder_password_verify' | translate}}</mat-label>
                                     <input matInput name="password" [type]="hideReapet ? 'password' : 'text'"
                                         [formControl]="passwordReapetControl" [errorStateMatcher]="matcher" required>
@@ -92,10 +92,9 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <span class="space-25px"></span>
-                            <div class="row">
-                                <button class="width-100per" mat-raised-button matStepperNext color="primary"
-                                    type="button"
+                            <span class="span-25"></span>
+                            <div class="basic-row center">
+                                <button class="width-max" mat-raised-button matStepperNext color="primary" type="button"
                                     [disabled]="!(nameControl.valid && passwordControl.valid && passwordReapetControl.valid)">
                                     {{'btn_continue' | translate}}
                                 </button>
@@ -107,13 +106,20 @@
                     <mat-step [editable]="false">
                         <ng-template matStepLabel>{{'signup_title_done' | translate}}</ng-template>
 
-                        <div class="row-container">
-                            <div class="row">
-                                {{'signup_terms_message' | translate}}
+                        <div class="basic-row-container">
+                            <div class="basic-row center">
+                                <div>
+                                    {{'signup_terms_message' | translate}}
+                                    <a routerLink="/terms" routerLinkActive="active"
+                                        target="_blank">{{'signup_terms_message_terms' | translate}}</a>
+                                    {{'signup_terms_message_and' | translate}}
+                                    <a routerLink="/privacy" routerLinkActive="active"
+                                        target="_blank">{{'signup_terms_message_privacy' | translate}}</a>
+                                </div>
                             </div>
-                            <span class="space-12px"></span>
-                            <div class="row">
-                                <div class="width-100per">
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <div class="width-max">
                                     <form>
                                         <mat-checkbox [formControl]="termsControl" required>
                                             {{'signup_terms_agree' | translate}}
@@ -124,17 +130,17 @@
                                     </form>
                                 </div>
                             </div>
-                            <span class="space-12px"></span>
-                            <div class="row">
-                                <div class="width-100per">
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <div class="width-max">
                                     <re-captcha [(ngModel)]="formModel.captcha" name="captcha" required
-                                    siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" #captchaControl="ngModel">
-                                </re-captcha>
+                                        siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" #captchaControl="ngModel">
+                                    </re-captcha>
                                 </div>
                             </div>
-                            <span class="space-25px"></span>
-                            <div class="row">
-                                <button class="width-100per" mat-raised-button color="primary" type="button"
+                            <span class="span-25"></span>
+                            <div class="basic-row center">
+                                <button class="width-max" mat-raised-button color="primary" type="button"
                                     [disabled]="!(termsControl.valid && captchaControl.valid)" (click)="submit()">
                                     {{'signup_btn' | translate}}
                                 </button>

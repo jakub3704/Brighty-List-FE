@@ -1,29 +1,29 @@
 <div class="body-container">
 
     <mat-card class="card-size">
-        <div class="row-container">
+        <div class="basic-row-container">
 
-            <div class="row">
+            <div class="basic-row center">
                 <mat-card-header>
                     <mat-card-title>{{'login_title' | translate}}</mat-card-title>
                 </mat-card-header>
             </div>
 
-            <span class="space-25px"></span>
+            <span class="span-25"></span>
 
-            <div class="row">
-                <mat-card-content class="width-100per">
-                    <form class="row-container">
-                        <div class="row">
+            <div class="basic-row center">
+                <mat-card-content class="width-max">
+                    <form class="basic-row-container">
+                        <div class="basic-row center">
                             <mat-error *ngIf="authenticationService.isInvalid">
                                 {{'form_error_user_or_pass' | translate}}
                             </mat-error>
                         </div>
 
-                        <span class="space-12px"></span>
+                        <span class="span-12"></span>
 
-                        <div class="row">
-                            <mat-form-field class="width-100per">
+                        <div class="basic-row center">
+                            <mat-form-field class="width-max">
                                 <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
                                 <input matInput [formControl]="userNameControl" [errorStateMatcher]="matcher"
                                     [(ngModel)]="username" placeholder="Username" name="username" required>
@@ -33,10 +33,10 @@
                             </mat-form-field>
                         </div>
 
-                        <span class="space-12px"></span>
+                        <span class="span-12"></span>
 
-                        <div class="row">
-                            <mat-form-field class="width-100per">
+                        <div class="basic-row center">
+                            <mat-form-field class="width-max">
                                 <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
                                 <input matInput [formControl]="passwordControl" [errorStateMatcher]="matcher"
                                     [(ngModel)]="password" placeholder="Password" name="password"
@@ -56,17 +56,17 @@
                 </mat-card-content>
             </div>
 
-            <div class="row">
+            <div class="basic-row center">
 
-                <mat-card-actions class="row-container">
-                    <div class="row">
-                        <button class="width-100per" (click)="logIn()" mat-raised-button color="primary"
+                <mat-card-actions class="basic-row-container">
+                    <div class="basic-row center">
+                        <button class="width-max" (click)="logIn()" mat-raised-button color="primary"
                             [disabled]="!(passwordControl.valid && userNameControl.valid)">
                             {{'login_button' | translate}}
                         </button>
                     </div>
-                    <span class="space-12px"></span>
-                    <div class="row">
+                    <span class="span-12"></span>
+                    <div class="basic-row center">
                         <a mat-button routerLink="/forgotten">{{'forgotten_password_title' | translate}}</a>
                     </div>
                 </mat-card-actions>

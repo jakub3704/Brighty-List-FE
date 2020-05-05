@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '../component/home/home.component';
 import { PageNotFoundComponent } from '../component/pagenotfound/pagenotfound.component';
-import { ErrorComponent } from '../component/error/error.component';
 
 import { LogInComponent } from '../security/component/login/login.component';
 import { SignupComponent } from '../security/component/signup/signup.component';
@@ -16,7 +15,6 @@ import { TasksComponent } from '../task/component/tasks/tasks.component';
 import { AuthRouteGuardService} from '../security/service/auth-route-guard.service';
 import { LoggedUserGuardService} from '../security/service/logged-user-guard.service';
 import { AboutComponent } from '../component/about/about.component';
-import { ContactComponent } from '../component/contact/contact.component';
 import { PrivacyComponent } from '../component/privacy/privacy.component';
 import { HelpComponent } from '../component/help/help.component';
 import { TermsComponent } from '../component/terms/terms.component';
@@ -33,9 +31,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'terms', component: TermsComponent },
-  { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
-  { path: 'error', component: ErrorComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

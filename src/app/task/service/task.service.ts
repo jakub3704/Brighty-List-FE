@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TaskDto } from '../model/task-dto';
 import { AuthenticationService } from '../../security/service/authentication.service';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ReminderDto } from '../model/reminder-dto';
 import { Task } from '../model/task';
