@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { equalValidator } from 'src/app/validators/equal-validator';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 import { UserService } from 'src/app/user/service/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -32,7 +32,8 @@ export class ResetPasswordComponent implements OnInit {
   public matcher = new MyFormErrorStateMatcher();
 
   constructor(private userService: UserService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     window.scroll(0, 0);
@@ -53,7 +54,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit(){
-    this.userService.resetPassword(this.token, this.passwordControl.value).then()
+    this.userService.resetPassword(this.token, this.passwordControl.value).then(()=>
+    {
+      this.router.navigate(['/login']);
+    })
   }
 
 }

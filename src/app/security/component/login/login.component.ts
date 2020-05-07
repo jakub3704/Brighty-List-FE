@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../security/service/authentication.service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class LogInComponent implements OnInit {
     Validators.required,
   ]);
 
-  matcher = new MyErrorStateMatcher();
+  matcher = new MyFormErrorStateMatcher();
 
   ngOnInit(): void {
     window.scroll(0, 0);
@@ -40,9 +41,3 @@ export class LogInComponent implements OnInit {
 
 }
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}

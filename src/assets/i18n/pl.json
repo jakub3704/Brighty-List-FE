@@ -15,7 +15,9 @@
     "forgotten_password_message": "Prześlemy łącze odzyskiwania na twój adres e-mail:",
     "forgotten_password_placeholder": "Wpisz adres e-mail",
     "forgotten_password_button": "Wyślij",
-
+	"forgotten_password_error": "Nie odnaleziono adresu e-mail w bazie",
+	"forgotten_password_executed": "Na twoj adres e-mail został wysłany link resetowania hasła",
+  
     "login_title":"Zaloguj Się",
     "login_button":"Zaloguj Się",
 
@@ -56,6 +58,9 @@
     "signup_terms_agree_error": "Musisz wyrazić zgodę na warunki użytkowania",
 	"signup_btn": "Załóż konto",
 
+	"reset_password_title": "Zresetuj swoje hasło",
+	"reset_password_error": "Niepoprawne łącze",
+	
     "home_title":"Spójrz na mój projekt portfolio",
     "home_part_one_title":"Zarządzaj swoim harmonogramem! ",
     "home_part_one_description":"Brighty list pomoże Ci zarządzać zadaniami za pomocą przypomnień e-mail",
