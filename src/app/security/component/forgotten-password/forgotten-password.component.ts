@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from 'src/app/user/service/user.service';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -15,7 +16,8 @@ export class ForgottenPasswordComponent implements OnInit {
     Validators.email
   ]);
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +41,13 @@ export class ForgottenPasswordComponent implements OnInit {
 
   sendRecovery() {
     if (!this.getError()) {
-      alert('ok')
+      this.userService.getResetPasswordLink(this.emailControl.value).then(
+        result => {
+          alert('ok');
+        },
+        error => {
+          alert('not ok');
+        });
     }
   }
 }

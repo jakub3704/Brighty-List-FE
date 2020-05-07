@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { equalValidator } from 'src/app/validators/equal-validator';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
+import { UserService } from 'src/app/user/service/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,7 +11,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  password: string;
+  response: string = 'WAITING';
+  token: string= '-----';
   hide = true;
   hideReapet = true;
 
@@ -25,17 +28,32 @@ export class ResetPasswordComponent implements OnInit {
     Validators.maxLength(30),
     equalValidator(this.passwordControl)
   ]);
-  public matcher = new MyErrorStateMatcher();
-  constructor() { }
+
+  public matcher = new MyFormErrorStateMatcher();
+
+  constructor(private userService: UserService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     window.scroll(0, 0);
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.token = params['token'];
+
+      this.userService.validateResetPasswordLink(this.token).then(data => {
+        if (data) {
+          this.response = 'true';
+         } else {
+          this.response = 'false';
+         }
+      },
+      error => {
+        this.response = 'false';
+      });
+    }); 
   }
 
-}
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm| null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  submit(){
+    this.userService.resetPassword(this.token, this.passwordControl.value).then()
   }
+
 }

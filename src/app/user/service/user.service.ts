@@ -61,4 +61,25 @@ export class UserService {
     });
     return await this.httpClient.post(this.backEndUrl + 'users/delete', password, { headers: httpHeaders }).toPromise();
   }
+
+  public async getResetPasswordLink(email: string){
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+    });
+    return await this.httpClient.post(this.backEndUrl + 'reset', email, { headers: httpHeaders }).toPromise();
+  }
+
+  public async validateResetPasswordLink(token: string){
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+    });
+    return await this.httpClient.get(this.backEndUrl + 'reset?token=' + token, { headers: httpHeaders }).toPromise();
+  }
+
+  public async resetPassword(token: string, password: string){
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+    });
+    return await this.httpClient.put(this.backEndUrl + 'reset?token=' + token, password, { headers: httpHeaders }).toPromise();
+  }
 }
