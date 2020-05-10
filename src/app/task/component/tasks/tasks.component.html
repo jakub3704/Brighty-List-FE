@@ -84,10 +84,10 @@
             <button mat-button [matMenuTriggerFor]="viewMenu">
                 {{'tasks_toolbar_view' | translate}}
             </button>
-            <mat-menu #viewMenu="matMenu" [(ngModel)]="isFullView">
-                <button mat-menu-item (click)="isFullView=true" [disabled]="isFullView">
+            <mat-menu #viewMenu="matMenu">
+                <button mat-menu-item (click)="!isFullView" [disabled]="isFullView">
                     {{'tasks_toolbar_view_full' | translate}}</button>
-                <button mat-menu-item (click)="isFullView=false" [disabled]="!isFullView">
+                <button mat-menu-item (click)="!isFullView" [disabled]="!isFullView">
                     {{'tasks_toolbar_view_small' | translate}}</button>
             </mat-menu>
 

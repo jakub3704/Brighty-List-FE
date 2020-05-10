@@ -42,8 +42,7 @@ export class DialogChangePasswordComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    public dialogRef: MatDialogRef<DialogChangePasswordComponent>,
-    private dialogFormBuilder: FormBuilder) {
+    public dialogRef: MatDialogRef<DialogChangePasswordComponent>) {
     dialogRef.disableClose = true;
   }
 

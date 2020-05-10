@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReminderDto } from '../../model/reminder-dto';
 import { TaskDto } from '../../model/task-dto';
-import { TaskService, dateTimeEquals, dateEquals } from '../../service/task.service';
+import { TaskService } from '../../service/task.service';
+import { dateEquals, dateTimeEquals } from 'src/app/utilities/my-date-util';
 
 @Component({
   selector: 'app-dialog-new-reminder',
@@ -11,6 +12,8 @@ import { TaskService, dateTimeEquals, dateEquals } from '../../service/task.serv
 })
 export class DialogNewReminderComponent implements OnInit {
   reminder: ReminderDto = new ReminderDto();
+  isReapet: boolean = false;
+  ratio: number = 0;
 
   reminderTypeSelection = 'NO_SELECTION';
   reapetTypeSelection = 'NEVER'
@@ -22,19 +25,19 @@ export class DialogNewReminderComponent implements OnInit {
 
   now: Date;
   myNow: Date;
+
   reminderDate: Date;
   reminderTime: string;
+
   minDate: Date;
-  minTime: string = null;
+  minTime: string;
   maxDate: Date;
-  maxTime: string = null;
-  errorSame = false;
+  maxTime: string;
+
+  response = '';
 
   canBeforeStart: boolean;
   canBetween: boolean;
-
-  dateStart = new Date(this.data.startTime);
-  dateEnd = new Date(this.data.endTime);
 
   constructor(
     public dialogRef: MatDialogRef<DialogNewReminderComponent>,
@@ -53,31 +56,33 @@ export class DialogNewReminderComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  submitChange(): void {
-    this.errorSame = false;
+  async submitChange() {
+    this.response = '';
     this.setReminderDate();
     this.reminder.taskId = this.data.taskId
-    if (!this.isSameReminders()) {
-      this.taskService.createReminder(this.reminder).then(
-        () => {
-          this.dialogRef.close();
-        });
-    } else {
-      this.errorSame = true;
+    await this.taskService.createReminder(this.reminder, this.isReapet, this.ratio).then(data => this.response = data);
+    if (this.response==="none"){
+      this.dialogRef.close();
     }
   }
 
   onDateChange() {
     if (dateEquals(this.reminderDate, this.minDate)) {
       this.minTime = this.timeToStringFromDate(this.minDate);
+      this.reminderTime = this.minTime;
+      this.updateTimeOfDate(this.reminderTime, this.reminderDate);
     } else {
       this.minTime = null;
+      this.updateTimeOfDate(this.reminderTime, this.reminderDate);
     }
     if (dateEquals(this.reminderDate, this.maxDate)) {
       var tmpDate = new Date(this.maxDate.getTime() - (15 * 60 * 1000));
       this.maxTime = this.timeToStringFromDate(tmpDate);
+      this.reminderTime = this.maxTime;
+      this.updateTimeOfDate(this.reminderTime, this.reminderDate);
     } else {
       this.maxTime = null;
+      this.updateTimeOfDate(this.reminderTime, this.reminderDate);
     }
   }
 
@@ -124,7 +129,7 @@ export class DialogNewReminderComponent implements OnInit {
     }
   }
 
-  onReminderTypeSelectionChange(){
+  onReminderTypeSelectionChange() {
     if (this.reminderTypeSelection === 'BEFORE_START') {
       this.setTimeBeforeArray();
       this.reminderDateForBefore();
@@ -154,7 +159,7 @@ export class DialogNewReminderComponent implements OnInit {
   }
 
   private setTimeBeforeArray() {
-    var minutesToStart = Math.floor((this.dateStart.getTime() - this.now.getTime()) / (1000 * 60));
+    var minutesToStart = Math.floor((this.data.startTime.getTime() - this.now.getTime()) / (1000 * 60));
     var maxIter: number;
     if (minutesToStart >= 20) {
       var interval = 15;
@@ -167,8 +172,8 @@ export class DialogNewReminderComponent implements OnInit {
     }
   }
 
-  private reminderDateForBefore(){
-    this.reminderDate = new Date(this.dateStart.getTime() - (this.timeBeforeValue * 60 * 1000));
+  private reminderDateForBefore() {
+    this.reminderDate = new Date(this.data.startTime.getTime() - (this.timeBeforeValue * 60 * 1000));
   }
 
   private reminderDateForBeetween() {
@@ -180,7 +185,7 @@ export class DialogNewReminderComponent implements OnInit {
         this.minDate = new Date(this.setCustomMinutes(this.data.startTime));
       } else {
         this.minDate = new Date(this.myNow);
-      }   
+      }
       this.minTime = this.timeToStringFromDate(this.minDate);
     }
     this.maxDate = new Date(this.data.endTime);
@@ -191,79 +196,27 @@ export class DialogNewReminderComponent implements OnInit {
   }
 
   private setReminderDate(): void {
-    this.updateTimeOfDate(this.reminderTime, this.reminderDate);
-
     if (this.reminderTypeSelection === 'BEFORE_START') {
-      this.reminder.cron = this.setCronForBeforeStart();
+      this.reminderDateForBefore();
+      this.isReapet = false;
+      this.ratio = 0;
     } else if (this.reminderTypeSelection === 'BETWEEN') {
-      this.reminder.cron = this.setCronBetween();
-    }
-  }
+      this.updateTimeOfDate(this.reminderTime, this.reminderDate);
 
-  private setCronForBeforeStart(): string {
-    this.reminderDateForBefore();
-    return '0' + ' ' + this.reminderDate.getMinutes()
-      + ' ' + this.reminderDate.getHours()
-      + ' ' + this.reminderDate.getDate()
-      + ' ' + this.reminderDate.getMonth()
-      + ' ' + '?';
-  }
-
-  private setCronBetween(): string {
-    var minutes = this.reminderDate.getMinutes().toString();
-    var hours = this.reminderDate.getHours().toString();
-    var dayOfMonth = this.reminderDate.getDate().toString();
-    var month = this.reminderDate.getMonth().toString();
-
-    if (this.reapetTypeSelection === 'EVERY_DAY') {
-      dayOfMonth = this.reminderDate.getDate().toString() + '/1';
-      month = this.reminderDate.getMonth().toString() + '/1';
-    }
-
-    if (this.reapetTypeSelection === 'CUSTOM') {
-      dayOfMonth = this.reminderDate.getDate().toString() + '/' + this.selectedReapet;
-      month = this.reminderDate.getMonth().toString() + '/1';
-    }
-
-    if (this.reapetTypeSelection === 'NEVER') {
-      dayOfMonth = this.reminderDate.getDate().toString();
-      month = this.reminderDate.getMonth().toString();
-    }
-
-    return '0' + ' ' + minutes + ' ' + hours + ' ' + dayOfMonth + ' ' + month + ' ' + '?';
-  }
-
-  /** Simplified check for same reminders in task
-   * 
-   *  Attention!! do not include all possible scenarios, 
-   *  some overlaping next execution times of reminders can occur
-   *  More sofisticated check needed
-   * 
-   *  return true if there is possibility of same reminders
-  */
-  private isSameReminders(): boolean {
-    for (var item of this.data.reminders) {
-      var reminderCronSplit: string[] = this.reminder.cron.split(" ");
-      var itemCronSplit: string[] = item.cron.split(" ");
-      if (reminderCronSplit[1] === itemCronSplit[1] &&
-        reminderCronSplit[2] === itemCronSplit[2]) {
-        var reminderCronSplitDay: string[] = reminderCronSplit[3].split('/');
-        var itemCronSplitDay: string[] = itemCronSplit[3].split('/');
-        var reminderCronSplitMonth: string[] = reminderCronSplit[4].split('/');
-        var itemCronSplitMonth: string[] = itemCronSplit[4].split('/');
-
-        if (reminderCronSplitDay[0] === itemCronSplitDay[0]) {
-          if (reminderCronSplitMonth[0] === itemCronSplitMonth[0]) {
-            return true;
-          } else {
-            return false;
-          }
-        } else {
-          return false;
-        }
+      if (this.reapetTypeSelection === 'EVERY_DAY') {
+        this.isReapet = true;
+        this.ratio = 1;
+      } 
+      if (this.reapetTypeSelection === 'CUSTOM') {
+        this.isReapet = true;
+        this.ratio = this.selectedReapet;
+      }
+      if (this.reapetTypeSelection === 'NEVER') {
+        this.isReapet = false;
+        this.ratio = 0;
       }
     }
-    return false;
+    this.reminder.nextExecutionTime = this.reminderDate;
   }
 
   private timeToStringFromDate(date: Date): string {

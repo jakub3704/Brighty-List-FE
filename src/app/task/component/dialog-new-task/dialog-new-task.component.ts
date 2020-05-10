@@ -3,7 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskDto } from '../../model/task-dto';
 import { FormControl, Validators} from '@angular/forms';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
-import { TaskService, dateTimeEquals, dateEquals } from '../../service/task.service';
+import { TaskService} from '../../service/task.service';
+import { dateTimeEquals, dateEquals } from 'src/app/utilities/my-date-util';
 
 @Component({
   selector: 'app-dialog-new-task',

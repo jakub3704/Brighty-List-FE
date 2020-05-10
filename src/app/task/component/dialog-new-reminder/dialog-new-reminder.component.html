@@ -10,7 +10,7 @@
             </button>
         </div>
     </div>
-    <div class="dialog-row center" *ngIf="errorSame">
+    <div class="dialog-row center" *ngIf="response==='same'">
         <mat-error>{{'error_same_reminder' | translate}}</mat-error>
     </div>
     <div class="dialog-row" *ngIf="!(reminderTypeSelection==='NO_SELECTION' || reminderTypeSelection==='IMPOSIBLE')">

@@ -5,6 +5,8 @@ import { TaskDto } from '../../model/task-dto';
 import { ReminderDto } from '../../model/reminder-dto';
 import { DialogNewTaskComponent } from '../dialog-new-task/dialog-new-task.component';
 import { DialogNewReminderComponent } from '../dialog-new-reminder/dialog-new-reminder.component';
+import { retry, retryWhen } from 'rxjs/operators';
+import { CustomErrorHandlerService } from 'src/app/error/custom-error-handler.service';
 
 
 @Component({
@@ -42,13 +44,7 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getAllTasks().then(data => {
-      for (var item of data) {
-        var taskDto = new TaskDto;
-        taskDto.mapFromTask(item);
-        this.tasks.push(taskDto);
-      }
-    });
+    this.refresh();
     window.scroll(0, 0);
   }
 
@@ -57,7 +53,7 @@ export class TasksComponent implements OnInit {
       width: '800px',
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.refreshTasks();
+      this.refresh();
     });
   }
 
@@ -68,7 +64,7 @@ export class TasksComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
       () => {
-        this.refreshTasks();
+        this.refresh();
       });
   }
 
@@ -79,39 +75,29 @@ export class TasksComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(
       () => {
-        this.refreshTasks();
+        this.refresh();
       });
   }
 
   btnDeleteTask(task: TaskDto): void {
-    this.taskService.deleteTask(task.taskId.toString()).then(() => { this.refreshTasks(); });
+    this.taskService.deleteTask(task.taskId.toString()).then(() => { this.refresh(); });
   }
 
   btnDeleteReminder(reminder: ReminderDto): void {
-    this.taskService.deleteReminder(reminder.reminderId.toString()).then(() => { this.refreshTasks(); });
+    this.taskService.deleteReminder(reminder.reminderId.toString()).then(() => { this.refresh(); });
   }
 
   completeTask(task: TaskDto): void {
-    this.taskService.completeTask(task.taskId.toString()).then(() => { this.refreshTasks(); });
-  }
-  
-  refreshTasks() {
-    var tmpTasks: TaskDto[] = []
-    this.taskService.getAllTasks().then(data => {
-      for (var i = 0; i < data.length; i++) {
-        var taskDto = new TaskDto;
-        taskDto.mapFromTask(data[i]);
-        taskDto.isExpanded = this.isExpanded(taskDto.taskId);
-        tmpTasks.push(taskDto);
-      }
-      this.tasks = tmpTasks;
-    });
+    this.taskService.completeTask(task.taskId.toString()).then(() => { this.refresh(); });
   }
 
-  refresh(){
-    this.initialize();
+  async refresh() {
+    await this.taskService.getAllTasks().then(
+      data => {
+      this.tasks = data;
+    });  
   }
-  
+
   sort(option: string) {
     this.sortOption = option;
     this.sortIsReverse = false;
@@ -142,13 +128,7 @@ export class TasksComponent implements OnInit {
       }
     } else {
       this.tasks = [];
-      this.taskService.sort(option).then(data => {
-        for (var item of data) {
-          var taskDto = new TaskDto;
-          taskDto.mapFromTask(item);
-          this.tasks.push(taskDto);
-        }
-      });
+      this.taskService.sort(option).then(data => {this.tasks = data;});  
     }
     window.scroll(0, 0);
   }
@@ -158,14 +138,10 @@ export class TasksComponent implements OnInit {
     this.sortOption = 'DEFAULT';
     this.sortIsReverse = false;
     this.tasks = [];
-    this.taskService.filter(option).then(data => {
-      for (var item of data) {
-        var taskDto = new TaskDto;
-        taskDto.mapFromTask(item);
-        this.tasks.push(taskDto);
-        window.scroll(0, 0);
-      }
-    });
+    this.taskService.filter(option).then(
+      data => {
+      this.tasks = data;
+    });  
   }
 
   search(searchInput: string) {
@@ -173,14 +149,10 @@ export class TasksComponent implements OnInit {
     this.sortOption = 'DEFAULT';
     this.sortIsReverse = false;
     this.tasks = [];
-    this.taskService.search(searchInput).then(data => {
-      for (var item of data) {
-        var taskDto = new TaskDto;
-        taskDto.mapFromTask(item);
-        this.tasks.push(taskDto);
-        window.scroll(0, 0);
-      }
-    });
+    this.taskService.search(searchInput).then(
+      data => {
+      this.tasks = data;
+    });  
   }
 
   sortReverse() {
@@ -188,25 +160,5 @@ export class TasksComponent implements OnInit {
     this.sortIsReverse = !this.sortIsReverse;
     window.scroll(0, 0);
   }
-
-  private initialize() {
-    this.tasks = [];
-    this.taskService.getAllTasks().then(data => {
-      for (var item of data) {
-        var taskDto = new TaskDto;
-        taskDto.mapFromTask(item);
-        this.tasks.push(taskDto);
-      }
-    });
-  }
-
-  private isExpanded(taskId: number){
-    for (var i = 0; i < this.tasks.length; i++) {
-      if (this.tasks[i].taskId === taskId) {
-        return this.tasks[i].isExpanded;
-      } else {
-        return false;
-      }
-    }
-  }
 }
+

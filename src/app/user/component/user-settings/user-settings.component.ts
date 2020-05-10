@@ -5,8 +5,6 @@ import { UserService } from '../../service/user.service';
 import { DialogChangePasswordComponent } from '../dialog-change-password/dialog-change-password.component';
 import { DialogChangeNameComponent } from '../dialog-change-name/dialog-change-name.component';
 import { DialogChangeEmailComponent } from '../dialog-change-email/dialog-change-email.component';
-import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/security/service/authentication.service';
 import { DialogDeleteAccountComponent } from '../dialog-delete-account/dialog-delete-account.component';
 
 @Component({
@@ -19,20 +17,11 @@ export class UserSettingsComponent implements OnInit {
   isGeneral = true;
 
   constructor(private userService: UserService,
-    private authenticationService: AuthenticationService,
-    private router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.userService.getUserDetails().then(
-      data => { 
-        this.userDto = data;
-        window.scroll(0, 0);
-      },
-      error => {
-        this.authenticationService.closeSesion();
-        this.router.navigate(['/home']);
-      });
+    this.initialize();
+    window.scroll(0, 0);
   }
 
   openDialogChangeName(): void {
@@ -78,4 +67,10 @@ export class UserSettingsComponent implements OnInit {
     });
   }
 
+  private async initialize(){
+    await this.userService.getUserDetails().then(
+      data => { 
+        this.userDto = data;
+      });
+  }
 }

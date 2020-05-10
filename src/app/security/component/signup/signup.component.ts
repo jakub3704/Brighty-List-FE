@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { UserService } from 'src/app/user/service/user.service';
 import { SignUpUserDto } from 'src/app/user/model/sign-up-user-dto';
 import { AuthenticationService } from '../../service/authentication.service';
 import { MatStepper } from '@angular/material/stepper';
 import { equalValidator } from 'src/app/validators/equal-validator';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
+import { SignUpService } from 'src/app/user/service/sign-up.service';
 
 @Component({
   selector: 'app-signup',
@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
   public matcher = new MyFormErrorStateMatcher();
 
   constructor(
-    private userServive: UserService,
+    private signUpService: SignUpService,
     public authenticationService: AuthenticationService
   ) { }
 
@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
   }
 
   public submit(): void {
-    this.userServive.signUpUser(this.user)
+    this.signUpService.signUpUser(this.user)
       .then(data => { data = this.user; });
     this.authenticationService.retriveToken(this.user.name, this.user.password);
   }
