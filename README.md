@@ -14,18 +14,18 @@ Front End API - used technologies:
 App is running on http://localhost:4200/  
 
 # Introduction
-Bright list is a project that alows users to create list of their task and 
+Bright list is a project that allows users to create list of their task and 
 set reminders for those task. 
-User can mark task for autocompletition on end date time or manual completion.
-
-Reminders for tasks are send as simple e-Mails via SendGrid.
-
-Additionaly users get e-mails when their tasks are overdue (when manual completition is selected).
+User can mark task for auto completion on end date time or manual completion.
+ 
+Reminders for tasks are send as simple eMails via SendGrid.
+ 
+Additionally users get eMails when their tasks are overdue (when manual completion is selected).
 
 # Implemented Functionality
-1. Comunication with Back End,
+1. Communication with Back End,
 2. Signing up new users,
-3. Updating user informations such as: nickname, e-Mail adress, password,
+3. Updating user informations such as: nickname, eMail address, password,
 4. Deleting account,
 5. Reseting user password, sending password reset link to user,
 6. User can create/delete/update tasks and reminders for those tasks,
