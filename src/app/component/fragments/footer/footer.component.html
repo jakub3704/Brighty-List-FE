@@ -9,10 +9,8 @@
     <span class="span-footer-space"></span>
     <div class="row">
       <span class="span-footer-vertical-margin"></span>
-      <div class="column center">
-        <a mat-button class="clean-link" routerLink="/help" routerLinkActive="active">{{'footer_help' | translate}}</a>
-      </div>
-      <span class="span-footer-vertical-space"></span>
+
+
       <div class="column center">
         <a mat-button class="clean-link" (click)="openDialogCookies()">{{'footer_cookie' | translate}}</a>
       </div>
@@ -28,8 +26,13 @@
       <div class="column center">
         <a mat-button class="clean-link" routerLink="/about" routerLinkActive="active">{{'footer_about' | translate}}</a>
       </div>
+      <span class="span-footer-vertical-space"></span>
+      <div class="column center">
+        <a mat-button class="clean-link" href="https://bitbucket.org/">{{'footer_git' | translate}}</a>
+      </div>
       <span class="span-footer-vertical-margin"></span>
     </div>
+
     <span class="span-footer-bottom"></span>
   </div>
 

@@ -1,5 +1,20 @@
 <div class="body-container">
-    <mat-card class="card-size">
+    <mat-card class="card-size" *ngIf="!canCreate">
+        <div class="basic-row-container">
+        <div class="basic-row center">
+            <p>{{'signup_cant_1' | translate}}</p>
+        </div>
+        <span class="span-12"></span>
+        <div class="basic-row center">
+            <p>{{'signup_cant_2' | translate}}</p>
+        </div>
+        <span class="span-25"></span>
+        <div class="basic-row center">
+            <a class="width-max" mat-raised-button color="primary" routerLink="/login" routerLinkActive="active">{{'signup_login' | translate}}</a>
+        </div>
+        </div>
+    </mat-card>
+    <mat-card class="card-size" *ngIf="canCreate">
         <div class="basic-row-container">
             <div class="basic-row center">
                 <mat-card-title>{{'signup_title' | translate}}</mat-card-title>
@@ -137,6 +152,12 @@
                                         siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" #captchaControl="ngModel">
                                     </re-captcha>
                                 </div>
+                            </div>
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <mat-error *ngIf="isFailure">
+                                    {{'signup_error' | translate}}
+                                </mat-error>
                             </div>
                             <span class="span-25"></span>
                             <div class="basic-row center">

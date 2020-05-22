@@ -10,7 +10,7 @@ export class SignUpService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public async signUpUser(user: SignUpUserDto){
-    return await this.httpClient.post<SignUpUserDto>(this.backEndUrl + 'signup', user).toPromise();
+  public async signUpUser(user: SignUpUserDto) {
+    return await this.httpClient.post(this.backEndUrl + 'signup', user).toPromise();
   }
 }

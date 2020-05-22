@@ -48,6 +48,9 @@ export class TasksComponent implements OnInit {
     window.scroll(0, 0);
   }
 
+  toggleView(): void{
+    this.isFullView = !this.isFullView;
+  }
   openDialogNewTask(): void {
     const dialogRef = this.dialog.open(DialogNewTaskComponent, {
       width: '800px',

@@ -17,6 +17,8 @@ export class SignupComponent implements OnInit {
   user = new SignUpUserDto();
   hide = true;
   hideReapet = true;
+  canCreate = true;
+  isFailure = false;
 
   emailControl = new FormControl('', [
     Validators.required,
@@ -67,8 +69,19 @@ export class SignupComponent implements OnInit {
 
   public submit(): void {
     this.signUpService.signUpUser(this.user)
-      .then(data => { data = this.user; });
-    this.authenticationService.retriveToken(this.user.name, this.user.password);
+      .then(result => {
+        result.toString();
+        if (result.toString() ==="true") {
+          this.canCreate = true;
+          this.authenticationService.retriveToken(this.user.name, this.user.password);
+        } 
+        if (result.toString() ==="false"){
+          this.canCreate = false;
+        }
+      },
+      error => {
+        this.isFailure = true;
+    });
   }
 
   public resolved(captchaResponse: string) {

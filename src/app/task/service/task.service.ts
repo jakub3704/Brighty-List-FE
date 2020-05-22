@@ -384,10 +384,10 @@ export class TaskService {
   }
 
   public async createReminderToPromise(reminderDto: ReminderDto, isReapet: boolean, ratio: number): Promise<any> {
-    return await this.httpClient.post<any>(this.backEndUrl + 'reminders?isReapet=' + isReapet + '&ratio=' + ratio, this.taskMapperService.mapReminderDtoToReminder(reminderDto), { headers: this.authenticationService.addAuthHeaders() }).toPromise();
+    return await this.httpClient.post<any>(this.backEndUrl + 'tasks/reminders?isReapet=' + isReapet + '&ratio=' + ratio, this.taskMapperService.mapReminderDtoToReminder(reminderDto), { headers: this.authenticationService.addAuthHeaders() }).toPromise();
   }
 
   public async deleteReminderToPromise(reminderId: string): Promise<any> {
-    return await this.httpClient.delete(this.backEndUrl + 'reminders/' + reminderId, { headers: this.authenticationService.addAuthHeaders() }).toPromise();
+    return await this.httpClient.delete(this.backEndUrl + 'tasks/reminders/' + reminderId, { headers: this.authenticationService.addAuthHeaders() }).toPromise();
   }
 }

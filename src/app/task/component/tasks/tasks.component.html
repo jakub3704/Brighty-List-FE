@@ -13,7 +13,7 @@
 
             <div class="search-container">
                 <div class="search-column center">
-                    <input [(ngModel)]="searchInput" type="text" placeholder="Search by title" name="searchByTitle">
+                    <input [(ngModel)]="searchInput" type="text" placeholder="{{'tasks_toolbar_search' | translate}}" name="searchByTitle">
                 </div>
                 <div class="search-column center">
                     <button mat-icon-button (click)="search(searchInput)">
@@ -85,9 +85,9 @@
                 {{'tasks_toolbar_view' | translate}}
             </button>
             <mat-menu #viewMenu="matMenu">
-                <button mat-menu-item (click)="!isFullView" [disabled]="isFullView">
+                <button mat-menu-item (click)="toggleView()" [disabled]="isFullView">
                     {{'tasks_toolbar_view_full' | translate}}</button>
-                <button mat-menu-item (click)="!isFullView" [disabled]="!isFullView">
+                <button mat-menu-item (click)="toggleView()" [disabled]="!isFullView">
                     {{'tasks_toolbar_view_small' | translate}}</button>
             </mat-menu>
 

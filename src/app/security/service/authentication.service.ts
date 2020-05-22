@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenDto } from './token-dto';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 const CLIENT_ID = 'brighty-client';
 const CLIENT_SECRET = 'brighty-secret';
@@ -12,6 +13,7 @@ const CLIENT_SECRET = 'brighty-secret';
 export class AuthenticationService implements OnInit {
     public isLoggedIn: boolean;
     public isInvalid = false;
+    public isWrongData = false;
     token: TokenDto;
 
     constructor(private httpClient: HttpClient,
@@ -23,6 +25,7 @@ export class AuthenticationService implements OnInit {
         if (this.checkCredentials()) {
             this.token = this.getTokenDto();
         }
+        this.isWrongData = false;
     }
 
     public retriveToken(username: string, password: string) {
@@ -46,10 +49,12 @@ export class AuthenticationService implements OnInit {
                     this.saveToken(data);
                     this.isLoggedIn = true;
                     this.isInvalid = false;
+                    this.isWrongData = false;
                     this.router.navigate(['/tasks']);
                 },
                 error => {
                     this.isInvalid = true;
+                    this.isWrongData = true;
                     console.error('retriveToken()');
                 }
             );
