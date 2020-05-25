@@ -172,4 +172,7 @@ export class UserService {
     return await this.httpClient.post(this.backEndUrl + 'users/delete', password, { headers: this.authenticationService.addAuthHeaders() }).toPromise();
   }
 
+  public async isUserOperationsDisabled(): Promise<boolean>{
+    return await this.httpClient.get<boolean>(this.backEndUrl + 'users/isUserOperationsDisabled', { headers: this.authenticationService.addAuthHeaders() }).toPromise();
+  }
 }

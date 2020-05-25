@@ -36,13 +36,14 @@ Additionally users get eMails when their tasks are overdue (when manual completi
 # Set Up
 install:
 - nodejs https://nodejs.org/
-- npm install -g @angular/cli
+- npm install -g @angular/cli@9.0.5
 
 install in project folder:
-- ng add @angular/material
+- ng add @angular/material@9.1.2
 - npm install @ngx-translate/core --save=
 - npm install ngx-cookie-service
 - npm install --save ngx-material-timepicker
+- npm install ng-recaptcha --save
 
 to run in project directory:
 - ng serve

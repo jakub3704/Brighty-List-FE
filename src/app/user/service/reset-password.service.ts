@@ -21,4 +21,9 @@ export class ResetPasswordService {
   public async resetPassword(token: string, password: string){
     return await this.httpClient.put(this.backEndUrl + 'reset?token=' + token, password).toPromise();
   }
+
+  public async isResetTokenDisabled(): Promise<boolean>{
+    return await this.httpClient.get<boolean>(this.backEndUrl + 'reset/isResetTokenDisabled').toPromise();
+  }
+
 }

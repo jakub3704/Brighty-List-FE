@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="card-row-column width-200">{{userDto.name}}</div>
                                     <div class="card-row-column width-100">
-                                        <button mat-icon-button (click)="openDialogChangeName()">
+                                        <button mat-icon-button (click)="openDialogChangeName()" [disabled]=isUserOperationsDisabled>
                                             <mat-icon>edit</mat-icon>
                                         </button>
                                     </div>
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="card-row-column width-200">{{userDto.email}}</div>
                                     <div class="card-row-column width-100">
-                                        <button mat-icon-button (click)="openDialogChangeEmail()">
+                                        <button mat-icon-button (click)="openDialogChangeEmail()" [disabled]=isUserOperationsDisabled>
                                             <mat-icon>edit</mat-icon>
                                         </button>
                                     </div>
@@ -56,6 +56,9 @@
                                 <span class="span-20"></span>
                                 <div class="card-row">
                                     {{'user_settings_general_description' | translate}}
+                                </div>
+                                <div class="card-row" *ngIf=isUserOperationsDisabled style="color: red">
+                                    {{'user_settings_is_disabled' | translate}}
                                 </div>
                             </div>
                             <!-- security-->
@@ -66,15 +69,18 @@
                                 <span class="span-10"></span>
                                 <div class="card-row">
                                     <button mat-button
-                                        (click)="openDialogChangePassword()">{{'user_settings_btn_password_change' | translate}}</button>
+                                        (click)="openDialogChangePassword()" [disabled]=isUserOperationsDisabled>{{'user_settings_btn_password_change' | translate}}</button>
                                 </div>
                                 <span class="span-10"></span>
                                 <div class="card-row">
-                                    <button mat-button (click)="openDialogDeleteAccount()">{{'user_settings_btn_delete_account' | translate}}</button>
+                                    <button mat-button (click)="openDialogDeleteAccount()" [disabled]=isUserOperationsDisabled>{{'user_settings_btn_delete_account' | translate}}</button>
                                 </div>
                                 <span class="span-20"></span>
                                 <div class="card-row">
                                     {{'user_settings_security_description' | translate}}
+                                </div>
+                                <div class="card-row" *ngIf=isUserOperationsDisabled style="color: red">
+                                    {{'user_settings_is_disabled' | translate}}
                                 </div>
                             </div>
                         </div>

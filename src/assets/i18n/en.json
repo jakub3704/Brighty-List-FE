@@ -26,6 +26,7 @@
 	"form_placeholder_password_current": "Enter current password",
 	"forgotten_password_error": "Email not found",
 	"forgotten_password_executed": "Link for your password reset was sent to your e-mail.",
+	"forgotten_password_is_disabled": "Reset password service is disabled3",
 		
 	"form_placeholder_task_title":"Task Title",
 	"form_placeholder_chose_priority":"Chose priority",
@@ -116,7 +117,7 @@
 		
 	"tasks_card_reminders": "Reminders",
 	"tasks_card_reminders_empty": "You have no reminders ",
-	"tasks_card_start_time": "Start time::",
+	"tasks_card_start_time": "Start time:",
 	"tasks_card_end_time": "End time:",	
 	"tasks_card_completed_time": "Completed time:",
 	"tasks_btn_pending": "Pending",
@@ -166,6 +167,7 @@
 	"user_settings_btn_password_change": "Password change",	
 	"user_settings_btn_delete_account": "Delete account",	
 	"user_settings_security_description": "Change your password or delete your account.",
+	"user_settings_is_disabled": "Data editing is disabled",
 	
 	"user_settings_dialog_change_password": "Password change",
 	"user_settings_dialog_change_name": "Change your username",

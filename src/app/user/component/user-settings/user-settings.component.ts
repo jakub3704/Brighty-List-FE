@@ -15,6 +15,7 @@ import { DialogDeleteAccountComponent } from '../dialog-delete-account/dialog-de
 export class UserSettingsComponent implements OnInit {
   userDto: UserDto = new UserDto();
   isGeneral = true;
+  isUserOperationsDisabled = true;
 
   constructor(private userService: UserService,
     public dialog: MatDialog) { }
@@ -27,7 +28,7 @@ export class UserSettingsComponent implements OnInit {
   openDialogChangeName(): void {
     const dialogRef = this.dialog.open(DialogChangeNameComponent, {
       width: '400px',
-      data: this.userDto
+      data: this.userDto,
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
@@ -71,6 +72,9 @@ export class UserSettingsComponent implements OnInit {
     await this.userService.getUserDetails().then(
       data => { 
         this.userDto = data;
+        this.userService.isUserOperationsDisabled().then(
+          data => this.isUserOperationsDisabled= data
+        )
       });
   }
 }

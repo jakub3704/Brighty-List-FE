@@ -17,7 +17,8 @@
     "forgotten_password_button": "Wyślij",
 	"forgotten_password_error": "Nie odnaleziono adresu e-mail w bazie",
 	"forgotten_password_executed": "Na twoj adres e-mail został wysłany link resetowania hasła",
-  
+  	"forgotten_password_is_disabled": "Resetowanie hasła jest wyłączone",
+
     "login_title":"Zaloguj Się",
     "login_button":"Zaloguj Się",
 
@@ -165,7 +166,8 @@
 	"user_settings_btn_password_change": "Zmiana hasła",	
 	"user_settings_btn_delete_account": "Usuń konto",	
 	"user_settings_security_description": "Zmień hasło lub usuń konto",
-	
+	"user_settings_is_disabled": "Edytcja danych jest wyłączona",
+
 	"user_settings_dialog_change_password": "Zmiana hasła",
 	"user_settings_dialog_change_name": "Zmiana nazwy użytkownika",
 	"user_settings_dialog_change_email": "Zmiana adresu e-mail",

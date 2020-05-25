@@ -3,53 +3,53 @@
         <div class="page-row-100hv color-basic">
             <div class="page-row-column">
                 <div class="row-container">
-                    <span class="span-50"></span>
-                    <div class="page-row center">
+                    <span class="fill-remaining-space"></span>
+                    <div class="page-row center height-max-25 flex-none"></div>
+                    <div class="page-row center height-max-60 flex-none">
                         <div class="preview-main-title">{{'home_title' | translate}}</div>
                     </div>
-                    <div class="page-row center height-min-10">
+                    <div class="page-row center height-max-10 flex-none"></div>
+                    <div class="page-row center height-max-60 flex-none">
                         <div class="preview-main-subtitle">{{'home_subtitle' | translate}}</div>
                     </div>
-                    <span class="span-15"></span>
-                    <div class="page-row center">
-                        <button mat-raised-button color="primary" class="btn-about" (click)="router.navigate(['about'])">
+                    <div class="page-row center height-max-25 flex-none"></div>
+                    <div class="page-row center height-max-60">
+                        <button mat-raised-button color="primary" class="btn-about"
+                            (click)="router.navigate(['about'])">
                             {{'home_about' | translate}}
                         </button>
                     </div>
-                    <span class="span-15"></span>
+                    <div class="page-row center height-max-25 flex-none"></div>
 
-                    <div class="page-row">
+                    <span class="fill-remaining-space"></span>
+
+                    <div class="page-row height-row">
 
                         <div class="page-row-column">
-
-                            <div class="row-container">
-                                <span class="fill-remaining-space"></span>
-                                <div class="page-row center height-min-10 padding-lf-60px">
-                                    <div class="page-row-column preview-title">
-                                        {{'home_part_one_title' | translate}}
-                                    </div>
+                            <span class="fill-remaining-space"></span>
+                            <div class="page-row center height-min-10">
+                                <div class="page-row-column preview-title">
+                                    {{'home_part_one_title' | translate}}
                                 </div>
-                                <span class="span-30"></span>
-                                <div class="page-row center height-min-10 padding-lf-60px">
-                                    <div class="page-row-column preview-description">
-                                        {{'home_part_one_description' | translate}}
-                                    </div>
-                                </div>
-                                <span class="span-30"></span>
-                                <div class="page-row center height-min-10 padding-lf-60px">
-                                    <button mat-raised-button color="primary" class="btn-join" (click)="router.navigate(['signup'])">
-                                        {{'home_test_it' | translate}}
-                                    </button>
-                                </div>
-                                <span class="fill-remaining-space"></span>
                             </div>
-
+                            <span class="span-30"></span>
+                            <div class="page-row center height-min-10">
+                                <div class="page-row-column preview-description">
+                                    {{'home_part_one_description' | translate}}
+                                </div>
+                            </div>
+                            <span class="span-30"></span>
+                            <div class="page-row center height-min-10">
+                                <button mat-raised-button color="primary" class="btn-join"
+                                    (click)="router.navigate(['signup'])">
+                                    {{'home_test_it' | translate}}
+                                </button>
+                            </div>
+                            <span class="fill-remaining-space"></span>
                         </div>
 
-                        <div class="page-row-column center">
-                            <div class="row">
-                                <img class="img-preview" src="assets/images/preview.png">
-                            </div>
+                        <div class="page-row-column center img-margin">
+                            <img class="img-preview" src="assets/images/preview.png">
                         </div>
 
                     </div>
@@ -61,71 +61,71 @@
         </div>
 
         <div class="page-row-100hv">
-        <div class="row-container width-max height-max">
-            <span class="fill-remaining-space"></span>
-            <div class="page-row center">
-                <div class="preview-how">
-                    {{'home_how_it_works' | translate}}
-                </div>
-            </div>
+            <div class="row-container width-max height-max">
+                <span class="fill-remaining-space"></span>
 
-            <div class="page-row">
-            <span class="span-10p"></span>
-
-            <div class="page-row-column center width-40">
-                <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
-            </div>
-
-            <div class="row-column center">
-
-                <div class="row-container">
-                    <span class="fill-remaining-space"></span>
-
-                    <div class="page-row center height-min-10">
-                        <div class="img-container">
-                            <div style="display: none" name="mySlides">
-                                <div class="numbertext">1 / 4</div>
-                                <img src="{{'how_1_img' | translate}}" style="width:100%">
-                            </div>
-                            <div style="display: none" name="mySlides">
-                                <div class="numbertext">2 / 4</div>
-                                <img src="{{'how_2_img' | translate}}" style="width:100%">
-                            </div>
-                            <div style="display: none" name="mySlides">
-                                <div class="numbertext">3 / 4</div>
-                                <img src="{{'how_3_img' | translate}}" style="width:100%">
-                            </div>
-                            <div style="display: none" name="mySlides">
-                                <div class="numbertext">4 / 4</div>
-                                <img src="{{'how_4_img' | translate}}" style="width:100%">
-                            </div>
-                        </div>
+                <div class="page-row center height-max-50">
+                    <div class="preview-how">
+                        {{'home_how_it_works' | translate}}
                     </div>
-                    <span class="span-5"></span>
-
-                    <div class="page-row center height-min-10">
-                        <div style="text-align:center">
-                            <span class="dot" (click)="currentSlide(1)"></span>
-                            <span class="dot" (click)="currentSlide(2)"></span>
-                            <span class="dot" (click)="currentSlide(3)"></span>
-                            <span class="dot" (click)="currentSlide(4)"></span>
-                        </div>
-                    </div>
-
-                    <span class="fill-remaining-space"></span>
                 </div>
 
+                <div class="page-row">
+                    <span class="fill-remaining-space"></span>
 
-            </div>
+                    <div class="page-row-column center width-40"  style="height:65%">
+                        <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+                    </div>
 
-            <div class="page-row-column center width-40">
-                <a class="next" (click)="plusSlides(1)">&#10095;</a>
-            </div>
+                    <div class="page-row-column center"  style="height:65%">
 
-            <span class="span-10p"></span>
+                        <span class="fill-remaining-space"></span>
+
+                        <div class="page-row center height-min-10">
+                            <div class="page-row-column center">
+                                <div style="display: none" name="mySlides">
+                                    <div class="numbertext">1 / 4</div>
+                                    <img src="{{'how_1_img' | translate}}" class="img-dimensions">
+                                </div>
+                                <div style="display: none" name="mySlides">
+                                    <div class="numbertext">2 / 4</div>
+                                    <img src="{{'how_2_img' | translate}}" class="img-dimensions">
+                                </div>
+                                <div style="display: none" name="mySlides">
+                                    <div class="numbertext">3 / 4</div>
+                                    <img src="{{'how_3_img' | translate}}" class="img-dimensions">
+                                </div>
+                                <div style="display: none" name="mySlides">
+                                    <div class="numbertext">4 / 4</div>
+                                    <img src="{{'how_4_img' | translate}}" class="img-dimensions">
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="span-5"></span>
+
+                        <div class="page-row center height-min-10" >
+                            <div style="text-align:center">
+                                <span class="dot" (click)="currentSlide(1)"></span>
+                                <span class="dot" (click)="currentSlide(2)"></span>
+                                <span class="dot" (click)="currentSlide(3)"></span>
+                                <span class="dot" (click)="currentSlide(4)"></span>
+                            </div>
+                        </div>
+
+                        <span class="fill-remaining-space"></span>
+
+                    </div>
+
+                    <div class="page-row-column center width-40"  style="height:65%">
+                        <a class="next" (click)="plusSlides(1)">&#10095;</a>
+                    </div>
+
+                    <span class="fill-remaining-space"></span>
+                </div>
+
+                <span class="fill-remaining-space"></span>
             </div>
-            <span class="fill-remaining-space"></span>
-        </div>    
         </div>
     </div>
 </div>

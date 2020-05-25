@@ -13,6 +13,7 @@ export class ForgottenPasswordComponent implements OnInit {
   errorMessage = '';
   executed = false;
   isError = false;
+  isResetTokenDisabled = true;
 
   emailControl = new FormControl('', [
     Validators.required,
@@ -24,6 +25,10 @@ export class ForgottenPasswordComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.resetPasswordService.isResetTokenDisabled().then(
+      data => {
+        this.isResetTokenDisabled = data
+      })
   }
 
   getError(): boolean {
@@ -45,14 +50,18 @@ export class ForgottenPasswordComponent implements OnInit {
 
   sendRecovery() {
     if (!this.getError()) {
-      this.resetPasswordService.getResetPasswordLink(this.emailControl.value).then(
-        result => {
-          this.executed = true;
-        },
-        error => {
-          this.executed = true;
-          this.isError = true;
-        });
+      if (!this.isResetTokenDisabled) {
+        this.resetPasswordService.getResetPasswordLink(this.emailControl.value).then(
+          result => {
+            this.executed = true;
+          },
+          error => {
+            this.executed = true;
+            this.isError = true;
+          });
+      } else {
+        this.executed = true;
+      }
     }
   }
 }
