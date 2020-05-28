@@ -1,76 +1,106 @@
 <div class="body-container">
+    <div class="basic-row-container">
+        <div class="basic-row center">
+            <mat-card class="card-size">
+                <div class="basic-row-container">
 
-    <mat-card class="card-size">
-        <div class="basic-row-container">
-
-            <div class="basic-row center">
-                <mat-card-header>
-                    <mat-card-title>{{'login_title' | translate}}</mat-card-title>
-                </mat-card-header>
-            </div>
-
-            <span class="span-25"></span>
-
-            <div class="basic-row center">
-                <mat-card-content class="width-max">
-                    <form class="basic-row-container">
-                        <div class="basic-row center">
-                            <mat-error *ngIf="authenticationService.isWrongData">
-                                {{'form_error_user_or_pass' | translate}}
-                            </mat-error>
-                        </div>
-
-                        <span class="span-12"></span>
-
-                        <div class="basic-row center">
-                            <mat-form-field class="width-max">
-                                <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
-                                <input matInput [formControl]="userNameControl" [errorStateMatcher]="matcher"
-                                    [(ngModel)]="username" placeholder="Username" name="username" required>
-                                <mat-error *ngIf="userNameControl.hasError('required')">
-                                    {{'form_blank_username' | translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <span class="span-12"></span>
-
-                        <div class="basic-row center">
-                            <mat-form-field class="width-max">
-                                <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
-                                <input matInput [formControl]="passwordControl" [errorStateMatcher]="matcher"
-                                    [(ngModel)]="password" placeholder="Password" name="password"
-                                    [type]="hide ? 'password' : 'text'" required>
-                                <button mat-icon-button matSuffix (click)="hide = !hide"
-                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                                <mat-error *ngIf="passwordControl.hasError('required')">
-                                    {{'form_blank_password' | translate}}
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                    </form>
-
-                </mat-card-content>
-            </div>
-
-            <div class="basic-row center">
-
-                <mat-card-actions class="basic-row-container">
                     <div class="basic-row center">
-                        <button class="width-max" (click)="logIn()" mat-raised-button color="primary"
-                            [disabled]="!(passwordControl.valid && userNameControl.valid)">
-                            {{'login_button' | translate}}
-                        </button>
+                        <mat-card-header>
+                            <mat-card-title>{{'login_title' | translate}}</mat-card-title>
+                        </mat-card-header>
+                    </div>
+
+                    <span class="span-25"></span>
+
+                    <div class="basic-row center">
+                        <mat-card-content class="width-max">
+                            <form class="basic-row-container">
+                                <div class="basic-row center">
+                                    <mat-error *ngIf="authenticationService.isWrongData">
+                                        {{'form_error_user_or_pass' | translate}}
+                                    </mat-error>
+                                </div>
+
+                                <span class="span-12"></span>
+
+                                <div class="basic-row center">
+                                    <mat-form-field class="width-max">
+                                        <mat-label>{{'form_placeholder_username' | translate}}</mat-label>
+                                        <input matInput [formControl]="userNameControl" [errorStateMatcher]="matcher"
+                                            [(ngModel)]="username" placeholder="Username" name="username" required>
+                                        <mat-error *ngIf="userNameControl.hasError('required')">
+                                            {{'form_blank_username' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <span class="span-12"></span>
+
+                                <div class="basic-row center">
+                                    <mat-form-field class="width-max">
+                                        <mat-label>{{'form_placeholder_password' | translate}}</mat-label>
+                                        <input matInput [formControl]="passwordControl" [errorStateMatcher]="matcher"
+                                            [(ngModel)]="password" placeholder="Password" name="password"
+                                            [type]="hide ? 'password' : 'text'" required>
+                                        <button mat-icon-button matSuffix (click)="hide = !hide"
+                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                        <mat-error *ngIf="passwordControl.hasError('required')">
+                                            {{'form_blank_password' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </form>
+
+                        </mat-card-content>
+                    </div>
+
+                    <div class="basic-row center">
+
+                        <mat-card-actions class="basic-row-container">
+                            <div class="basic-row center">
+                                <button class="width-max" (click)="logIn()" mat-raised-button color="primary"
+                                    [disabled]="!(passwordControl.valid && userNameControl.valid)">
+                                    {{'login_button' | translate}}
+                                </button>
+                            </div>
+                            <span class="span-12"></span>
+                            <div class="basic-row center">
+                                <a mat-button routerLink="/forgotten">{{'forgotten_password_title' | translate}}</a>
+                            </div>
+                        </mat-card-actions>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="basic-row center pd-tb-25">
+            <mat-card class="card-size ">
+                <div class="basic-row-container">
+
+                    <div class="basic-row center">
+                        <mat-card-header>
+                            <mat-card-title>{{'login_card_predefined_accounts_title' | translate}}</mat-card-title>
+                        </mat-card-header>
+                    </div>
+
+                    <div class="basic-row pd-t-2">
+                        {{'login_card_predefined_accounts' | translate}}
+                    </div>
+                    <div class="basic-row pd-t-2">
+                        {{'login_card_account_1' | translate}}
+                    </div>
+                    <div class="basic-row pd-t-2">
+                        {{'login_card_account_2' | translate}}
+                    </div>
+                    <div class="basic-row pd-t-2">
+                        {{'login_card_account_3' | translate}}
                     </div>
                     <span class="span-12"></span>
-                    <div class="basic-row center">
-                        <a mat-button routerLink="/forgotten">{{'forgotten_password_title' | translate}}</a>
-                    </div>
-                </mat-card-actions>
-            </div>
+                </div>
+            </mat-card>
         </div>
-    </mat-card>
-</div>
+
+    </div>

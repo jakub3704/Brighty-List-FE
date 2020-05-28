@@ -13,4 +13,8 @@ export class SignUpService {
   public async signUpUser(user: SignUpUserDto) {
     return await this.httpClient.post(this.backEndUrl + 'signup', user).toPromise();
   }
+
+  public async isSignUpPossible(): Promise<boolean> {
+    return await this.httpClient.get<boolean>(this.backEndUrl + 'signup').toPromise();
+  }
 }

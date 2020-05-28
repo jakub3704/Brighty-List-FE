@@ -21,6 +21,11 @@
 
     "login_title":"Zaloguj Się",
     "login_button":"Zaloguj Się",
+	"login_card_predefined_accounts_title": "Predefiniowani użytkownicy",
+	"login_card_predefined_accounts": "Zaloguj się jako jeden z predefiniowanych użytkowników:",
+	"login_card_account_1": "User: UserA; Password: UserA",
+	"login_card_account_2": "User: UserB; Password: UserB",
+	"login_card_account_3": "User: UserC; Password: UserC",
 
     "form_placeholder_email": "Podaj e-mail",
     "form_placeholder_username":"Podaj nazwę użytkownika",

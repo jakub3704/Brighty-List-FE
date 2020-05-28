@@ -17,7 +17,12 @@
     "forgotten_password_button": "Send",
 
     "login_title": "Login",
-    "login_button": "Login",
+	"login_button": "Login",
+	"login_card_predefined_accounts_title": "Predefined users",
+	"login_card_predefined_accounts": "Login as one of predefined user:",
+	"login_card_account_1": "User: UserA; Password: UserA",
+	"login_card_account_2": "User: UserB; Password: UserB",
+	"login_card_account_3": "User: UserC; Password: UserC",
 
     "form_placeholder_email": "Enter mail",
     "form_placeholder_username": "Enter username",
@@ -60,7 +65,7 @@
     "signup_terms_agree_error": "You must agree to the terms of use",
 	"signup_btn": "Sign up",
 	"signup_cant_1": "You can't create account this week.",
-	"signup_cant_2": "Try logging in on precreated test accounts.",
+	"signup_cant_2": "Try logging in on predefined test accounts.",
 	"signup_login": "Log in",
 	"signup_error": "Something gone wrong.",
 

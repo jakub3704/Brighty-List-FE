@@ -65,6 +65,16 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0, 0);
+
+    this.signUpService.isSignUpPossible().then(
+      result => {
+        if (result.toString() ==="true") {
+          this.canCreate = true;
+        } else {
+          this.canCreate = false;
+        }
+      });
+
   }
 
   public submit(): void {
