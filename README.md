@@ -40,10 +40,10 @@ install:
 
 install in project folder:
 - ng add @angular/material@9.1.2
-- npm install @ngx-translate/core --save=
-- npm install ngx-cookie-service
-- npm install --save ngx-material-timepicker
-- npm install ng-recaptcha --save
+- npm clean install @ngx-translate/core@12.1.2 --save
+- npm clean install ngx-cookie-service@3.0.3
+- npm clean install ngx-material-timepicker@5.5.1 --save 
+- npm clean install ng-recaptcha@5.0.0 --save
 
 to run in project directory:
 - ng serve
