@@ -232,7 +232,7 @@
 	"about_title": "O Brighty List",
 	"about_purpose": "Brighty list jest projektem portfolio, podczas którego uczyłem się programować.",
 	"about_purpose_note": "Ten projekt służy wyłącznie do testowania.",
-	"about_desc_1": "Bright list to projekt, który pozwala użytkownikom tworzyć listę swoich zadań i ustawiać przypomnienia dla tych zadań.",
+	"about_desc_1": "Brighty list to projekt, który pozwala użytkownikom tworzyć listę swoich zadań i ustawiać przypomnienia dla tych zadań.",
 	"about_desc_2": "Użytkownik może oznaczyć zadanie do automatycznego ukończenia lub ręcznego.",
 	"about_desc_3": "Przypomnienia o zadaniach są wysyłane jako proste wiadomości e-mail za pośrednictwem SendGrid.",
 	"about_desc_4": "Ponadto użytkownicy otrzymują wiadomości e-mail, gdy ich zadania są niezakończone o czasie (jeśli wybrano ręczne kończenie).",

@@ -218,9 +218,9 @@
 	"terms_requirement_7": "cookies.",
 	
 	"about_title": "About Brighty List",
-	"about_purpose": "Bright List is a portfolio project that was made for learning purpose.",
+	"about_purpose": "Brighty List is a portfolio project that was made for learning purpose.",
 	"about_purpose_note": "This project is for testing purpose only.",
-	"about_desc_1": "Bright list is a project that allows users to create list of their task and set reminders for those task.",
+	"about_desc_1": "Brighty list is a project that allows users to create list of their task and set reminders for those task.",
 	"about_desc_2": "User can mark task for auto completion on end date time or manual completion.",
 	"about_desc_3": "Reminders for tasks are send as simple eMails via SendGrid.",
 	"about_desc_4": "Additionally users get eMails when their tasks are overdue (when manual completion is selected).",
