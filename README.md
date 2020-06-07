@@ -1,5 +1,5 @@
-# Bright List - Front End
-Bright List is a portfolio project that was made for learning purpose.
+# Brighty List - Front End
+Brighty List is a portfolio project that was made for learning purpose.
 This project is for testing purpose only.
 
 Front End API - used technologies:
@@ -14,7 +14,7 @@ Front End API - used technologies:
 App is running on http://localhost:4200/  
 
 # Introduction
-Bright list is a project that allows users to create list of their task and 
+Brighty list is a project that allows users to create list of their task and 
 set reminders for those task. 
 User can mark task for auto completion on end date time or manual completion.
  

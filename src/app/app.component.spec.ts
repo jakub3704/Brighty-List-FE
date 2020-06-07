@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'bright-list-fe'`, () => {
+  it(`should have as title 'brighty-list-fe'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('bright-list-fe');
+    expect(app.title).toEqual('brighty-list-fe');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('bright-list-fe app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('brighty-list-fe app is running!');
   });
 });

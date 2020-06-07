@@ -10,6 +10,9 @@
     <a *ngIf="!authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/signup" routerLinkActive="active">{{'sign_up' | translate}}</a>
 
     <a *ngIf="authenticationService.isLoggedIn" mat-button class="clean-link" routerLink="/tasks" routerLinkActive="active">{{'header_my_tasks' | translate}}</a>
+    
+
+
     <div *ngIf="authenticationService.isLoggedIn">
       <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
@@ -19,7 +22,10 @@
         <button mat-menu-item (click)="logOut()">{{'header_user_log_out' | translate}}</button>
       </mat-menu>
     </div>
-
+    <div class="mat-body" *ngIf="authenticationService.isLoggedIn">
+      {{authenticationService.userName}}
+    </div>
+    <span class="span-20"></span>
     <div>
       <button mat-icon-button [matMenuTriggerFor]="languageMenu">
         <mat-icon>language</mat-icon>

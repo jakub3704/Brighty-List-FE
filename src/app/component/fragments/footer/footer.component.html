@@ -1,39 +1,47 @@
 <footer #footer>
   <div class="container-rows">
+
     <span class="span-footer-top"></span>
+
     <div class="row">
       <span class="fill-remaining-space"></span>
-      <a mat-button class="clean-link" routerLink="/home" routerLinkActive="active">{{'app_titile' | translate}}</a>
+      <a mat-button class="clean-link app-name-btn" routerLink="/home"
+        routerLinkActive="active">{{'app_titile' | translate}}</a>
       <span class="fill-remaining-space"></span>
     </div>
-    <span class="span-footer-space"></span>
+
+    <span class="span-footer-middle"></span>
+
     <div class="row">
-      <span class="span-footer-vertical-margin"></span>
+      <span class="span-footer-horizontal-margin"></span>
 
-
       <div class="column center">
-        <a mat-button class="clean-link" (click)="openDialogCookies()">{{'footer_cookie' | translate}}</a>
+        <a mat-button class="clean-link links-btn" (click)="openDialogCookies()">{{'footer_cookie' | translate}}</a>
       </div>
-      <span class="span-footer-vertical-space"></span>
+      <span class="span-footer-horizontal-space"></span>
       <div class="column center">
-        <a mat-button class="clean-link" routerLink="/privacy" routerLinkActive="active">{{'footer_privacy' | translate}}</a>
+        <a mat-button class="clean-link links-btn" routerLink="/privacy"
+          routerLinkActive="active">{{'footer_privacy' | translate}}</a>
       </div>
-      <span class="span-footer-vertical-space"></span>
+      <span class="span-footer-horizontal-space"></span>
       <div class="column center">
-        <a mat-button class="clean-link" routerLink="/terms" routerLinkActive="active">{{'footer_terms' | translate}}</a>
+        <a mat-button class="clean-link links-btn" routerLink="/terms"
+          routerLinkActive="active">{{'footer_terms' | translate}}</a>
       </div>
-      <span class="span-footer-vertical-space"></span>
+      <span class="span-footer-horizontal-space"></span>
       <div class="column center">
-        <a mat-button class="clean-link" routerLink="/about" routerLinkActive="active">{{'footer_about' | translate}}</a>
+        <a mat-button class="clean-link links-btn" routerLink="/about"
+          routerLinkActive="active">{{'footer_about' | translate}}</a>
       </div>
-      <span class="span-footer-vertical-space"></span>
+      <span class="span-footer-horizontal-space"></span>
       <div class="column center">
-        <a mat-button class="clean-link" href="https://bitbucket.org/">{{'footer_git' | translate}}</a>
+        <a mat-button class="clean-link links-btn" href="https://github.com/jakub3704/">{{'footer_git' | translate}}</a>
       </div>
-      <span class="span-footer-vertical-margin"></span>
+      <span class="span-footer-horizontal-margin"></span>
     </div>
 
     <span class="span-footer-bottom"></span>
+
   </div>
 
 </footer>

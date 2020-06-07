@@ -9,14 +9,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomeComponent implements OnInit {
   slideIndex = 1;
-  how_1 = "assets/images/" + this.translate.instant('test_img');
 
   constructor(private translate: TranslateService,
     public router: Router) { }
 
   ngOnInit(): void {
     this.showSlides(this.slideIndex);
-    this.how_1 = "assets/images/" + this.translate.instant('test_img');
   }
 
   plusSlides(n) {

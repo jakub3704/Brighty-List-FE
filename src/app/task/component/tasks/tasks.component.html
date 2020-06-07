@@ -1,4 +1,5 @@
 <div class="tasks-app-container">
+    <!-- TOOLBAR -->
     <mat-toolbar class="page-toolbar shadow">
         <mat-toolbar-row>
             <span class="toolbar-margin"></span>
@@ -13,7 +14,8 @@
 
             <div class="search-container">
                 <div class="search-column center">
-                    <input [(ngModel)]="searchInput" type="text" placeholder="{{'tasks_toolbar_search' | translate}}" name="searchByTitle">
+                    <input [(ngModel)]="searchInput" type="text" placeholder="{{'tasks_toolbar_search' | translate}}"
+                        name="searchByTitle">
                 </div>
                 <div class="search-column center">
                     <button mat-icon-button (click)="search(searchInput)">
@@ -95,7 +97,8 @@
 
         </mat-toolbar-row>
     </mat-toolbar>
-
+    <!-- BODY -->
+    <!-- Task - Empty -->
     <div class="body-container">
         <div class="page-row-container" *ngIf="tasks.length == 0">
             <div class="page-row">
@@ -105,26 +108,40 @@
             </div>
         </div>
 
-
         <div class="page-row-container" *ngIf="tasks.length !== 0">
-
             <div class="page-row" *ngFor="let task of tasks">
-                <!-- Single Task -->
+
                 <mat-card class="card-task">
                     <div class="card-row-container">
 
                         <div class="card-row height-50">
 
                             <div class="card-column-priority center">
-                                <mat-icon>{{prioritiesIcon[task.priority]}}</mat-icon>
+                                <img src={{prioritiesIcon[task.priority]}} style="width:50px; height:50px; flex:none;">
                             </div>
 
                             <div class="card-column-title">
 
                                 <div class="card-row height-40">
-                                    <div class="card-column-title">
+                                    <div class="card-column-title center-vertically title-font">
                                         <div>{{task.title}}</div>
                                     </div>
+                                    <!-- Small View -->
+                                    <span class="fill-remaining-space"></span>
+                                    <div class="card-column" *ngIf="!isFullView">
+                                        <div class="card-row small-view-dates-width">{{'tasks_card_start_time' | translate}}
+                                            {{task.startTime.toLocaleString()}}</div>
+                                        <div class="card-row small-view-dates-width"
+                                            *ngIf="task.completedTime===undefined || task.completedTime===null">
+                                            {{'tasks_card_end_time' | translate}} {{task.endTime.toLocaleString()}}
+                                        </div>
+                                        <div class="card-row small-view-dates-width"
+                                            *ngIf="task.completedTime!=undefined || task.completedTime!=null">
+                                            {{'tasks_card_completed_time' | translate}}
+                                            {{task.completedTime.toLocaleString()}}</div>
+                                    </div>
+                                    <span class="span-50" *ngIf="!isFullView"></span>
+
                                     <div class="card-column width-100">
                                         <div class="card-row">
                                             <div class="card-column">
@@ -140,6 +157,37 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Small View -->
+                                    <span class="span-20" *ngIf="!isFullView"></span>
+                                    <div *ngIf="!isFullView">
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            *ngIf="task.status === 'STATUS_PENDING'" (click)="completeTask(task)">
+                                            {{'tasks_btn_pending' | translate}}
+                                        </button>
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            *ngIf="task.status === 'STATUS_PENDING_AUTOCOMPLETE'"
+                                            style="background-color: #9575CD;" (click)="completeTask(task)">
+                                            {{'tasks_btn_pending' | translate}}
+                                        </button>
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            *ngIf="task.status === 'STATUS_ACTIVE_AUTOCOMPLETE'"
+                                            style="background-color: #9575CD;" (click)="completeTask(task)">
+                                            {{'tasks_btn_autocomplete' | translate}}
+                                        </button>
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            *ngIf="task.status === 'STATUS_ACTIVE'" (click)="completeTask(task)">
+                                            {{'tasks_btn_complete' | translate}}
+                                        </button>
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            style="background-color: green;" *ngIf="task.status === 'STATUS_COMPLETED'">
+                                            {{'tasks_btn_completed' | translate}}
+                                        </button>
+                                        <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
+                                            style="background-color: red;" *ngIf="task.status === 'STATUS_OVERDUE'"
+                                            (click)="completeTask(task)">
+                                            {{'tasks_btn_overdue' | translate}}
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="card-row height-15">
@@ -152,7 +200,7 @@
 
                         <div class="card-row height-10">
                         </div>
-                        <!-- Full View -->
+
                         <div class="card-row" *ngIf="isFullView">
                             <div class="card-column">
                                 <div class="card-row-container">
@@ -211,8 +259,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Full View part End -->
-                    <div class="card-row">
+                    <div class="card-row" *ngIf="isFullView">
                         <div>
                             <div class="card-row">{{'tasks_card_start_time' | translate}}</div>
                             <div class="card-row">{{task.startTime.toLocaleString()}}</div>
@@ -228,29 +275,29 @@
                         </div>
                         <span class="fill-remaining-space"></span>
                         <div>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
                                 *ngIf="task.status === 'STATUS_PENDING'" (click)="completeTask(task)">
                                 {{'tasks_btn_pending' | translate}}
                             </button>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'" 
                                 *ngIf="task.status === 'STATUS_PENDING_AUTOCOMPLETE'" style="background-color: #9575CD;"
                                 (click)="completeTask(task)">
                                 {{'tasks_btn_pending' | translate}}
                             </button>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
                                 *ngIf="task.status === 'STATUS_ACTIVE_AUTOCOMPLETE'" style="background-color: #9575CD;"
                                 (click)="completeTask(task)">
                                 {{'tasks_btn_autocomplete' | translate}}
                             </button>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
                                 *ngIf="task.status === 'STATUS_ACTIVE'" (click)="completeTask(task)">
                                 {{'tasks_btn_complete' | translate}}
                             </button>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
                                 style="background-color: green;" *ngIf="task.status === 'STATUS_COMPLETED'">
                                 {{'tasks_btn_completed' | translate}}
                             </button>
-                            <button mat-raised-button color="primary" class="button-size" [disabled]=false
+                            <button mat-raised-button color="primary" class="button-size" [disabled]=false [style.width]="translate.currentLang==='pl' ? '200px' : '150px'"
                                 style="background-color: red;" *ngIf="task.status === 'STATUS_OVERDUE'"
                                 (click)="completeTask(task)">
                                 {{'tasks_btn_overdue' | translate}}

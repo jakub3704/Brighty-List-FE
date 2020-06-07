@@ -7,6 +7,7 @@ import { DialogNewTaskComponent } from '../dialog-new-task/dialog-new-task.compo
 import { DialogNewReminderComponent } from '../dialog-new-reminder/dialog-new-reminder.component';
 import { retry, retryWhen } from 'rxjs/operators';
 import { CustomErrorHandlerService } from 'src/app/error/custom-error-handler.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -29,9 +30,9 @@ export class TasksComponent implements OnInit {
   };
 
   prioritiesIcon = {
-    1: 'looks_one',
-    2: 'looks_two',
-    3: 'looks_3'
+    1: 'assets/p_high.png',
+    2: 'assets/p_medium.png',
+    3: 'assets/p_low.png'
   };
 
   expandIcon = {
@@ -40,7 +41,8 @@ export class TasksComponent implements OnInit {
   };
 
   constructor(private taskService: TaskService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, 
+    public translate: TranslateService) {
   }
 
   ngOnInit(): void {

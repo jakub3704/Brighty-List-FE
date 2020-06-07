@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../security/service/authentication.service';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
 
 
@@ -14,6 +13,13 @@ export class LogInComponent implements OnInit {
   hide = true;
   username: string;
   password: string;
+
+  predefinedColumns: string[] = ['user', 'password'];
+
+  predefinedData = [
+    {user: 'userPL', password: 'userPL'},
+    {user: 'userEN', password: 'userEN'}
+  ];  
 
   constructor(public authenticationService: AuthenticationService) { }
 

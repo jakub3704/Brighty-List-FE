@@ -8,8 +8,8 @@ footer {
   left: 0;
   right: 0;
   height: 120px;
-  background-color: #cccccc;
-  color: #666666;
+  background-color: #7986CB;
+  color: white;
   font-weight: 600;
 }
 
@@ -52,10 +52,22 @@ footer a {
   flex: 0 0 20px;
 }
 
-.span-footer-vertical-margin {
+.span-footer-middle {
+  flex: 0 0 10px;
+}
+
+.span-footer-horizontal-margin {
   flex: 1 1 100%;
 }
 
-.span-footer-vertical-space {
+.span-footer-horizontal-space {
   flex: 0 0 40px;
+}
+
+.app-name-btn{
+  font-size: 16px !important;
+}
+
+.links-btn{
+font-weight: normal !important;
 }

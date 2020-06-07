@@ -17,7 +17,7 @@
             <div class="row-column">
                 <div class="padding-left">{{'tasks_create_task_title' | translate}}</div>
                 <mat-form-field class="forms-margin">
-                    <mat-label>Task Title</mat-label>
+                    <mat-label>{{'form_placeholder_task_title' | translate}}</mat-label>
                     <input matInput [(ngModel)]="task.title" name="taskTitle" [formControl]="titleControl"
                         [errorStateMatcher]="matcher" required maxlength="20" minlength="3">
                 </mat-form-field>

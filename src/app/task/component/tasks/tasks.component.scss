@@ -60,6 +60,7 @@
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: #fafafa;
 }
 
 .card-row-container {
@@ -95,7 +96,10 @@
   flex-direction: column;
   height: 100%;
 }
-
+.title-font{
+  font-size: 18px;
+  font-style: italic;
+}
 .height-max-flex {
   flex: 10;
 }
@@ -145,7 +149,7 @@ width-max-flex {
 
 .button-size {
   min-width: 150px;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .border-bottom {
@@ -179,4 +183,9 @@ width-max-flex {
   color: white;
   background-color: #9575cd;
   border-bottom: 1px solid white;
+}
+
+.small-view-dates-width{
+  flex: none;
+  width: 250px;
 }

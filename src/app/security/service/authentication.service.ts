@@ -1,10 +1,9 @@
-import { Injectable, ɵbypassSanitizationTrustResourceUrl, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpHandler } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenDto } from './token-dto';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
-import { ThrowStmt } from '@angular/compiler';
 
 const CLIENT_ID = 'brighty-client';
 const CLIENT_SECRET = 'brighty-secret';
@@ -14,6 +13,7 @@ export class AuthenticationService implements OnInit {
     public isLoggedIn: boolean;
     public isInvalid = false;
     public isWrongData = false;
+    public userName: string = undefined;
     token: TokenDto;
 
     constructor(private httpClient: HttpClient,
@@ -24,6 +24,7 @@ export class AuthenticationService implements OnInit {
     ngOnInit(): void {
         if (this.checkCredentials()) {
             this.token = this.getTokenDto();
+            this.getUserName();
         }
         this.isWrongData = false;
     }
@@ -46,6 +47,7 @@ export class AuthenticationService implements OnInit {
             { headers: httpHeaders })
             .toPromise().then(
                 data => {
+                    this.userName = username;
                     this.saveToken(data);
                     this.isLoggedIn = true;
                     this.isInvalid = false;
@@ -55,6 +57,7 @@ export class AuthenticationService implements OnInit {
                 error => {
                     this.isInvalid = true;
                     this.isWrongData = true;
+                    this.userName = undefined;
                     console.error('retriveToken()');
                 }
             );
@@ -86,14 +89,14 @@ export class AuthenticationService implements OnInit {
         this.token = token;
         var expire = new Date(new Date().getTime() + token.expires_in * 1000 * 10);
         this.coockieService.set('access_token', JSON.stringify(token), expire);
-        console.log('AuthenticationService - saveToken() | ' + token.access_token + ' | ' + new Date().toISOString() + ' |');
+        this.coockieService.set('user', this.userName, expire);
     }
 
     updateToken(token: TokenDto) {
         this.token = token;
         var expire = new Date(new Date().getTime() + token.expires_in * 1000 * 10);
         this.coockieService.set('access_token', JSON.stringify(token), expire);
-        console.log('AuthenticationService - updateToken() | ' + token.access_token + ' | ' + new Date().toISOString() + ' |');
+        this.coockieService.set('user', this.coockieService.get('user'), expire);
     }
 
     getTokenDto(): TokenDto {
@@ -101,6 +104,9 @@ export class AuthenticationService implements OnInit {
         tokenDto = JSON.parse(this.coockieService.get('access_token'));
         this.token = tokenDto;
         return tokenDto;
+    }
+    getUserName(): void {
+        this.userName = this.coockieService.get('user');
     }
 
     getAccesToken(): string {
@@ -112,6 +118,7 @@ export class AuthenticationService implements OnInit {
     checkCredentials(): boolean {
         if (this.coockieService.check('access_token')) {
             this.isLoggedIn = true;
+            this.getUserName();
         } else {
             this.token = null;
             this.isLoggedIn = false;
@@ -121,6 +128,7 @@ export class AuthenticationService implements OnInit {
 
     closeSesion() {
         this.coockieService.delete('access_token');
+        this.coockieService.delete('user');
         this.isLoggedIn = false;
         this.router.navigate(['/home']);
     }

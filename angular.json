@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bright-list-fe": {
+    "brighty-list-fe": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bright-list-fe",
+            "outputPath": "dist/brighty-list-fe",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bright-list-fe:build"
+            "browserTarget": "brighty-list-fe:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bright-list-fe:build:production"
+              "browserTarget": "brighty-list-fe:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bright-list-fe:build"
+            "browserTarget": "brighty-list-fe:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "bright-list-fe:serve"
+            "devServerTarget": "brighty-list-fe:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bright-list-fe:serve:production"
+              "devServerTarget": "brighty-list-fe:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "bright-list-fe"
+  "defaultProject": "brighty-list-fe"
 }
