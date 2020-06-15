@@ -1,8 +1,5 @@
 import { ReminderDto } from './reminder-dto';
 import { TaskStatus } from './task-status';
-import { Task } from './task';
-import { Reminder } from './reminder';
-import { dateTimeEquals } from 'src/app/utilities/my-date-util';
 
 export class TaskDto {
   taskId: number;

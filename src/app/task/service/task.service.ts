@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { TaskDto } from '../model/task-dto';
 import { AuthenticationService } from '../../security/service/authentication.service';
 import { environment } from '../../../environments/environment';

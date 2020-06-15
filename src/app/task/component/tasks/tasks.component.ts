@@ -5,8 +5,6 @@ import { TaskDto } from '../../model/task-dto';
 import { ReminderDto } from '../../model/reminder-dto';
 import { DialogNewTaskComponent } from '../dialog-new-task/dialog-new-task.component';
 import { DialogNewReminderComponent } from '../dialog-new-reminder/dialog-new-reminder.component';
-import { retry, retryWhen } from 'rxjs/operators';
-import { CustomErrorHandlerService } from 'src/app/error/custom-error-handler.service';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -30,9 +28,9 @@ export class TasksComponent implements OnInit {
   };
 
   prioritiesIcon = {
-    1: 'assets/p_high.png',
-    2: 'assets/p_medium.png',
-    3: 'assets/p_low.png'
+    1: 'assets/images/p_high.png',
+    2: 'assets/images/p_medium.png',
+    3: 'assets/images/p_low.png'
   };
 
   expandIcon = {
@@ -53,6 +51,7 @@ export class TasksComponent implements OnInit {
   toggleView(): void{
     this.isFullView = !this.isFullView;
   }
+  
   openDialogNewTask(): void {
     const dialogRef = this.dialog.open(DialogNewTaskComponent, {
       width: '800px',

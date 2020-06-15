@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import { equalValidator } from 'src/app/validators/equal-validator';
 import { MyFormErrorStateMatcher } from 'src/app/config/my-form-error-state-matcher';
